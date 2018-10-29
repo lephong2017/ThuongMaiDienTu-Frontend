@@ -1,0 +1,11 @@
+.header_content{
+    background-color:white !important;
+    width :100% !important;
+    padding: 0 !important;
+    height: 50px !important;
+    line-height: 64px !important;
+    float:right !important;
+    display: flex !important;
+    align-content: flex-end !important;
+    justify-content: right !important;
+}
