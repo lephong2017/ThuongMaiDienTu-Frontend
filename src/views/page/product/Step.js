@@ -6,9 +6,10 @@ class StepContent extends Component{
     render(){
         return(
             <Steps size="small" current={1}>
-                <Step title="Finished" />
-                <Step title="In Progress" />
-                <Step title="Waiting" />
+                <Step title="Chọn xe" />
+                <Step title="Xem thông tin xe" />
+                <Step title="Điền thông tin của bạn" />
+                <Step title="Hoàn tất" />
             </Steps>      
         );
     }

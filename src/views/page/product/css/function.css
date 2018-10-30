@@ -1,0 +1,10 @@
+/* .function_filter{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+} */
+.ant-menu-horizontal {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0 20px;
+}
