@@ -1,0 +1,41 @@
+.infor-car{
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-content: left;
+    padding:20px 20px;
+}
+.image_car{
+    height:200px;
+    width:312px;
+    padding:10px 10px;
+    /* margin:10px 10px; */
+}
+.car_name{
+    padding:10px 10px;
+}
+.car_name div > h5{
+    font-weight: bold !important;
+    color:blue !important;
+    line-height: 2rem;
+}
+.text-feature{
+    font-size: 1.1rem;
+    font-weight: 500;
+    /* color:blue; */
+    padding:0 10px;
+}
+.grid-feature{
+    margin-top:20px;
+}
+.title-label {
+    text-transform: uppercase;
+    color: blue;
+    font-weight: 600;
+    font-size: 1.25rem;
+}
+.text-note{
+    padding-left:10px;
+    font-size: 1.15rem;
+    line-height: 0.5rem;
+}

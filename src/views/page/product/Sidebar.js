@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Layout, Menu, Slider, Switch,Icon,Row,Col } from 'antd';
+import { Layout,  Slider,Row,Col } from 'antd';
 import QuickBook from 'views/page/home/QuickBook';
 const {  Sider,  } = Layout;
 class SidebarContent extends Component{

@@ -1,4 +1,4 @@
-import { Menu, Icon, Row ,Col } from 'antd';
+import {  Row ,Col, } from 'antd';
 import React,{Component} from 'react';
 import MainSlider from 'views/list-car-slider/ListCars';
 import './css/slider.css';
@@ -12,11 +12,13 @@ class Content extends Component {
         <Row className="silder_content">
           <MainSlider/>
         </Row>
-        <Row className="book_content" >
-          <Col span={16} style={{width:'100%'}}>
-              <QuickBook/>
-          </Col>
-        </Row>
+        {/* <Affix style={{ position: 'absolute', top: '15%', right: '10%'}}> */}
+          <Row className="book_content" >
+            <Col span={16} style={{width:'100%'}}>
+                <QuickBook/>
+            </Col>
+          </Row>
+        {/* </Affix> */}
       </div>
     );
   }

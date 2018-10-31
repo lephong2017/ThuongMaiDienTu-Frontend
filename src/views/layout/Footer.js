@@ -1,13 +1,13 @@
-import { Menu, Icon } from 'antd';
+// import { Menu, Icon } from 'antd';
 import React,{Component} from 'react';
-const SubMenu = Menu.SubMenu;
-const MenuItemGroup = Menu.ItemGroup;
-
+// import HeaderContent from './Header';
 class FooterContent extends Component {
 
   render() {
     return (
-     <div></div>
+     <div>
+      {/* <HeaderContent/> */}
+     </div>
     );
   }
 }

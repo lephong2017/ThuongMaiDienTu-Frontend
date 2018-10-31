@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
 import { Layout } from 'antd';
 import HeaderContent from './layout/Header';
-import FooterContent from './layout/Footer';
+// import FooterContent from './layout/Footer';
 import ContentSite from './layout/Content';
 import 'antd/dist/antd.css';
+import './css/app.css';
 const { Header, Footer, Content } = Layout;
 class App extends Component{
     render(){
@@ -13,12 +14,12 @@ class App extends Component{
                     <Header className="header_content">
                         <HeaderContent/>
                     </Header>
-                    <Content>
+                    <Content className="content_sites">
                         <ContentSite/>
                     </Content>
-                    <Footer>
+                    {/* <Footer className="footer_content">
                         <FooterContent/>
-                    </Footer>
+                    </Footer> */}
                 </Layout>
             </div>
         );

@@ -1,11 +1,11 @@
-import { Form, Input,DatePicker , Tooltip, Icon, Cascader, Select, Row, Col, Checkbox, Button, AutoComplete } from 'antd';
+import { Form,DatePicker , Select, Row, Col, Button, } from 'antd';
 import React,{Component} from 'react';
 import moment from 'moment';
+import {Link} from 'react-router-dom';
 import './css/form.css';
 const FormItem = Form.Item;
 const Option = Select.Option;
-const AutoCompleteOption = AutoComplete.Option;
-const { MonthPicker, RangePicker } = DatePicker;
+const {  RangePicker } = DatePicker;
 
 const range=(start, end)=> {
     const result = [];
@@ -14,7 +14,7 @@ const range=(start, end)=> {
     }
     return result;
 }
-class BookCar extends React.Component {
+class BookCar extends Component {
   state = {
     confirmDirty: false,
     autoCompleteResult: [],
@@ -58,25 +58,13 @@ class BookCar extends React.Component {
   }
 
   render() {
-    const { getFieldDecorator } = this.props.form;
+    // const { getFieldDecorator } = this.props.form;
 
     const { formLayout } = this.state;
     const formItemLayout = formLayout === 'horizontal' ? {
         labelCol: { span: 4 },
         wrapperCol: { span: 14 },
       } : null;
-    const tailFormItemLayout = {
-      wrapperCol: {
-        xs: {
-          span: 24,
-          offset: 0,
-        },
-        sm: {
-          span: 16,
-          offset: 8,
-        },
-      },
-    };
 
     return (
       <Row className="form_content">
@@ -90,6 +78,7 @@ class BookCar extends React.Component {
                         // value={state.currency}
                         // size={size}
                         style={{ width: '100%' }}
+                        defaultValue="ThuDuc"
                         // onChange={this.handleCurrencyChange}
                         >
                             <Option value="BinhDuong">Bình Dương</Option>
@@ -113,7 +102,9 @@ class BookCar extends React.Component {
                 </FormItem>
                 
                 <FormItem style={{float:'right'}}>
-                     <Button type="primary" htmlType="submit">Chọn xe</Button>
+                        <Link to="tim-xe">
+                          <Button type="primary" htmlType="submit">Chọn xe</Button>
+                        </Link>
                 </FormItem>
             </Form>
           </Col>

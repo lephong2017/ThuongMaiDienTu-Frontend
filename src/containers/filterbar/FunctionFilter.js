@@ -1,7 +1,6 @@
-import { Menu, Icon,Button } from 'antd';
+import { Menu,   } from 'antd';
 import React,{Component} from 'react';
 import { Select ,Input} from 'antd';
-
 const Option = Select.Option;
 const Search = Input.Search;
 class HeaderContent extends Component {

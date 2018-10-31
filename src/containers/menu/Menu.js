@@ -3,7 +3,6 @@ import React,{Component} from 'react';
 import {Link} from 'react-router-dom';
 import options from './options';
 const SubMenu = Menu.SubMenu;
-const MenuItemGroup = Menu.ItemGroup;
 class HeaderContent extends Component {
   state = {
     current: 'mail',

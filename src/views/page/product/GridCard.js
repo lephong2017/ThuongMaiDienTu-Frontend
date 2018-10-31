@@ -1,4 +1,4 @@
-import { Card, Icon, Avatar,Row ,Col } from 'antd';
+import {  Row ,Col } from 'antd';
 import React,{Component} from 'react';
 import ItemCar from './ItemCar';
 const gridStyle = {
@@ -8,22 +8,47 @@ const carStyle={
     display:'flex',
     flexDirection:'row',
     justifyContent:'flex-end',
+    marginBottom:'10px'
 }
 
 class GridItem extends Component{
     render(){
         return (
-            <Row title="List car" style={carStyle} gutter={16}>
-                <Col md={8} style={gridStyle}>
-                    <ItemCar/>
-                </Col>
-                <Col md={8} style={gridStyle}>
-                    <ItemCar/>
-                </Col>
-                <Col md={8} style={gridStyle}>
-                    <ItemCar/>
-                </Col>
-            </Row>
+            <div>
+                <Row title="List car" style={carStyle} gutter={16}>
+                    <Col md={8} style={gridStyle}>
+                        <ItemCar/>
+                    </Col>
+                    <Col md={8} style={gridStyle}>
+                        <ItemCar/>
+                    </Col>
+                    <Col md={8} style={gridStyle}>
+                        <ItemCar/>
+                    </Col>
+                </Row>
+                <Row title="List car" style={carStyle} gutter={16}>
+                    <Col md={8} style={gridStyle}>
+                        <ItemCar/>
+                    </Col>
+                    <Col md={8} style={gridStyle}>
+                        <ItemCar/>
+                    </Col>
+                    <Col md={8} style={gridStyle}>
+                        <ItemCar/>
+                    </Col>
+                </Row>
+                <Row title="List car" style={carStyle} gutter={16}>
+                    <Col md={8} style={gridStyle}>
+                        <ItemCar/>
+                    </Col>
+                    <Col md={8} style={gridStyle}>
+                        <ItemCar/>
+                    </Col>
+                    <Col md={8} style={gridStyle}>
+                        <ItemCar/>
+                    </Col>
+                </Row>
+            </div>
         )
     }
 }
