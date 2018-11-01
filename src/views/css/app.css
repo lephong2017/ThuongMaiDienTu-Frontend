@@ -5,6 +5,11 @@
     position: fixed;
     bottom: 0;
 }
+.ant-menu-horizontal {
+    align-items: right;
+    right: 0;
+    position: absolute;
+}
 html, body{
     margin:0px;
     /* Read text font size */

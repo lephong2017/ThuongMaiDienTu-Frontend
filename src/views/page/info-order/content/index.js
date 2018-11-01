@@ -1,5 +1,6 @@
 import { Form, Icon, Input,Row,Col, Button, Select } from 'antd';
 import React,{Component} from 'react';
+import {Link} from 'react-router-dom';
 import '../css/form.css';
 const FormItem = Form.Item;
 const { TextArea } = Input;
@@ -63,9 +64,11 @@ class NormalLoginForm extends Component {
                     <TextArea rows={4} />
                 </FormItem>
                 <FormItem>
-                    <Button style={{float:'right'}} type="primary" htmlType="submit" className="login-form-button">
-                        Hoàn tất
-                    </Button>
+                    <Link to="/final">
+                        <Button style={{float:'right'}} type="primary" htmlType="submit" className="login-form-button">
+                            Hoàn tất
+                        </Button>
+                    </Link>
                 </FormItem>
             </Form>
           </Col>

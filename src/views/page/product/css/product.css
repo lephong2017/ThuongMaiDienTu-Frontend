@@ -4,3 +4,41 @@
 body{
     overflow-x:hidden !important;
 }
+.resposive_content_find_car{
+    display:flex;
+    flex-direction:row;
+}
+.responsive_list_car{
+    display:flex;
+    flex-direction:row;
+    justify-content:flex-end;
+    margin-bottom:10px;
+}
+.item-car{
+    margin-bottom: 10px;
+}
+.pagination-bar{
+    float: right;
+    padding:16px;
+    
+}
+.ant-pagination {
+    float:right;
+}
+@media only screen and (max-width: 600px) {
+    .resposive_content_find_car {
+        flex-direction:column;
+        margin-top: 0;
+    }
+    .responsive_list_car{
+        flex-direction:column;
+        align-items: center;
+    }
+    .ant-pagination-total-text {
+        font-size: 43px;
+        margin-bottom: 15px;
+    }
+    .sidebar_content{
+        margin-top:0 !important;
+    }
+}

@@ -9,9 +9,9 @@ class ItemCar extends Component{
     render(){
         return(
             <Card
-                style={{ width: 250 }}
-                cover={<img alt="example" 
-                src={img} />}
+                className="item-car"
+                style={{ width: '100%' }}
+                cover={<img alt="example"  src={img} />}
                 actions={
                     [
                         <Icon type="eye" theme="outlined" />,

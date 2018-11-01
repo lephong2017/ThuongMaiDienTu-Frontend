@@ -1,5 +1,9 @@
 self.__precacheManifest = [
   {
+    "revision": "50f854c48f3a170c069681144978042b",
+    "url": "/static/media/hyundai.50f854c4.png"
+  },
+  {
     "revision": "31bd98a71bff94c79c9ff6b500e342f1",
     "url": "/static/media/banner6.31bd98a7.png"
   },
@@ -16,23 +20,23 @@ self.__precacheManifest = [
     "url": "/static/js/runtime~main.229c360f.js"
   },
   {
-    "revision": "9f06a375ed95313a54e7",
-    "url": "/static/js/main.9f06a375.chunk.js"
+    "revision": "48fa1a854a32997150d4",
+    "url": "/static/js/main.48fa1a85.chunk.js"
   },
   {
-    "revision": "d160c920c51e8b87e83d",
-    "url": "/static/js/1.d160c920.chunk.js"
+    "revision": "84c6e2efb940c4e822cf",
+    "url": "/static/js/1.84c6e2ef.chunk.js"
   },
   {
-    "revision": "9f06a375ed95313a54e7",
-    "url": "/static/css/main.ab18f616.chunk.css"
+    "revision": "48fa1a854a32997150d4",
+    "url": "/static/css/main.bcc932d1.chunk.css"
   },
   {
-    "revision": "d160c920c51e8b87e83d",
-    "url": "/static/css/1.590780ee.chunk.css"
+    "revision": "84c6e2efb940c4e822cf",
+    "url": "/static/css/1.67ac7c3d.chunk.css"
   },
   {
-    "revision": "6a186bc024dac73ffaf71d4aedb80d85",
+    "revision": "8a78ed33c2b849475821d7287d7b848c",
     "url": "/index.html"
   }
 ];

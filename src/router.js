@@ -5,6 +5,7 @@ import App from 'views/App';
 import SearchCar from 'views/page/product';
 import DetailCar from 'views/page/detail';
 import InfoRentalCar from 'views/page/info-order';
+import FinalRentalCar from 'views/page/final';
 const PublicRoutes = ({ history, }) => {
   return (
     <ConnectedRouter history={history}>
@@ -28,6 +29,11 @@ const PublicRoutes = ({ history, }) => {
           exact
           path={'/info-rental-car'}
           component={InfoRentalCar}
+        />
+        <Route
+          exact
+          path={'/final'}
+          component={FinalRentalCar}
         />
       </div>
     </ConnectedRouter>

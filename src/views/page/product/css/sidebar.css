@@ -1,7 +1,10 @@
-.ant-layout-sider {
+/* .ant-layout-sider {
     width: 320px !important;
     flex: 0 0 320px !important;
     max-width: 320px !important;
     min-width: 320px !important;  
     background-color: rgba(255, 255, 255, 0.815) !important;
+} */
+.sidebar_content{
+    margin-top:50px;
 }

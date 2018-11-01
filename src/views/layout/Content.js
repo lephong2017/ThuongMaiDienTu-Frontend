@@ -7,14 +7,14 @@ import QuickBook from 'views/page/home/QuickBook';
 class Content extends Component {
 
   render() {
-    return (
+    return ( 
       <div>
         <Row className="silder_content">
           <MainSlider/>
         </Row>
         {/* <Affix style={{ position: 'absolute', top: '15%', right: '10%'}}> */}
           <Row className="book_content" >
-            <Col span={16} style={{width:'100%'}}>
+            <Col sm={24} md={16} style={{width:'100%'}}>
                 <QuickBook/>
             </Col>
           </Row>

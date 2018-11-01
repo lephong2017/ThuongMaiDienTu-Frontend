@@ -30,22 +30,33 @@ class ContentApp extends Component{
                         <StepContent step={1}/>
                     </div>
                     <Layout>
-                        <SidebarContent className="sidebar_content" collapsed={this.state.collapsed}/>
-                        <Layout>
-                            <FunctionFilter className="function_filter"/>
-                            <Content style={{ margin: '24px 16px', padding: 24, background: '#fff', minHeight: 280 }}>
-                                <Row>
-                                    <Col>
-                                        <GridCard/>
+                        <Row className="resposive_content_find_car" gutter={8} >
+                            <Col md={6} className="sidebar_content" >
+                                <SidebarContent collapsed={this.state.collapsed}/>
+                            </Col>
+                            <Col md={18}>
+                                <Row style={{display:'flex',flexDirection:'column'}}>
+                                    <Col md={24}>
+                                        <FunctionFilter className="function_filter"/>
+                                    </Col>
+                                    <br/>
+                                    <Col md={24}>
+                                        <Content style={{ marginTop: '34px', padding: '12px 0', background: '#fff' }}>
+                                            <Row>
+                                                <Col md={24} sm={24}>
+                                                    <GridCard/>
+                                                </Col>
+                                            </Row>
+                                            <Row>
+                                                <Col md={24} sm={24} className="pagination-bar" >
+                                                    <PaginationContent/>
+                                                </Col>
+                                            </Row>
+                                        </Content>
                                     </Col>
                                 </Row>
-                                <Row>
-                                    <Col style={{float:'right'}}>
-                                        <PaginationContent/>
-                                    </Col>
-                                </Row>
-                            </Content>
-                        </Layout>
+                            </Col>
+                        </Row>
                     </Layout>
                 </Content>
                 <Footer>

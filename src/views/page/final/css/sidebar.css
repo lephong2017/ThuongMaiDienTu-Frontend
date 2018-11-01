@@ -1,0 +1,27 @@
+.ant-layout-sider {
+    width: 360px !important;
+    flex: 0 0 360px !important;
+    max-width: 360px !important;
+    min-width: 360px !important;  
+    background-color: rgba(255, 255, 255, 0.815) !important;
+}
+.image_car{
+    height:200px;
+    width:312px;
+    padding:10px 10px;
+}
+.text-feature{
+    font-size: 1.1rem;
+    font-weight: 500;
+    /* color:blue; */
+    padding:0 10px;
+}
+.grid-feature{
+    margin-top:20px;
+}
+.name-car{
+    font-size: 1.35rem;
+    font-weight: bold !important;
+    color:blue !important;
+    line-height: 2rem;
+}

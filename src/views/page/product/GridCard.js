@@ -15,39 +15,35 @@ class GridItem extends Component{
     render(){
         return (
             <div>
-                <Row title="List car" style={carStyle} gutter={16}>
-                    <Col md={8} style={gridStyle}>
+                <Row title="List car" className="responsive_list_car" gutter={8}>
+                    <Col sm={24} md={6} style={gridStyle}>
                         <ItemCar/>
                     </Col>
-                    <Col md={8} style={gridStyle}>
+                    <Col sm={24} md={6} style={gridStyle}>
                         <ItemCar/>
                     </Col>
-                    <Col md={8} style={gridStyle}>
+                    <Col sm={24} md={6} style={gridStyle}>
                         <ItemCar/>
                     </Col>
-                </Row>
-                <Row title="List car" style={carStyle} gutter={16}>
-                    <Col md={8} style={gridStyle}>
-                        <ItemCar/>
-                    </Col>
-                    <Col md={8} style={gridStyle}>
-                        <ItemCar/>
-                    </Col>
-                    <Col md={8} style={gridStyle}>
+                    <Col sm={24} md={6} style={gridStyle}>
                         <ItemCar/>
                     </Col>
                 </Row>
-                <Row title="List car" style={carStyle} gutter={16}>
-                    <Col md={8} style={gridStyle}>
+                <Row title="List car" className="responsive_list_car" gutter={8}>
+                    <Col sm={24} md={6} style={gridStyle}>
                         <ItemCar/>
                     </Col>
-                    <Col md={8} style={gridStyle}>
+                    <Col sm={24} md={6} style={gridStyle}>
                         <ItemCar/>
                     </Col>
-                    <Col md={8} style={gridStyle}>
+                    <Col sm={24} md={6} style={gridStyle}>
+                        <ItemCar/>
+                    </Col>
+                    <Col sm={24} md={6} style={gridStyle}>
                         <ItemCar/>
                     </Col>
                 </Row>
+                
             </div>
         )
     }

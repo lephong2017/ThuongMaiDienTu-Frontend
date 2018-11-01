@@ -19,23 +19,20 @@ class SidebarContent extends Component{
             flexDirection:'column',
             justifyContent:'center',
             alignItems:'center',
+            backgroundColor:'rgba(255, 255, 255, 0.815)',
+            margin:'10px 0px',
+            padding:'10px 0px',
         }
         return (
-            <Sider
-              trigger={null}
-              collapsible
-              collapsed={this.props.collapsed}
-            >
-                <Row style={rowstyle}>
-                    <Col span={18}>
-                        <QuickBook/>
-                    </Col>
-                    <Col span={18}>
-                        <Slider onChange={this.filterPrice} range defaultValue={[this.state.priceStart, this.state.priceEnd]} disabled={false} />
-                        <span>Tầm giá từ {this.state.priceStart} đến {this.state.priceEnd}</span>
-                    </Col>
-                </Row>
-            </Sider>
+            <Row style={rowstyle}>
+                <Col span={20}>
+                    <QuickBook/>
+                </Col>
+                <Col span={20}>
+                    <Slider onChange={this.filterPrice} range defaultValue={[this.state.priceStart, this.state.priceEnd]} disabled={false} />
+                    <span>Tầm giá từ {this.state.priceStart} đến {this.state.priceEnd}</span>
+                </Col>
+            </Row>
         )
     }
 }
