@@ -62,6 +62,7 @@
     flex-direction:column;   
     align-items: center;
     text-align: center;
+    height: 670px;
 }
 .title-header-final {
     text-transform: uppercase;

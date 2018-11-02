@@ -7,6 +7,7 @@ import StepContent from 'containers/step/Step';
 import FormInfoCustomer from './content';
 import 'containers/filterbar/function.css';
 import './css/sidebar.css';
+import './css/index.css';
 const { Header, Content,Footer } = Layout;
 class ContentApp extends Component{
     state={
@@ -28,17 +29,14 @@ class ContentApp extends Component{
                         <StepContent step={4}/>
                     </div>
                     <Layout>
-                        <SidebarContent className="sidebar_content" collapsed={this.state.collapsed}/>
-                        <Layout>
-                            {/* <FunctionFilter className="function_filter"/> */}
-                            <Content style={{ margin: '24px 16px', padding: 24, background: '#fff', minHeight: 280 }}>
-                                <Row>
-                                    <Col>
-                                        <FormInfoCustomer/>
-                                    </Col>
-                                </Row>
-                            </Content>
-                        </Layout>
+                        <Row className="resposive_content_final_order" gutter={16} >
+                            <Col md={6} className="sidebar_content" >
+                                <SidebarContent collapsed={this.state.collapsed}/>
+                            </Col>
+                            <Col md={17} style={{padding: 16, background: '#fff',height:"100%"}}>
+                                <FormInfoCustomer/>
+                            </Col>
+                        </Row>
                     </Layout>
                 </Content>
                 <Footer>

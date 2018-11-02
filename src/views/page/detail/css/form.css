@@ -3,6 +3,8 @@
     /* right:10% !important; */
     /* top:-50% !important; */
     width:100% !important;
+    padding-bottom: 46px;
+    padding-top:12px;
 }
 .ant-form-item{
     margin-bottom: 0 !important;

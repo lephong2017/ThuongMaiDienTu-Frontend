@@ -80,7 +80,7 @@ class BookCar extends Component {
     }
     return (
       <Row className="form_content">
-          <Col span={24} >
+          <Col md={24} >
             <Form layout={null} onSubmit={this.handleSubmit}>
                 <FormItem
                     {...formItemLayout}

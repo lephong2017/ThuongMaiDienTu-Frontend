@@ -39,3 +39,16 @@
     font-size: 1.15rem;
     line-height: 0.5rem;
 }
+@media only screen and (max-width: 600px) {
+    .infor-car{
+        flex-direction: column;
+    }
+    .image_car{
+        margin: auto;
+    }
+    .text-note{
+        padding-left:10px;
+        font-size: 1.15rem;
+        line-height: 1.25em;
+    }
+}

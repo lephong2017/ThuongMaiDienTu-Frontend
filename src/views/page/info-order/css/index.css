@@ -1,0 +1,10 @@
+.resposive_content_info_order{
+    display:flex;
+    flex-direction:row;
+}
+@media only screen and (max-width: 600px) {
+    .resposive_content_info_order {
+        flex-direction:column;
+        margin-top: 0;
+    }
+}

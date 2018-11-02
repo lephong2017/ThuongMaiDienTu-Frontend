@@ -35,9 +35,6 @@ class NormalLoginForm extends Component {
                 </Col>
             </Row>
           </Col>
-          <Col md={24}>
-            
-          </Col>
       </Row>
     );
   }

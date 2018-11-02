@@ -1,0 +1,13 @@
+.resposive_content_detail_car{
+    display:flex;
+    flex-direction:row;
+}
+@media only screen and (max-width: 600px) {
+    .resposive_content_detail_car {
+        flex-direction:column;
+        margin-top: 0;
+    }
+    .sidebar_content{
+        margin-top:10px !important;
+    }
+}

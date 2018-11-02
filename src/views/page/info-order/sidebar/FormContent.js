@@ -77,7 +77,7 @@ class BookCar extends Component {
     }
     return (
       <Row className="form_content">
-          <Col span={24} >
+          <Col md={24} >
             <Row>
               <Col md={24}>
                 <p className="title-label">Hình thức nhận xe:</p>

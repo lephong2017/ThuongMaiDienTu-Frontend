@@ -1,9 +1,9 @@
 .ant-layout-sider {
-    width: 360px !important;
+    /* width: 360px !important;
     flex: 0 0 360px !important;
     max-width: 360px !important;
     min-width: 360px !important;  
-    background-color: rgba(255, 255, 255, 0.815) !important;
+    background-color: rgba(255, 255, 255, 0.815) !important; */
 }
 .image_car{
     height:200px;
@@ -24,4 +24,14 @@
     font-weight: bold !important;
     color:blue !important;
     line-height: 2rem;
+}
+.sidebar_content {
+    margin-top: 0;
+    background-color: #fff;
+}
+@media only screen and (max-width: 600px) {
+    .sidebar_content{
+        margin-right: 0px;
+        text-align: center;
+    }
 }

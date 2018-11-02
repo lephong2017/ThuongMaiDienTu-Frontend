@@ -24,21 +24,15 @@ class SidebarContent extends Component{
             padding:'10px 10px'
         }
         return (
-            <Sider
-              trigger={null}
-              collapsible
-              collapsed={this.props.collapsed}
-            >
-                <Row style={rowstyle} gutter={16}>
-                    <Col span={22} >
-                        <InfoCustomer/>
-                    </Col>
-                    <br/>
-                    <Col span={22}>
-                        <InfoDetail/>
-                    </Col>
-                </Row>
-            </Sider>
+            <Row style={rowstyle} gutter={16}>
+                <Col md={22} >
+                    <InfoCustomer/>
+                </Col>
+                <br/>
+                <Col md={22}>
+                    <InfoDetail/>
+                </Col>
+            </Row>
         )
     }
 }

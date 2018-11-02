@@ -9,10 +9,11 @@ import InfoCarContent from './content';
 // import PaginationContent from 'components/pagination/Pagination'
 import 'containers/filterbar/function.css';
 import './css/sidebar.css';
+import './css/index.css';
 const { Header, Content,Footer } = Layout;
 class ContentApp extends Component{
     state={
-        collapsed: false,
+        collapsed: false, 
     }
     toggle = () => {
         this.setState({
@@ -20,12 +21,6 @@ class ContentApp extends Component{
         });
     }
       render() {
-        const contentStyle={ 
-            margin: '24px 16px', 
-            // padding: 24, 
-            background: '#fff', 
-            minHeight: 280 
-        }
         return (
             <Layout>
                 <Header className="header_content">
@@ -36,22 +31,25 @@ class ContentApp extends Component{
                         <StepContent step={2}/>
                     </div>
                     <Layout>
-                        <Layout>
-                            {/* <FunctionFilter className="function_filter"/> */}
-                            <Content style={contentStyle}>
-                                <Row>
-                                    <Col>
-                                        <InfoCarContent/>
+                        <Row className="resposive_content_detail_car" gutter={8} >
+                            <Col md={18}>
+                                <Row style={{display:'flex',flexDirection:'column'}}>
+                                    <Col md={24}>
+                                        <Content style={{ padding: '12px 0', background: '#fff' }}>
+                                            <Row>
+                                                <Col md={24} sm={24}>
+                                                    <InfoCarContent/>
+                                                </Col>
+                                            </Row>
+                                        </Content>
                                     </Col>
                                 </Row>
-                                <Row>
-                                    <Col style={{float:'right'}}>
-                                        {/* <PaginationContent/> */}
-                                    </Col>
-                                </Row>
-                            </Content>
-                        </Layout>
-                        <SidebarContent className="sidebar_content" />
+                            </Col>
+                            <Col md={6} className="sidebar_content" >
+                                 <SidebarContent  />
+                            </Col>
+                        </Row>
+
                     </Layout>
                 </Content>
                 <Footer>
