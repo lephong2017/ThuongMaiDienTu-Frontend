@@ -50,8 +50,8 @@ class HeaderContent extends Component {
   }
   
   onCloseLogin = () => { this.setState({ visibleLogin: false, }) };
-  onCloseRegister = () => { this.setState({ visibleRegister:false}) };
   showDrawerLogin = () => {  this.setState({  visibleLogin: true, }); };
+  onCloseRegister = () => { this.setState({ visibleRegister:false}) };
   showDrawerRegister = () => {  this.setState({  visibleRegister: true, }); };
   handleClick = (e) => {
     if(e.key==='register'){
