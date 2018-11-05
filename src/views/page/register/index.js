@@ -1,5 +1,9 @@
 import { Form, Input,  Checkbox, Button,  } from 'antd';
 import React,{Component} from 'react';
+import {actRegister,actGetIAM} from 'actions/auth0/index';
+import { withRouter,} from 'react-router-dom';
+import { connect } from 'react-redux';
+import {showNotification} from 'components/notification/Notification';
 const FormItem = Form.Item;
 
 
@@ -7,15 +11,28 @@ class RegistrationForm extends Component {
   state = {
     confirmDirty: false,
     autoCompleteResult: [],
+    dataAPI:{}
   };
-
   handleSubmit = (e) => {
     e.preventDefault();
+    showNotification("Đăng ký rồi","Đợi xíu đi","topRight","success");
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
+        const data = {
+          email:{
+            value:values.email,
+            primary:true
+          },
+          userName:values.email,
+          password:values.password
+        }
+        this.props.actGetIAM();
+        this.props.actRegister(data);
+      }else{
+        console.log("ok error");
       }
     });
+    this.props.onClose();
   }
 
   handleConfirmBlur = (e) => {
@@ -105,4 +122,24 @@ class RegistrationForm extends Component {
   }
 }
 
-export default  Form.create()(RegistrationForm);
+const FormRegister=  Form.create()(RegistrationForm);
+
+const mapStateToProps = state => {
+  return {
+      auth: state.auth,
+  }
+}
+
+const mapDispatchToProps = (dispatch, props) => {
+  return {
+    actRegister:(data)=>{
+          dispatch(actRegister(data));
+    },
+    actGetIAM:()=>{
+          dispatch(actGetIAM());
+    }
+
+  }
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(FormRegister));

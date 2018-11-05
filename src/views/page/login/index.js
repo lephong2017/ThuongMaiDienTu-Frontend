@@ -1,5 +1,11 @@
 import { Form, Input,  Row, Col, Checkbox, Button,  } from 'antd';
 import React,{Component} from 'react';
+
+import {tenantId} from 'settings/index';
+import {actLogin} from 'actions/auth0/index';
+import { withRouter,} from 'react-router-dom';
+import { connect } from 'react-redux';
+import {showNotification} from 'components/notification/Notification';
 const FormItem = Form.Item;
 
 
@@ -13,6 +19,14 @@ class LoginForm extends Component {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
+        const data ={
+          grant_type  :  values.password,
+          tenantId  :  tenantId,
+          username :  values.email,
+          password : values.password
+
+        }
+        showNotification("Đăng nhập rồi","Đợi xíu đi","topRight","success");
         console.log('Received values of form: ', values);
       }
     });
@@ -65,4 +79,22 @@ class LoginForm extends Component {
   }
 }
 
-export default  Form.create()(LoginForm);
+const FormLogin= Form.create()(LoginForm);
+
+
+const mapStateToProps = state => {
+  return {
+      auth: state.auth,
+  }
+}
+
+const mapDispatchToProps = (dispatch, props) => {
+  return {
+    actLogin:(data)=>{
+          dispatch(actLogin(data));
+    },
+
+  }
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(FormLogin));

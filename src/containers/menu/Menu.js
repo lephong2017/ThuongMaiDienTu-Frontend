@@ -87,7 +87,7 @@ class HeaderContent extends Component {
       onClose:this.onCloseLogin,
       visible:this.state.visibleLogin,
       hasButtonFooter:false,
-      componentWillShow:()=> <Login/>,
+      componentWillShow:()=> <Login onClose={this.onCloseLogin}/>,
   }
     const listPropForDrawerRegister={
       styleProps:{
@@ -111,7 +111,7 @@ class HeaderContent extends Component {
       onClose:this.onCloseRegister,
       visible:this.state.visibleRegister,
       hasButtonFooter:false,
-      componentWillShow:()=> <Register/>,
+      componentWillShow:()=> <Register onClose={this.onCloseRegister}/>,
   }
     return (
       <Menu

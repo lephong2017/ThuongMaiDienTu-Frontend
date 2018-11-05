@@ -8,6 +8,14 @@ import {demoData} from './list-car-dumy';
 import DrawerContent from 'components/Drawer/Drawer';
 import FormCar from './action/add/FormCar'; 
 import FormEditCar from './action/edit/edit'; 
+
+import { withRouter,Link} from 'react-router-dom';
+import { connect } from 'react-redux';
+import {showNotification} from 'components/notification/Notification';
+import {handleAPI} from 'actions/management/index';
+import {loadObj,addObj,delObj,updateObj,findObj} from './api/ObjectParam';
+import * as typeAPI from 'utils/const/CheckTypeAPIComponents';
+
 class CarManagement extends Component{
     state={
         fullScreenMode:false,
@@ -19,6 +27,7 @@ class CarManagement extends Component{
 
         visibledAdd:false,
         visibledEdit:false,
+        dataAPI:{}
     }
     handleFullScreenMode=(val)=> {
         this.setState(() => {
@@ -68,6 +77,45 @@ class CarManagement extends Component{
         this.setState({visibledEdit:true})
     }
     onCloseEdit = () => { this.setState({ visibledEdit: false, }) };
+
+    checkCallAPI=(apiName,objData)=>{
+        switch(apiName){
+            case typeAPI.LOAD:
+                return this.props.handleAPI(loadObj,{});  
+            case typeAPI.ADD:
+                showNotification("Add rồi","Đợi xíu đi","topRight","success");
+                return this.props.handleAPI(addObj,objData);
+            case typeAPI.DELETE:
+                showNotification("Delete rồi","Đợi xíu đi","topRight","success");
+                return this.props.handleAPI(delObj,objData);
+            case typeAPI.UPDATE:
+                showNotification("Update rồi","Đợi xíu đi","topRight","success");
+                return this.props.handleAPI(updateObj,objData);
+            case typeAPI.FIND:
+                return this.props.handleAPI(findObj,objData);
+            default :return this.props.handleAPI(loadObj);
+        }
+    }
+    componentWillMount(){
+        this.checkCallAPI(typeAPI.LOAD);
+    }
+    handleSubmit=(obj)=>{
+        this.checkCallAPI(typeAPI.ADD,obj);
+        this.onClose();
+    }
+    handleDelete=(id)=>{
+        this.checkCallAPI(typeAPI.DELETE,{id:id});
+        this.onClose();
+        this.onCloseDrawerEdit();
+    }
+    handleSubmitEdit=(obj)=>{
+        var object={
+            id:{id:obj.id},
+            data:obj
+        }
+        this.checkCallAPI(typeAPI.UPDATE,object);
+        this.onCloseDrawerEdit();
+    }
     render(){
         var objSetting={
             loadding:false,
@@ -196,4 +244,17 @@ class CarManagement extends Component{
         );
     }
 }
-export default CarManagement; 
+const mapStateToProps = state => {
+    return {
+        demo: state,
+    }
+}
+const mapDispatchToProps = (dispatch, props) => {
+    return {
+        handleAPI:(objectParam,objectData)=>{
+            dispatch(handleAPI(objectParam,objectData));
+        }
+
+    }
+}
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CarManagement));
