@@ -1,16 +1,16 @@
 // import * as Types from 'actions/ActionTypes';
 import callApis from 'utils/callAPI/apiCallerNotToken';
 
-const getParamFromObject=(object)=>{
-    if(object===null) return '';
-    var param='?';
-    var keyObject=Object.keys(object);
-    var i;
-    for( i=0; i<keyObject.length; i++){
-        param+=(keyObject[i]+"="+object[keyObject[i]])+'&';
-    }
-    return param.substring(0,param.length-1);
-}
+// const getParamFromObject=(object)=>{
+//     if(object===null) return '';
+//     var param='?';
+//     var keyObject=Object.keys(object);
+//     var i;
+//     for( i=0; i<keyObject.length; i++){
+//         param+=(keyObject[i]+"="+object[keyObject[i]])+'&';
+//     }
+//     return param.substring(0,param.length-1);
+// }
 export const handleAPI=(objectParam,objectData)=>{
     switch(objectParam.methodType){
         case 'REGISTER_API':

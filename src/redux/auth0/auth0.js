@@ -3,7 +3,7 @@ var auth0 ={
    isAuth0:false
 };
    
-const auth0 = (state = auth0, action) => {
+const auth = (state = auth0, action) => {
     switch (action.type) {
         case Types.LOGIN: 
             return {...state,auth0:action.auth0};
@@ -11,4 +11,4 @@ const auth0 = (state = auth0, action) => {
         }
     };
 
-export default auth0;
+export default auth;

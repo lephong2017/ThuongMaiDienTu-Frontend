@@ -1,7 +1,7 @@
 import { Form, Input,  Checkbox, Button,  } from 'antd';
 import React,{Component} from 'react';
 import {actRegister,actGetIAM} from 'actions/auth0/index';
-import { withRouter,} from 'react-router-dom';
+import { withRouter,Link} from 'react-router-dom';
 import { connect } from 'react-redux';
 import {showNotification} from 'components/notification/Notification';
 const FormItem = Form.Item;
@@ -111,7 +111,7 @@ class RegistrationForm extends Component {
           {getFieldDecorator('agreement', {
             valuePropName: 'checked',
           })(
-            <Checkbox>Tôi <a href="">đồng ý</a> với điều khoản của bạn</Checkbox>
+            <Checkbox>Tôi <Link to="#">đồng ý</Link> với điều khoản của bạn</Checkbox>
           )}
         </FormItem>
         <FormItem >

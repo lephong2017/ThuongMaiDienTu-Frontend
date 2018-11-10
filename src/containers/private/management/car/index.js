@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import {Row,Col,Button,Icon} from 'antd';
+import {Row,Col,Button,} from 'antd';
 import './index.css';
 import FunctionbarContent from './function/index';
 import PanelWrapper from 'containers/wrapper/Panel.style';
@@ -9,7 +9,7 @@ import DrawerContent from 'components/Drawer/Drawer';
 import FormCar from './action/add/FormCar'; 
 import FormEditCar from './action/edit/edit'; 
 
-import { withRouter,Link} from 'react-router-dom';
+import { withRouter,} from 'react-router-dom';
 import { connect } from 'react-redux';
 import {showNotification} from 'components/notification/Notification';
 import {handleAPI} from 'actions/management/index';
@@ -211,7 +211,7 @@ class CarManagement extends Component{
             componentWillShow:()=> <FormEditCar/>,
         }
         return (
-            <Row className="content_manager_wrapper">
+            <Row className="content_manager_wrapper" style={{height:'100%'}}>
                 <PanelWrapper className={this.state.fullScreenMode ? "full-screen-mode" : ""}>
                     <FunctionbarContent showDrawerAdd={this.showDrawerAdd} handleFullScreenMode={this.handleFullScreenMode}/>
                     <Col md={24} className="table-wrapper">

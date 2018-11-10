@@ -11,7 +11,7 @@ export const actRegister = (data) => {
     }
 }
 export const actLogin = (data,) => {
-    const IAM = sessionStorage.getItem('IAM');
+    // const IAM = sessionStorage.getItem('IAM');
     const username=clientId;
     const password=secret;
     return (dispatch) => {

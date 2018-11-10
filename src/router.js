@@ -1,13 +1,13 @@
 import React from 'react';
 import { Route,Router } from 'react-router-dom';
-import {ConnectedRouter} from 'connected-react-router';
+// import {ConnectedRouter} from 'connected-react-router';
 import App from 'views/App';
 import MainApp from 'app/App';
 import SearchCar from 'views/page/product';
 import DetailCar from 'views/page/detail';
 import InfoRentalCar from 'views/page/info-order';
 import FinalRentalCar from 'views/page/final';
-import Management  from 'containers/private/layout-management/index';
+// import Management  from 'containers/private/layout-management/index';
 const PublicRoutes = ({ history, }) => {
   return (
     <Router history={history}>

@@ -1,6 +1,5 @@
-import { Drawer, Button } from 'antd';
+import { Drawer,  } from 'antd';
 import React,{Component} from 'react';
-import * as styles from './drawer.css';
 export default class App extends Component {
   state = { visible: false, childrenDrawer: false };
 
@@ -29,7 +28,7 @@ export default class App extends Component {
   };
 
   render() {
-    var {styleProps,visible,onClose,hasButtonFooter,componentWillShow} = this.props;
+    var {styleProps,visible,onClose,componentWillShow} = this.props;
     return (
         <Drawer
           title={styleProps.title}

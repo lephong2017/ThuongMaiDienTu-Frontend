@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import { Layout,Row,Col, } from 'antd';
+import { Row,Col, } from 'antd';
 import InfoCustomer from 'views/page/final/sidebar/InfoCustomer';
 import InfoDetail from './InfoDetail';
 import '../css/sidebar.css';
-const {  Sider,  } = Layout;
+// const {  Sider,  } = Layout;
 class SidebarContent extends Component{
     constructor(props){
         super(props)

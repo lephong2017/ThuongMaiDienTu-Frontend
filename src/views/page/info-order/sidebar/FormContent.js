@@ -3,7 +3,7 @@ import React,{Component} from 'react';
 import moment from 'moment';
 import {Link} from 'react-router-dom';
 import '../css/form.css';
-const FormItem = Form.Item;
+// const FormItem = Form.Item;
 
 const range=(start, end)=> {
     const result = [];
@@ -65,11 +65,11 @@ class BookCar extends Component {
 
   render() {
 
-    const { formLayout } = this.state;
-    const formItemLayout = formLayout === 'horizontal' ? {
-        labelCol: { span: 4 },
-        wrapperCol: { span: 14 },
-      } : null;
+    // const { formLayout } = this.state;
+    // const formItemLayout = formLayout === 'horizontal' ? {
+    //     labelCol: { span: 4 },
+    //     wrapperCol: { span: 14 },
+    //   } : null;
     const rowStyleOrder={
         display:'flex',
         flexDirection:'row',

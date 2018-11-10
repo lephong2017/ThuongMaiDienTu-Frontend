@@ -13,7 +13,7 @@ class AppRouter extends Component {
   render() {
     const { url, style } = this.props;
     return (
-      <div style={style}>
+      <div style={style} >
         {adminRoutes.map(singleRoute => {
           const { path,component, exact, ...otherProps } = singleRoute;
           return (

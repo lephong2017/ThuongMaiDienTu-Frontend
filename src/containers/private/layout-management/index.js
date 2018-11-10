@@ -8,12 +8,12 @@ class LayoutContent extends Component{
     render(){
         const {url} = this.props.match;
         return(
-            <Layout style={{display:'flex', flexDirection:'row'}}>
+            <Layout style={{display:'flex', flexDirection:'row',height:'100%',border:'1px solid rgba(0,0,0,0.12)'}}>
                 <SidebarContent/>
                 <Content>
-                    <Layout>
+                    <Layout >
                         <BreadcumbContent/>
-                        <Content>
+                        <Content >
                             <Row style={{display:'flex', flexDirection:'column'}}>
                                 <Col md={24}>
                                     <ManagementRouter url={url}/>

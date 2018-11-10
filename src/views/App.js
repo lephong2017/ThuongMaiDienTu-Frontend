@@ -5,7 +5,7 @@ import HeaderContent from './layout/Header';
 import ContentSite from './layout/Content';
 import 'antd/dist/antd.css';
 import './css/app.css';
-const { Header, Footer, Content } = Layout;
+const { Header, Content } = Layout;
 class App extends Component{
     render(){
         return (

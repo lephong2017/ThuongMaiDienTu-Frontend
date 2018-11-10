@@ -4,12 +4,12 @@ import ItemCar from './ItemCar';
 const gridStyle = {
     padding:'0 20px',
 };
-const carStyle={
-    display:'flex',
-    flexDirection:'row',
-    justifyContent:'flex-end',
-    marginBottom:'10px'
-}
+// const carStyle={
+//     display:'flex',
+//     flexDirection:'row',
+//     justifyContent:'flex-end',
+//     marginBottom:'10px'
+// }
 
 class GridItem extends Component{
     render(){

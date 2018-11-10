@@ -1,4 +1,4 @@
-import { Form, Icon, Input,Row,Col, Button, Select } from 'antd';
+import { Form,Row,Col, } from 'antd';
 import React,{Component} from 'react';
 import '../css/form.css';
 import iconSuccess from 'images/icon/step3.png';

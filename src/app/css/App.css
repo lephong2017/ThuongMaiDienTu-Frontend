@@ -1,4 +1,62 @@
+/* import image-service-1 from 'images\car\hyundai.png';
+import image-service-2 from 'images\car\hyundai.png';
+import image-service-3 from 'images\car\hyundai.png'; */
 .ant-modal-content {
-    height: 400px;
+    height: 500px;
+    text-align: center;
+}
+.ant-modal-title{
+    font-size: 2rem;
+    line-height: 2.5rem;
+    border-bottom: 0;
+}
+.modal-content-wrapper{
+    display: flex;
+    flex-direction: column;
+}
+.title-about-use-service{
+    font-size: 1.75rem;
+    font-weight: 500;
+    margin: 20px;
+}
+.service-content{
+    display: flex;
+    flex-direction: row;
+}
+.service-items{
+    align-items: center;
+    padding:15px;
+}
+.image-service-1{
+    background-color: yellowgreen;
+    background-image: url('../../images/car/hyundai.png');
+    background-size: cover;
+    background-position: center;
+    width:200px;
+    height:200px;
+    border-radius: 50%;
+    margin: 0 auto;
+    text-align: center;
+}
+.image-service-2{
+    background-color: green;
+    background-image: url('../../images/car/hyundai.png');
+    background-size: cover;
+    background-position: center;
+    width:200px;
+    height:200px;
+    border-radius: 50%;
+    margin: 0 auto;
+    text-align: center;
+}
+.image-service-3{
+    background-color: blue;
+    background-image: url('../../images/car/hyundai.png');
+    background-size: cover;
+    background-position: center;
+    width:200px;
+    height:200px;
+    border-radius: 50%;
+    margin: 0 auto;
     text-align: center;
 }
