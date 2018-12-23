@@ -17,6 +17,9 @@ export const actCountData = (data) => {
 }
 export const reqSearchPartner = (keyword, pageIndex, pageSize, accesstoken) => {
     return (dispatch) => {
+         callApis(`Car/CountCondition/condition?condition=${keyword}`, 'GET', null, accesstoken).then(res => {
+            dispatch(actCountData(res.data));
+        }).catch(error => console.log("Fetch Error "+ error));
         return callApis(`Partner/PagingCondition/pagesize/pageNow/condition?pagesize=${pageSize}&pageNow=${pageIndex}&condition=${keyword}`, 'GET', null, accesstoken).then(res => {
             dispatch(actLoadDataPaging(res.data));
         }).catch(error => console.log("Fetch Error "+ error));
@@ -31,6 +34,8 @@ export const reqLoadDataPaging = (pageIndex,pageSize,accesstoken) => {
         }).catch(error => console.log("Fetch Error "+ error));
     }
 }
+
+
 
 export const actLoadDataPaging = (data) => {
     return {

@@ -11,11 +11,17 @@ import 'containers/filterbar/function.css';
 import './css/sidebar.css';
 import { withRouter,Link} from 'react-router-dom';
 import { connect } from 'react-redux';
-import {loadProductAct} from 'redux/product/actProduct';
+import {reqLoadDataPaging, reqSearchProduct} from 'redux/car/actions';
+
+import * as CONST_VARIABLE from 'utils/const/index';
 const { Header, Content,Footer } = Layout;
 class ContentApp extends Component{
     state={
         collapsed: false,
+        pageIndex:1, 
+        pageSize: 12,
+        priceStart:0, 
+        priceEnd:10000
     }
     toggle = () => {
         this.setState({
@@ -23,11 +29,19 @@ class ContentApp extends Component{
         });
     }
     componentWillMount(){
-        this.props.loadProductAct();
+        const accesstoken = sessionStorage.getItem(CONST_VARIABLE.ACCESS_TOKEN);
+        const {pageIndex, pageSize,} = this.state;
+        this.props.loadProductAct(pageIndex,pageSize,accesstoken);
+    }
+
+    onSearch=(keyword, order)=>{
+        const accesstoken = sessionStorage.getItem(CONST_VARIABLE.ACCESS_TOKEN);
+        const {pageIndex, pageSize, priceStart, priceEnd} = this.state;
+        this.props.searchProductAct(keyword, pageIndex, pageSize, order, priceStart, priceEnd, accesstoken);
     }
     
     render() {
-        const {products} = this.props;
+        const {car} = this.props;
     return (
         <Layout>
             <Header className="header_content">
@@ -45,14 +59,14 @@ class ContentApp extends Component{
                         <Col md={18}>
                             <Row style={{display:'flex',flexDirection:'column'}}>
                                 <Col md={24}>
-                                    <FunctionFilter className="function_filter"/>
+                                    <FunctionFilter onSearch={this.onSearch} className="function_filter"/>
                                 </Col>
                                 <br/>
                                 <Col md={24}>
                                     <Content style={{ marginTop: '34px', padding: '12px 0', background: '#fff' }}>
                                         <Row>
                                             <Col md={24} sm={24}>
-                                                <GridCard products={products.listProduct}/>
+                                                <GridCard products={car}/>
                                             </Col>
                                         </Row>
                                         <Row>
@@ -77,15 +91,20 @@ class ContentApp extends Component{
 }
 const mapStateToProps = state => {
     return {
-        products: state.products,
+        car: state.car,
     }
   }
   
   const mapDispatchToProps = (dispatch, props) => {
     return {
-        loadProductAct:()=>{
-            dispatch(loadProductAct()) ;
-        }
+        loadProductAct:(pageIndex,pageSize,accesstoken)=>{
+            dispatch(reqLoadDataPaging(pageIndex,pageSize,accesstoken)) ;
+        },
+        
+        searchProductAct:(keyword, pageIndex, pageSize, sortOrder, priceStart, priceEnd, accesstoken)=>{
+            dispatch(reqSearchProduct(keyword, pageIndex, pageSize, sortOrder, priceStart, priceEnd, accesstoken)) ;
+        },
+
     }
   }
   

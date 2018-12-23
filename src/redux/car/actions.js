@@ -23,9 +23,21 @@ export const reqSearchCar = (keyword, pageIndex, pageSize, accesstoken) => {
     }
 }
 
+
 export const reqLoadDataPaging = (pageIndex,pageSize,accesstoken) => {
     return (dispatch) => {
         return callApis(`Car/Paging/pagesize/pageNow?pagesize=${pageSize}&pageNow=${pageIndex}`, 'GET', null, accesstoken).then(res => {
+            console.log(res.data);    
+            dispatch(actLoadDataPaging(res.data));
+        }).catch(error => console.log("Fetch Error "+ error));
+    }
+}
+
+export const reqSearchProduct = (keyword, pageIndex, pageSize, sortOrder, priceStart, priceEnd, accesstoken) => {
+    return (dispatch) => {
+        return callApis(
+        `Car/PagingConditionPrice/condition/pageIndex/pageSize/sortOrder/priceStart/priceEnd?condition=${keyword}&pageIndex=${pageIndex}&pageSize=${pageSize}&sortOrder=${sortOrder}&priceStart=${priceStart}&priceEnd=${priceEnd}`,
+         'GET', null, accesstoken).then(res => {
             console.log(res.data);    
             dispatch(actLoadDataPaging(res.data));
         }).catch(error => console.log("Fetch Error "+ error));

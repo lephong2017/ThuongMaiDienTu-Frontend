@@ -6,6 +6,10 @@ const Search = Input.Search;
 class HeaderContent extends Component {
   state = {
     current: 'mail',
+    order: 'ASC'
+  }
+  handleChange=(val)=>{
+    this.setState({order: val})
   }
 
   render() {
@@ -18,14 +22,14 @@ class HeaderContent extends Component {
       <Menu.Item key="search">
         <Search
           placeholder="Input search text"
-          onSearch={value => console.log(value)}
+          onSearch={value => this.props.onSearch(value, this.state.order)}
           style={{ width: "100%" }}
         />
       </Menu.Item>
       <Menu.Item key="filter">
-        <Select labelInValue defaultValue={{ key: 'price-up' }} style={{ width: '120%' }} onChange={this.handleChange}>
-          <Option value="price-up">Giá tăng dần</Option>
-          <Option value="price-down">Giá giảm dần</Option>
+        <Select labelInValue defaultValue={{ key: 'ASC' }} style={{ width: '120%' }} onChange={this.handleChange}>
+          <Option value="ASC">Giá tăng dần</Option>
+          <Option value="DES">Giá giảm dần</Option>
         </Select>
       </Menu.Item>
       
