@@ -32,7 +32,6 @@ class FormEditContent extends Component{
             const id= this.props.id;
             const obj= {
                 id: id,
-                purchDate: '2018-12-22T09:48:25.350Z'
             }
             this.props.onSubmitEdit( id, {...values, ...obj});
         }
@@ -41,7 +40,7 @@ class FormEditContent extends Component{
 
     render(){
         const { edit,  } = this.state;
-        const { car } = this.props;
+        const { partner } = this.props;
         const classNames="field-no-radius form-light";
         const type="vertical";
         const trigger =[
@@ -63,92 +62,68 @@ class FormEditContent extends Component{
         ]
         const listFields=[
             {
-                attrbField:'name',
+                attrbField:'nameCompany',
                 data:{
                     dataType:'TEXT',
-                    defaultValue:car.name,
+                    defaultValue:partner.nameCompany
                 },
                 render:{
-                    placeholder:'Vui lòng nhập tên xe',
-                    label:'Tên xe: ',
+                    placeholder:'Vui lòng nhập công ty',
+                    label:'Tên công ty: ',
 
                 },
                 action:{
                 }
             },
             {
-                attrbField:'color',
+                attrbField:'email',
                 data:{
-                    dataType:'TEXT',
-                    defaultValue:car.color,
+                    dataType:'EMAIL',
                     validation:{
-                        rules: [
-                            {
-                              required: true,
-                              message: 'Trường dữ liệu này là bắt buộc!!!'
-                            }
-                        ],
-                    }
-                },
-                render:{
-                    placeholder:'Vui lòng nhập màu sắc',
-                    label:'Màu sắc xe: ',
-                },
-                action:{
-                }
-            },
-            {
-                attrbField:'brank',
-                data:{
-                    dataType:'TEXT',
-                    defaultValue:car.brank,
-                },
-                render:{
-                    placeholder:'Vui lòng nhập brank ',
-                    label:'Brank: ',
-
-                },
-                action:{
-                }
-            },
-            {
-                attrbField:'description',
-                data:{
-                    dataType:'TEXT_AREA',
-                    defaultValue:car.description,
-                    validation:{
-                        rules: [
-                            {
-                              required: true,
-                              message: 'Trường dữ liệu này là bắt buộc!!!'
-                            }
-                        ],
+                        // rules: [
+                        //     {
+                        //       required: true,
+                        //       message: 'Trường dữ liệu này là bắt buộc!!!'
+                        //     }
+                        // ],
                     },
+                    defaultValue:partner.email
                 },
                 render:{
-                    placeholder:'Vui lòng nhập mô tả',
-                    label:'Mô tả: ',
+                    placeholder:'Vui lòng nhập email của bạn',
+                    label:'Email: ',
                 },
                 action:{
                 }
             },
             {
-                attrbField:'typeCar',
+                attrbField:'phoneNumber',
+                data:{
+                    dataType:'PHONE',
+                    defaultValue:partner.phoneNumber
+                },
+                render:{
+                    placeholder:'Vui lòng nhập số điện thoại ',
+                    label:'Số điện thoại: ',
+
+                },
+                action:{
+                }
+            },
+            
+            {
+                attrbField:'partnerPayment',
                 data:{
                     dataType:'SELECT',
                     config:{
                         options:[
                             {
-                                text:'Xe số',
-                                value:'xeso',
+                                text:'Thanh toán online',
+                                value:'online',
                             },
                             {
-                                text:'Xe tay ga',
-                                value:'tayga',
-                            },
-                            {
-                                text:'Xe con',
-                                value:'xecon',
+                                text:'Tiền mặt',
+                                value:'tienmat',
                             },
                         ]
                     },
@@ -160,11 +135,11 @@ class FormEditContent extends Component{
                             }
                         ],
                     },
-                    defaultValue:'tayga',
+                    defaultValue:'online',
                 },
                 render:{
-                    placeholder:'Vui lòng chọn loại xe',
-                    label:'Loại xe: ',
+                    placeholder:'Vui lòng chọn phương thức thanh toán',
+                    label:'Phương thức thanh toán: ',
                 },
                 action:{
                 }
