@@ -17,7 +17,7 @@ class ItemCar extends Component{
                     [
                         <Icon type="eye" theme="outlined" />,
                         <Icon type="select" theme="outlined" />,
-                        <Link to={`detail/${car.name}`}>
+                        <Link to={`detail/${car.id}`}>
                             <Icon type="shopping-cart" theme="outlined" />
                         </Link>
                     ]

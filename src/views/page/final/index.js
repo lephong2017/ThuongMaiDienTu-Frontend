@@ -8,6 +8,8 @@ import FormInfoCustomer from './content';
 import 'containers/filterbar/function.css';
 import './css/sidebar.css';
 import './css/index.css';
+
+
 const { Header, Content,Footer } = Layout;
 class ContentApp extends Component{
     state={

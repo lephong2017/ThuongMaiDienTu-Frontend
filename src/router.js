@@ -24,7 +24,7 @@ const PublicRoutes = ({ history, }) => {
           />
           <Route
             exact
-            path={'/detail'}
+            path={'/detail/:id'}
             component={DetailCar}
           />
           <Route
