@@ -3,6 +3,8 @@ import React,{Component} from 'react';
 import moment from 'moment';
 import {Link} from 'react-router-dom';
 import '../css/form.css';
+
+import PaypalBtn from 'react-paypal-checkout';
 const FormItem = Form.Item;
 const Option = Select.Option;
 
@@ -13,19 +15,31 @@ const range=(start, end)=> {
     }
     return result;
 }
+
 class BookCar extends Component {
   state = {
     confirmDirty: false,
     autoCompleteResult: [],
+    dateRental:null,
+    dateReturn:null,
+    numDayRental:0,
   };
 
-  onChange=(value, dateString)=> {
-    console.log('Selected Time: ', value);
-    console.log('Formatted Selected Time: ', dateString);
+  onChangeDateRental=(value, dateString)=> {
+    // console.log('Selected Time: ', value);
+    // console.log('Formatted Selected Time: ', dateString);
+    this.setState({dateRental: dateString});
+  }
+  
+  onChangeDateReturn=(value, dateString)=> {
+    // console.log('Selected Time: ', value);
+    // console.log('Formatted Selected Time: ', dateString);
+    const numDayRental = new Date(dateString).getDate() - new Date(this.state.dateRental).getDate();
+    this.setState({dateReturn: dateString, numDayRental: numDayRental });
   }
   
   onOk=(value)=> {
-    console.log('onOk: ', value);
+    // console.log('onOk: ', value);
   }
 
   handleSubmit = (e) => {
@@ -66,7 +80,34 @@ class BookCar extends Component {
 
   render() {
     // const { getFieldDecorator } = this.props.form;
+    const onSuccess = (payment) => {
+			console.log("The payment was succeeded!", payment);
+		}		
 
+		const onCancel = (data) => {
+			console.log('The payment was cancelled!', data);
+		}	
+
+		const onError = (err) => {
+			console.log("Error!", err);		
+		}			
+
+		let env = 'sandbox'; // you can set here to 'production' for production
+		let currency = 'USD'; // or you can set this value from your props or state  
+		let total = 1;  // same as above, this is the total amount (based on currency) to be 
+		let locale = 'en_US'; 
+		let style = {
+			'label':'pay', 
+			'tagline': false, 
+			'size':'medium', 
+			'shape':'pill', 
+			'color':'gold'
+		};
+
+		const client = {
+            sandbox:    'AY1jSZZWe9ubj79SyF4ixwYn32ExUwpeBwUBGiqjcTF3vCdQN3VPOZ7l4GF7SsBYifOWxo4x0RlceB11',
+            production: 'EPOgRKs0mDvWhvRXnGFsAcqp3ny-hYeYoSPQPxIYKvc1kGKqgCpV0xI2c7bs0qU8okWyyqbl7ajjH43z',
+		}
     const { formLayout } = this.state;
     const formItemLayout = formLayout === 'horizontal' ? {
         labelCol: { span: 4 },
@@ -102,11 +143,13 @@ class BookCar extends Component {
                     label="Chọn ngày thuê "
                     >
                       <DatePicker
-                        showTime
+                        // showTime
                         format="YYYY-MM-DD HH:mm:ss"
                         placeholder="Select Time"
-                        onChange={this.onChange}
-                        onOk={this.onOk}
+                        disabledDate={this.disabledDate}
+                        disabledTime={this.disabledRangeTime}
+                        onChange={this.onChangeDateRental}
+                        // onOk={this.onOk}
                         style={{width:'100%'}}
                         />
                 </FormItem>
@@ -115,11 +158,13 @@ class BookCar extends Component {
                     label="Chọn ngày trả"
                     >
                       <DatePicker
-                        showTime
+                        // showTime
                         format="YYYY-MM-DD HH:mm:ss"
                         placeholder="Select Time"
-                        onChange={this.onChange}
-                        onOk={this.onOk}
+                        disabledDate={this.disabledDate}
+                        disabledTime={this.disabledRangeTime}
+                        onChange={this.onChangeDateReturn}
+                        // onOk={this.onOk}
                         style={{width:'100%'}}
                         />
                 </FormItem>
@@ -145,24 +190,41 @@ class BookCar extends Component {
                       </Row>
                       <Row style={rowStyleOrder} className="row-info-order">
                           <Col span={12}><span>Ngày</span></Col>
-                          <Col span={12}><span className="span-info-order">7 Ngày</span></Col>
+                          <Col span={12}><span className="span-info-order">{this.state.numDayRental} Ngày</span></Col>
                       </Row>
                       <hr/>
                       <Row style={rowStyleOrder} className="row-info-order">
                           <Col span={12}><span>TỔNG</span></Col>
-                          <Col span={12}><span className="span-info-order">7 Đ</span></Col>
+                          <Col span={12}><span className="span-info-order">{this.state.numDayRental*900000}</span></Col>
                       </Row>
 
                 </FormItem>
-                
                 <FormItem style={{float:'right',width:'100%'}}>
                     <Row >
-                        <Col md={24}>
-                            <Link to="info-rental-car">
-                                <Button style={{width:'100%'}} type="primary" htmlType="submit">Chọn xe này</Button>
-                            </Link>
-                        </Col>
-                    </Row>
+                {
+                  (this.state.numDayRental>0)?
+                    <Col md={24}>
+                     <PaypalBtn 
+                        env={env} 
+                        client={client} 
+                        currency={currency} 
+                        total={total} 
+                        locale={locale} 
+                        style={style}
+                        onError={onError} 
+                        onSuccess={onSuccess} 
+                        onCancel={onCancel}
+                      />
+                      <Link to="/final">
+                        <Button style={{width:'100%'}} type="primary" htmlType="submit">Hoàn tất</Button>
+                      </Link>
+                    </Col>:
+                    <Col><span style={{color: 'red'}}>Phải mượn xe ít nhất một ngày</span></Col>
+
+
+                }
+                       
+                  </Row>
                 </FormItem>
             </Form>
           </Col>

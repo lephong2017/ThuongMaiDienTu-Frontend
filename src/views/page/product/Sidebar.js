@@ -11,7 +11,8 @@ class SidebarContent extends Component{
         }
     }
     filterPrice=(val)=>{
-        this.setState({priceStart:val[0]*1000,priceEnd:val[1]*1000})
+        this.setState({priceStart:val[0]*1000,priceEnd:val[1]*1000});
+        this.props.onSearchPrice(val[0]*1000, val[1]*1000);
     }
     render(){
         const rowstyle={

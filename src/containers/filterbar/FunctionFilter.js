@@ -9,7 +9,8 @@ class HeaderContent extends Component {
     order: 'ASC'
   }
   handleChange=(val)=>{
-    this.setState({order: val})
+    this.setState({order: val});
+    this.props.onSearch('', val);
   }
 
   render() {

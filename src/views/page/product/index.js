@@ -11,7 +11,7 @@ import 'containers/filterbar/function.css';
 import './css/sidebar.css';
 import { withRouter,Link} from 'react-router-dom';
 import { connect } from 'react-redux';
-import {reqLoadDataPaging, reqSearchProduct} from 'redux/car/actions';
+import {reqLoadDataPaging, reqSearchProduct, reqCountData} from 'redux/car/actions';
 
 import * as CONST_VARIABLE from 'utils/const/index';
 const { Header, Content,Footer } = Layout;
@@ -21,7 +21,7 @@ class ContentApp extends Component{
         pageIndex:1, 
         pageSize: 12,
         priceStart:0, 
-        priceEnd:10000
+        priceEnd:1000000
     }
     toggle = () => {
         this.setState({
@@ -32,59 +32,80 @@ class ContentApp extends Component{
         const accesstoken = sessionStorage.getItem(CONST_VARIABLE.ACCESS_TOKEN);
         const {pageIndex, pageSize,} = this.state;
         this.props.loadProductAct(pageIndex,pageSize,accesstoken);
+        this.props.loadCountData();
     }
 
-    onSearch=(keyword, order)=>{
+    componentDidMount(){
+        this.props.loadCountData();
+    }
+
+    onShowSizeChange = (current, pageSize)=> {
+        console.log(current, pageSize);
+        const accesstoken = sessionStorage.getItem(CONST_VARIABLE.ACCESS_TOKEN);
+        this.props.loadProductAct(current,pageSize,accesstoken);
+    }
+
+    onSearch= (keyword, order) =>{
         const accesstoken = sessionStorage.getItem(CONST_VARIABLE.ACCESS_TOKEN);
         const {pageIndex, pageSize, priceStart, priceEnd} = this.state;
+        this.props.searchProductAct(keyword, pageIndex, pageSize, order, priceStart, priceEnd, accesstoken);
+    }
+
+    onSearchPrice=(priceStart, priceEnd)=>{
+        const accesstoken = sessionStorage.getItem(CONST_VARIABLE.ACCESS_TOKEN);
+        const {pageIndex, pageSize,} = this.state;
+        const keyword= '';
+        const order= 'ASC';
         this.props.searchProductAct(keyword, pageIndex, pageSize, order, priceStart, priceEnd, accesstoken);
     }
     
     render() {
         const {car} = this.props;
     return (
-        <Layout>
-            <Header className="header_content">
-                <HeaderContent/>
-            </Header>
-            <Content>
-                <div className="step_content">
-                    <StepContent step={1}/>
-                </div>
-                <Layout>
-                    <Row className="resposive_content_find_car" gutter={8} >
-                        <Col md={6} className="sidebar_content" >
-                            <SidebarContent collapsed={this.state.collapsed}/>
-                        </Col>
-                        <Col md={18}>
-                            <Row style={{display:'flex',flexDirection:'column'}}>
-                                <Col md={24}>
-                                    <FunctionFilter onSearch={this.onSearch} className="function_filter"/>
-                                </Col>
-                                <br/>
-                                <Col md={24}>
-                                    <Content style={{ marginTop: '34px', padding: '12px 0', background: '#fff' }}>
-                                        <Row>
-                                            <Col md={24} sm={24}>
-                                                <GridCard products={car}/>
-                                            </Col>
-                                        </Row>
-                                        <Row>
-                                            <Col md={24} sm={24} className="pagination-bar" >
-                                                <PaginationContent/>
-                                            </Col>
-                                        </Row>
-                                    </Content>
-                                </Col>
-                            </Row>
-                        </Col>
-                    </Row>
-                </Layout>
-            </Content>
-            <Footer>
-                <FooterContent/>
-            </Footer>
-        </Layout>
+    <Layout>
+        <Header className="header_content">
+            <HeaderContent/>
+        </Header>
+        <Content>
+            <div className="step_content">
+                <StepContent step={1}/>
+            </div>
+            <Layout>
+                <Row className="resposive_content_find_car" gutter={8} >
+                    <Col md={6} className="sidebar_content" >
+                        <SidebarContent onSearchPrice={this.onSearchPrice} collapsed={this.state.collapsed}/>
+                    </Col>
+                    <Col md={18}>
+                        <Row style={{display:'flex',flexDirection:'column'}}>
+                            <Col md={24}>
+                                <FunctionFilter onSearch={this.onSearch} className="function_filter"/>
+                            </Col>
+                            <br/>
+                            <Col md={24}>
+                                <Content style={{ marginTop: '34px', padding: '12px 0', background: '#fff' }}>
+                                    <Row>
+                                        <Col md={24} sm={24}>
+                                            <GridCard products={car}/>
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col md={24} sm={24} className="pagination-bar" >
+                                            <PaginationContent 
+                                                total={this.props.numberCar} 
+                                                onShowSizeChange={this.onShowSizeChange}/>
+                                        </Col>
+                                    </Row>
+                                </Content>
+                            </Col>
+                        </Row>
+                    </Col>
+                </Row>
+            </Layout>
+        </Content>
+        <Footer>
+            <FooterContent/>
+        </Footer>
+    </Layout>
         
     );
     }
@@ -92,6 +113,7 @@ class ContentApp extends Component{
 const mapStateToProps = state => {
     return {
         car: state.car,
+        numberCar: state.numberCar
     }
   }
   
@@ -103,6 +125,10 @@ const mapStateToProps = state => {
         
         searchProductAct:(keyword, pageIndex, pageSize, sortOrder, priceStart, priceEnd, accesstoken)=>{
             dispatch(reqSearchProduct(keyword, pageIndex, pageSize, sortOrder, priceStart, priceEnd, accesstoken)) ;
+        },
+
+        loadCountData:()=>{
+            dispatch(reqCountData()) ;
         },
 
     }

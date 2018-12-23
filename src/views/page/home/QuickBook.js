@@ -91,7 +91,7 @@ class BookCar extends Component {
                     >
                       <RangePicker
                         disabledDate={this.disabledDate}
-                        disabledTime={this.disabledRangeTime}
+                        disabledTime={this.disabledRangeTime} 
                         showTime={{
                             hideDisabledOptions: true,
                             defaultValue: [moment('00:00:00', 'HH:mm:ss'), moment('11:59:59', 'HH:mm:ss')],

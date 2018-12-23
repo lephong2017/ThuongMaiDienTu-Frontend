@@ -35,6 +35,9 @@ export const reqLoadDataPaging = (pageIndex,pageSize,accesstoken) => {
 
 export const reqSearchProduct = (keyword, pageIndex, pageSize, sortOrder, priceStart, priceEnd, accesstoken) => {
     return (dispatch) => {
+        callApis(`Car/CountCondition/condition?condition=${keyword}`, 'GET', null, accesstoken).then(res => {
+            dispatch(actCountData(res.data));
+        }).catch(error => console.log("Fetch Error "+ error));
         return callApis(
         `Car/PagingConditionPrice/condition/pageIndex/pageSize/sortOrder/priceStart/priceEnd?condition=${keyword}&pageIndex=${pageIndex}&pageSize=${pageSize}&sortOrder=${sortOrder}&priceStart=${priceStart}&priceEnd=${priceEnd}`,
          'GET', null, accesstoken).then(res => {
