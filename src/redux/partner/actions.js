@@ -34,7 +34,7 @@ export const reqLoadDataPaging = (pageIndex,pageSize,accesstoken) => {
 
 export const actLoadDataPaging = (data) => {
     return {
-        type: Types.LOAD_Partner,
+        type: Types.LOAD_PARTNER,
         data
     }
 }
@@ -49,7 +49,7 @@ export const reqFindPartner = (id, accesstoken) => {
 
 export const actFindPartner = (data) => {
     return {
-        type: Types.FIND_Partner,
+        type: Types.FIND_PARTNER,
         data
     }
 }
@@ -66,7 +66,7 @@ export const reqDeletePartner = (id, accesstoken) => {
 
 export const actDeletePartner = (data) => {
     return {
-        type: Types.DELETE_Partner,
+        type: Types.DELETE_PARTNER,
         data
     }
 }
@@ -83,7 +83,7 @@ export const reqUpdatePartner = (id, Partner, accesstoken) => {
 
 export const actUpdatePartner = (data) => {
     return {
-        type: Types.UPDATE_Partner,
+        type: Types.UPDATE_PARTNER,
         data
     }
 }

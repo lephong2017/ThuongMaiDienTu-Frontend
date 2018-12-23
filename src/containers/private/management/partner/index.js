@@ -14,7 +14,7 @@ import FormEditCar from './action/edit/edit';
 import { withRouter, } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {showNotification} from 'components/notification/Notification';
-import {reqLoadDataPaging, reqSearchCar, reqCountData, reqFindCar, reqDeleteCar, reqAddCar, reqUpdateCar} from 'redux/partner/actions';
+import {reqLoadDataPaging, reqSearchCar, reqCountData, reqFindCar, reqDeleteCar, reqAddCar, reqUpdateCar} from 'redux/car/actions';
 import * as CONST_VARIABLE from 'utils/const/index';
 
 class CarManagement extends Component{
