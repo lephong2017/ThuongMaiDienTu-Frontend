@@ -6,18 +6,19 @@ import PanelWrapper from 'containers/wrapper/Panel.style';
 import TableContent from 'components/ptp__table/index';
 // import TableContent from 'components/table/MyTable';
 
-// import {demoData} from './list-car-dumy';
+// import {demoData} from './list-Partner-dumy';
 import DrawerContent from 'components/Drawer/Drawer';
-import FormCar from './action/add/FormCar'; 
-import FormEditCar from './action/edit/edit'; 
+import FormPartner from './action/add/FormPartner'; 
+import FormEditPartner from './action/edit/edit'; 
 
 import { withRouter, } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {showNotification} from 'components/notification/Notification';
-import {reqLoadDataPaging, reqSearchCar, reqCountData, reqFindCar, reqDeleteCar, reqAddCar, reqUpdateCar} from 'redux/car/actions';
+import {reqLoadDataPaging, reqSearchPartner, reqCountData, 
+    reqFindPartner, reqDeletePartner, reqAddPartner, reqUpdatePartner} from 'redux/partner/actions';
 import * as CONST_VARIABLE from 'utils/const/index';
 
-class CarManagement extends Component{
+class PartnerManagement extends Component{
     state={
         pageSize:5,
         pageIndex:1,
@@ -46,7 +47,7 @@ class CarManagement extends Component{
     onCloseAdd = () => { this.setState({ visibledAdd: false, }) };
 
     showDrawerEdit=(id)=>{ 
-        this.props.handleFindCar(id);
+        this.props.handleFindPartner(id);
         this.setState({visibledEdit:true, idEdit: id});
      }
     onCloseEdit = () => { this.setState({ visibledEdit: false, }) };
@@ -95,13 +96,13 @@ class CarManagement extends Component{
         var accesstoken = sessionStorage.getItem(CONST_VARIABLE.ACCESS_TOKEN);
         // console.log(val);
         if(val!==''){
-            // this.props.countAllCar(accesstoken);    
-            this.props.handleSearchCar(val, this.state.pageIndex, this.state.pageSize, accesstoken);
+            // this.props.countAllPartner(accesstoken);    
+            this.props.handleSearchPartner(val, this.state.pageIndex, this.state.pageSize, accesstoken);
        
         }else{
             const {pageIndex, pageSize}= this.state;
             this.props.loadDataPaging(pageIndex, pageSize,  accesstoken);
-            this.props.countAllCar(accesstoken);    
+            this.props.countAllPartner(accesstoken);    
 
         }
     }
@@ -111,32 +112,32 @@ class CarManagement extends Component{
         var accesstoken = sessionStorage.getItem(CONST_VARIABLE.ACCESS_TOKEN);
         const {pageIndex, pageSize}= this.state;
         this.props.loadDataPaging(pageIndex, pageSize,  accesstoken);
-        this.props.countAllCar(accesstoken);
+        this.props.countAllPartner(accesstoken);
     }
 
     componentDidMount(){
         var accesstoken = sessionStorage.getItem(CONST_VARIABLE.ACCESS_TOKEN);
         const {pageIndex, pageSize}= this.state;
         this.props.loadDataPaging(pageIndex, pageSize,  accesstoken);
-        this.props.countAllCar(accesstoken);
+        this.props.countAllPartner(accesstoken);
     }
 
     handleSubmit=(obj)=>{
         var accesstoken = sessionStorage.getItem(CONST_VARIABLE.ACCESS_TOKEN);
-        this.props.handleAddCar(obj, accesstoken);
+        this.props.handleAddPartner(obj, accesstoken);
         this.onCloseAdd();
         showNotification("Thêm thành công", "Bạn vừa thực hiện thêm một xe!!!", "topRight", "success");
     }
 
     handleDelete=(id)=>{
         var accesstoken = sessionStorage.getItem(CONST_VARIABLE.ACCESS_TOKEN);
-        this.props.handleDeleteCar(id, accesstoken);
+        this.props.handleDeletePartner(id, accesstoken);
         showNotification("Xóa thành công", "Bạn vừa thực hiện xóa một xe!!!", "topRight", "success");
     }
 
     handleSubmitEdit=(id, obj)=>{
         var accesstoken = sessionStorage.getItem(CONST_VARIABLE.ACCESS_TOKEN);
-        this.props.handleUpdateCar(id, obj, accesstoken);
+        this.props.handleUpdatePartner(id, obj, accesstoken);
         this.onCloseEdit();
         this.setState({id:null});
         showNotification("Sửa thành công", "Bạn vừa thực hiện cập nhật thông tin một xe!!!", "topRight", "success");
@@ -153,34 +154,29 @@ class CarManagement extends Component{
         }
         const columns = [
             {
-                title: 'Tên xe',
-                dataIndex: 'name',
-                key: 'name',
-                sorter: (a, b) => a.name.length - b.name.length,
-                sortOrder: sortedInfo.columnKey === 'name' && sortedInfo.order,
+                title: 'Tên công ty',
+                dataIndex: 'nameCompany',
+                key: 'nameCompany',
+                sorter: (a, b) => a.nameCompany.length - b.nameCompany.length,
+                sortOrder: sortedInfo.columnKey === 'nameCompany' && sortedInfo.order,
             }, 
             {
-                title: 'Loại xe',
-                dataIndex: 'typeCar',
-                key: 'typeCar',
+                title: 'Email',
+                dataIndex: 'email',
+                key: 'email',
                 defaultSortOrder: 'ascend',
-                sorter: (a, b) => a.typeCar - b.typeCar,
-                sortOrder: sortedInfo.columnKey === 'typeCar' && sortedInfo.order,
+                sorter: (a, b) => a.email - b.email,
+                sortOrder: sortedInfo.columnKey === 'email' && sortedInfo.order,
             }, 
             {
-                title: 'Màu sắc',
-                dataIndex: 'color',
-                key: 'color',
+                title: 'Số điện thoại',
+                dataIndex: 'phoneNumber',
+                key: 'phoneNumber',
             }, 
             {
-                title: 'Brank',
-                dataIndex: 'brank',
-                key: 'brank',
-            }, 
-            {
-                title: 'Mô tả',
-                dataIndex: 'description',
-                key: 'description',
+                title: 'Thanh toán',
+                dataIndex: 'partnerPayment',
+                key: 'partnerPayment',
             }, 
             {
                 title: 'Action',
@@ -210,7 +206,7 @@ class CarManagement extends Component{
             },
             pagination:{
                 defaultPageSize:5,
-                total: this.props.numberCar
+                total: this.props.numberPartner
             },
         }
         const event={
@@ -300,7 +296,7 @@ class CarManagement extends Component{
             onClose:this.onCloseAdd,
             visible:this.state.visibledAdd,
             hasButtonFooter:false,
-            componentWillShow:(key)=> <FormCar
+            componentWillShow:(key)=> <FormPartner
                     key={key}
                     onSubmitAdd={this.handleSubmit}
                 />,
@@ -327,10 +323,10 @@ class CarManagement extends Component{
             onClose:this.onCloseEdit,
             visible:this.state.visibledEdit,
             hasButtonFooter:false,
-            componentWillShow:(key)=> <FormEditCar 
+            componentWillShow:(key)=> <FormEditPartner 
                 key={key}
                 id={this.state.idEdit} 
-                car={this.props.itemCar}
+                partner={this.props.itemPartner}
                 onSubmitEdit={this.handleSubmitEdit}
             />,
         }
@@ -341,7 +337,7 @@ class CarManagement extends Component{
                     <Col md={24} className="table-wrapper">
                         <TableContent
                             rowSelection={rowSelection}
-                            data={this.props.car} 
+                            data={this.props.partner} 
                             columns={columns} 
                             config={config} 
                             event={event}
@@ -350,7 +346,7 @@ class CarManagement extends Component{
                         
                     </Col>
                     <DrawerContent 
-                        key={'addcar'}
+                        key={'addPartner'}
                         styleProps={listPropForDrawer.styleProps} 
                         visible={listPropForDrawer.visible} 
                         onClose={listPropForDrawer.onClose}
@@ -358,7 +354,7 @@ class CarManagement extends Component{
                         componentWillShow={listPropForDrawer.componentWillShow}
                     />
                     <DrawerContent 
-                        key={'editcar'}
+                        key={'editPartner'}
                         styleProps={listPropForDrawerEdit.styleProps} 
                         visible={listPropForDrawerEdit.visible} 
                         onClose={listPropForDrawerEdit.onClose}
@@ -372,36 +368,37 @@ class CarManagement extends Component{
     }
 }
 const mapStateToProps = state => {
+    console.log(state.Partner);
     return {
-        car: state.car,
-        itemCar: state.itemCar,
-        numberCar: state.numberCar
+        partner: state.partner,
+        itemPartner: state.itemPartner,
+        numberPartner: state.numberPartner
     }
 }
 const mapDispatchToProps = (dispatch, props) => {
     return {
-        handleAddCar: (object, accesstoken)=>{
-            dispatch(reqAddCar(object, accesstoken));
+        handleAddPartner: (object, accesstoken)=>{
+            dispatch(reqAddPartner(object, accesstoken));
         },
-        handleFindCar: (id, accesstoken)=>{
-            dispatch(reqFindCar(id, accesstoken));
+        handleFindPartner: (id, accesstoken)=>{
+            dispatch(reqFindPartner(id, accesstoken));
         },
-        handleUpdateCar: (id, object, accesstoken)=>{
-            dispatch(reqUpdateCar(id, object, accesstoken));
+        handleUpdatePartner: (id, object, accesstoken)=>{
+            dispatch(reqUpdatePartner(id, object, accesstoken));
         },
-        handleDeleteCar: (id, accesstoken)=>{
-            dispatch(reqDeleteCar(id, accesstoken));
+        handleDeletePartner: (id, accesstoken)=>{
+            dispatch(reqDeletePartner(id, accesstoken));
         },
         loadDataPaging: (pageIndex, pageSize, accesstoken)=>{
             dispatch(reqLoadDataPaging(pageIndex, pageSize, accesstoken));
         },
-        countAllCar: ( accesstoken)=>{
+        countAllPartner: ( accesstoken)=>{
             dispatch(reqCountData( accesstoken));
         },
-        handleSearchCar: (keyword, pageIndex, pageSize, accesstoken)=>{
-            dispatch(reqSearchCar(keyword, pageIndex, pageSize, accesstoken))
+        handleSearchPartner: (keyword, pageIndex, pageSize, accesstoken)=>{
+            dispatch(reqSearchPartner(keyword, pageIndex, pageSize, accesstoken))
         }
 
     }
 }
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CarManagement));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PartnerManagement));

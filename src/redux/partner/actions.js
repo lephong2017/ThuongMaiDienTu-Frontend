@@ -79,6 +79,7 @@ export const actDeletePartner = (data) => {
 export const reqUpdatePartner = (id, Partner, accesstoken) => {
     return (dispatch) => {
         return callApis(`Partner/Update/${id}`, 'PUT', Partner, accesstoken).then(res => {
+            console.log("edit");
             return callApis(`Partner/Paging/pagesize/pageNow?pagesize=5&pageNow=1`, 'GET', null, accesstoken).then(res => {
                 dispatch(actUpdatePartner(res.data));
             }).catch(error => console.log("Fetch Error "+ error));

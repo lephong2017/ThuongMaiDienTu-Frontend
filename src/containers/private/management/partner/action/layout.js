@@ -1,7 +1,7 @@
 export const layouts=[
     [
         {
-            attrbLayout:'name',
+            attrbLayout:'nameCompany',
             width:{
                 sm:24,  md:24, lg:24, xl:24,  xxl:24,
             }
@@ -9,7 +9,7 @@ export const layouts=[
     ],
     [
         {
-            attrbLayout:'typeCar',
+            attrbLayout:'email',
             width:{
                 sm:24,  md:24, lg:24, xl:24,  xxl:24,
             }
@@ -17,25 +17,17 @@ export const layouts=[
     ],
     [
         {
-            attrbLayout:'color',
+            attrbLayout:'phoneNumber',
             width:{
                 sm:24,  md:24, lg:24, xl:24,  xxl:24,
-            }
-        },
-        
-    ],
-    [
-        {
-            attrbLayout:'brank',
-            width:{
-                sm:24,  md:24, lg:24, xl:24,  xxl:24,
+                // sm:24,  md:24, lg:24, xl:24,  xxl:24,
             }
         },
         
     ],
     [
         {
-            attrbLayout:'description',
+            attrbLayout:'partnerPayment',
             width:{
                 sm:24,  md:24, lg:24, xl:24,  xxl:24,
             }
