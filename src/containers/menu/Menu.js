@@ -1,17 +1,22 @@
 import { Menu, Icon,Button, } from 'antd';
 import React,{Component} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, } from 'react-router-dom';
 import options from './options';
 import Register from 'views/page/register/index';
 import Login from 'views/page/login/index';
 import Drawer from 'components/Drawer/Drawer';
+import { withRouter,} from 'react-router-dom';
+import { connect } from 'react-redux';
 const SubMenu = Menu.SubMenu;
 class HeaderContent extends Component {
+  
   state = {
     current: 'mail',
     visibleLogin: false,
     visibleRegister: false,
   }
+
+
   getMenuItem = ({ singleOption, }) => {
     const { key, label, leftIcon, children } = singleOption;
     if (children) {
@@ -27,8 +32,8 @@ class HeaderContent extends Component {
         >
           {children.map(child => {
             return (
-              <Menu.Item  key={child.key}>
-                <Link  to={child.key}>
+              <Menu.Item  key={`${child.key}`}>
+                <Link  to={`/${child.key}`}>
                   <span>{child.label} </span>
                 </Link>
               </Menu.Item>
@@ -120,12 +125,17 @@ class HeaderContent extends Component {
         mode="horizontal"
       >
         {options.map(singleOption =>  this.getMenuItem({singleOption })  )}
+
         <Menu.Item key={"register"}>
             <Button onClick={this.handleClick}>Đăng ký</Button>
         </Menu.Item>
-        <Menu.Item key={"login"}>
-            <Button onClick={this.handleClick}>Đăng nhập</Button>
-        </Menu.Item>
+        {
+          (this.props.auth0)?
+          <div></div>:
+          <Menu.Item key={"login"}>
+              <Button onClick={this.handleClick}>Đăng nhập</Button>
+          </Menu.Item>
+        }
         <Drawer 
             key={'register'}
             styleProps={listPropForDrawerRegister.styleProps} 
@@ -147,4 +157,16 @@ class HeaderContent extends Component {
   }
 }
 
-export default HeaderContent;
+const mapStateToProps = state => {
+  return {
+      auth0: state.auth0,
+  }
+}
+
+const mapDispatchToProps = (dispatch, props) => {
+  return {
+
+  }
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HeaderContent));

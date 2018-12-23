@@ -7,3 +7,4 @@ export const DELETE_CAR= 'DELETE_CAR';
 export const IS_FETCHING_CAR= 'IS_FETCHING_CAR';
 export const FETCH_CAR_FILTER = 'FETCH_CAR_FILTER';
 export const FIND_CAR= 'FIND_CAR';
+export const COUNT_DATA= 'COUNT_DATA';

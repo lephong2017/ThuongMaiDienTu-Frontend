@@ -4,46 +4,27 @@ import ItemCar from './ItemCar';
 const gridStyle = {
     padding:'0 20px',
 };
-// const carStyle={
-//     display:'flex',
-//     flexDirection:'row',
-//     justifyContent:'flex-end',
-//     marginBottom:'10px'
-// }
-
 class GridItem extends Component{
+    renderListCard=(products)=>{
+        return(
+            <Row title="List car" className="responsive_list_car" gutter={0}>
+            { 
+                products.map((car,ind)=>{
+                    return(
+                    <Col sm={24} md={6} style={gridStyle}>
+                        <ItemCar key={ind} car={car}/>
+                    </Col>
+                    )
+                })
+            }
+            </Row>
+        ) 
+    }
     render(){
+        const {products} =this.props;
         return (
             <div>
-                <Row title="List car" className="responsive_list_car" gutter={8}>
-                    <Col sm={24} md={6} style={gridStyle}>
-                        <ItemCar/>
-                    </Col>
-                    <Col sm={24} md={6} style={gridStyle}>
-                        <ItemCar/>
-                    </Col>
-                    <Col sm={24} md={6} style={gridStyle}>
-                        <ItemCar/>
-                    </Col>
-                    <Col sm={24} md={6} style={gridStyle}>
-                        <ItemCar/>
-                    </Col>
-                </Row>
-                <Row title="List car" className="responsive_list_car" gutter={8}>
-                    <Col sm={24} md={6} style={gridStyle}>
-                        <ItemCar/>
-                    </Col>
-                    <Col sm={24} md={6} style={gridStyle}>
-                        <ItemCar/>
-                    </Col>
-                    <Col sm={24} md={6} style={gridStyle}>
-                        <ItemCar/>
-                    </Col>
-                    <Col sm={24} md={6} style={gridStyle}>
-                        <ItemCar/>
-                    </Col>
-                </Row>
-                
+                {this.renderListCard(products)}
             </div>
         )
     }

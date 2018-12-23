@@ -7,7 +7,8 @@ export default function callApi(endpoint, method = 'GET', body,accesstoken) {
         method,
         headers:{
             'access-control-request-origin':'*',
-            'content-type' : 'application/json',
+            'content-type' : 'application/json-patch+json',
+            'accept':'application/json'
             // 'Authorization': 'Bearer ' + accesstoken,
         },
         data: body

@@ -31,6 +31,7 @@ export default class App extends Component {
     var {styleProps,visible,onClose,componentWillShow} = this.props;
     return (
         <Drawer
+          key={this.props.key}
           title={styleProps.title}
           width={styleProps.width}
           height={styleProps.height}
@@ -48,7 +49,7 @@ export default class App extends Component {
           getContainer={styleProps.getContainer}
 
         >
-            {componentWillShow()}
+            {componentWillShow(this.props.key)}
           
           {/* <div  style={styles.divFooter} >
             {

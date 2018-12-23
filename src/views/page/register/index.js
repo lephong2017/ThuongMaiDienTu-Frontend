@@ -1,11 +1,12 @@
 import { Form, Input,  Checkbox, Button,  } from 'antd';
 import React,{Component} from 'react';
 import {actRegister,actGetIAM} from 'actions/auth0/index';
+import {actRegisterRequest} from 'actions/auth0/auth0';
+
 import { withRouter,Link} from 'react-router-dom';
 import { connect } from 'react-redux';
 import {showNotification} from 'components/notification/Notification';
 const FormItem = Form.Item;
-
 
 class RegistrationForm extends Component {
   state = {
@@ -15,19 +16,10 @@ class RegistrationForm extends Component {
   };
   handleSubmit = (e) => {
     e.preventDefault();
-    showNotification("Đăng ký rồi","Đợi xíu đi","topRight","success");
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        const data = {
-          email:{
-            value:values.email,
-            primary:true
-          },
-          userName:values.email,
-          password:values.password
-        }
-        this.props.actGetIAM();
-        this.props.actRegister(data);
+        actRegisterRequest(values);
+        showNotification("Đăng ký rồi","Đợi xíu đi","topRight","success");
       }else{
         console.log("ok error");
       }
@@ -66,6 +58,18 @@ class RegistrationForm extends Component {
       <Form onSubmit={this.handleSubmit} layout="vertical"> 
         <FormItem
           // {...formItemLayout}
+          label="Tên đăng nhập"
+        >
+          {getFieldDecorator('username', {
+            rules: [ {
+              required: true, message: 'Vui lòng nhập tên đăng nhập của bạn!',
+            }],
+          })(
+            <Input type='text' placeholder='Nhập tên đăng nhập!'/>
+          )}
+        </FormItem>
+        <FormItem
+          // {...formItemLayout}
           label="E-mail"
         >
           {getFieldDecorator('email', {
@@ -75,7 +79,7 @@ class RegistrationForm extends Component {
               required: true, message: 'Vui lòng cung cấp E-mail của bạn!',
             }],
           })(
-            <Input />
+            <Input type='email' placeholder='Nhập địa chỉ email của bạn!'/>
           )}
         </FormItem>
         <FormItem
@@ -89,7 +93,7 @@ class RegistrationForm extends Component {
               validator: this.validateToNextPassword,
             }],
           })(
-            <Input type="password" />
+            <Input type="password" placeholder='Nhập mật khẩu của bạn!'/>
           )}
         </FormItem>
         <FormItem
@@ -103,17 +107,42 @@ class RegistrationForm extends Component {
               validator: this.compareToFirstPassword,
             }],
           })(
-            <Input type="password" onBlur={this.handleConfirmBlur} />
+            <Input type="password" onBlur={this.handleConfirmBlur} placeholder='Nhập lại mật khẩu của bạn'/>
           )}
         </FormItem>
+{/*         
         
+        <FormItem
+          // {...formItemLayout}
+          label="Số điện thoại"
+        >
+          {getFieldDecorator('phone', {
+            rules: [ {
+              required: true, message: 'Vui lòng cung cấp số điện thoại của bạn!',
+            }],
+          })(
+            <Input type='number' placeholder='Nhập số điện thoại của bạn!'/>
+          )}
+        </FormItem>
+        <FormItem
+          // {...formItemLayout}
+          label="Địa chỉ"
+        >
+          {getFieldDecorator('address', {
+            rules: [ {
+              required: true, message: 'Vui lòng cung cấp địa chỉ của bạn!',
+            }],
+          })(
+            <Input placeholder='Nhập địa chỉ của bạn!'/>
+          )}
+        </FormItem>
         <FormItem>
           {getFieldDecorator('agreement', {
             valuePropName: 'checked',
           })(
             <Checkbox>Tôi <Link to="#">đồng ý</Link> với điều khoản của bạn</Checkbox>
           )}
-        </FormItem>
+        </FormItem> */}
         <FormItem >
           <Button style={{float:'right'}} type="primary" htmlType="submit">Đăng ký</Button>
         </FormItem>

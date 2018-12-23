@@ -1,22 +1,22 @@
 
 const options = [
     {
-      key: "/",
+      key: "",
       label: "Trang chủ",
       leftIcon: "ion-pie-graph"
     },
     {
-      key: "/dashboard",
+      key: "dashboard",
       label: "Dùng thử",
       leftIcon: "ion-pie-graph"
     },
     {
-      key: "/about",
+      key: "about",
       label: "Giới thiệu",
       leftIcon: "ion-pie-graph"
     },
     {
-      key: "/vietnam",
+      key: "vietnam",
       label: "Việt Nam",
       leftIcon: "ion-ios-people",
       children: [

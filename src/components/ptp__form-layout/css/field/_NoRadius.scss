@@ -1,0 +1,28 @@
+.field-no-radius{
+    // padding:20px;
+    
+    .ant-form-item-children{
+        >input{
+            border-radius: 0;
+        }
+        .ant-calendar-picker-input{
+            border-radius: 0;
+        }
+        >textarea{
+            border-radius:0;
+        }
+    }
+
+    .row-form-item{
+        display: flex;
+        flex-direction: row;
+    }
+
+    .ant-select-selection--single {
+        border-radius:0;
+    }
+
+    .ant-select-selection--multiple{
+        border-radius:0;
+    }
+}

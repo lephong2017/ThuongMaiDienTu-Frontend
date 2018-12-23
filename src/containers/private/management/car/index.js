@@ -1,33 +1,38 @@
 import React,{Component} from 'react';
-import {Row,Col,Button,} from 'antd';
+import {Row, Col, Button, Icon, Popover, Avatar, Select, notification,   } from 'antd';
 import './index.css';
 import FunctionbarContent from './function/index';
 import PanelWrapper from 'containers/wrapper/Panel.style';
-import TableContent from 'components/table/MyTable';
-import {demoData} from './list-car-dumy';
+import TableContent from 'components/ptp__table/index';
+// import TableContent from 'components/table/MyTable';
+
+// import {demoData} from './list-car-dumy';
 import DrawerContent from 'components/Drawer/Drawer';
 import FormCar from './action/add/FormCar'; 
 import FormEditCar from './action/edit/edit'; 
 
-import { withRouter,} from 'react-router-dom';
+import { withRouter, } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {showNotification} from 'components/notification/Notification';
-import {handleAPI} from 'actions/management/index';
-import {loadObj,addObj,delObj,updateObj,findObj} from './api/ObjectParam';
-import * as typeAPI from 'utils/const/CheckTypeAPIComponents';
+import {reqLoadDataPaging, reqSearchCar, reqCountData, reqFindCar, reqDeleteCar, reqAddCar, reqUpdateCar} from 'redux/car/actions';
+import * as CONST_VARIABLE from 'utils/const/index';
 
 class CarManagement extends Component{
     state={
-        fullScreenMode:false,
         pageSize:5,
         pageIndex:1,
-        listPageVisit:[1],
-        listPageVisitFilter:[1],
-        iSearch:"ALL",
-
+        fullScreenMode:false,
+        
         visibledAdd:false,
         visibledEdit:false,
-        dataAPI:{}
+
+        filteredInfo: null,
+        sortedInfo: null, 
+        selectedRowKeys: [],
+        pagination:null,
+        recordSelected:null,
+        data:[],
+        idEdit:null
     }
     handleFullScreenMode=(val)=> {
         this.setState(() => {
@@ -36,132 +41,243 @@ class CarManagement extends Component{
             };
         });
     }
-    getItemRow=()=>{
-
-    }
-    onPageChange=(pageInd)=>{
-        var stringFilter = this.state.iSearch;
-        if(stringFilter===''||stringFilter==="ALL"){
-            var pageVisit = this.state.listPageVisit;
-            this.setState({
-                pageIndex:pageInd,
-                listPageVisitFilter:[],
-        },
-            function(){
-                var isPageVisit= this.state.listPageVisit.includes(pageInd);
-                if(isPageVisit===false){
-                    pageVisit.push(pageInd);
-                    this.setState({listPageVisit:pageVisit,});
-                    
-                }
-            });
-        }else{
-            this.setState({pageIndex:pageInd+1,listPageVisit:[]},
-                function(){
-                    var pageVisit = this.state.listPageVisitFilter;
-                    var isPageVisit= this.state.listPageVisitFilter.includes(pageInd);
-                    if(isPageVisit===false){
-                        pageVisit.push(pageInd);
-                        this.setState({listPageVisitFilter:pageVisit, });
-                    }
-
-                });
-            }
-    } 
-    showDrawerAdd=()=>{
-        this.setState({visibledAdd:true})
-    }
+        
+    showDrawerAdd=()=>{ this.setState({visibledAdd:true}) }
     onCloseAdd = () => { this.setState({ visibledAdd: false, }) };
 
-    showDrawerEdit=()=>{
-        this.setState({visibledEdit:true})
-    }
+    showDrawerEdit=(id)=>{ 
+        this.props.handleFindCar(id);
+        this.setState({visibledEdit:true, idEdit: id});
+     }
     onCloseEdit = () => { this.setState({ visibledEdit: false, }) };
 
-    checkCallAPI=(apiName,objData)=>{
-        switch(apiName){
-            case typeAPI.LOAD:
-                return this.props.handleAPI(loadObj,{});  
-            case typeAPI.ADD:
-                showNotification("Add rồi","Đợi xíu đi","topRight","success");
-                return this.props.handleAPI(addObj,objData);
-            case typeAPI.DELETE:
-                showNotification("Delete rồi","Đợi xíu đi","topRight","success");
-                return this.props.handleAPI(delObj,objData);
-            case typeAPI.UPDATE:
-                showNotification("Update rồi","Đợi xíu đi","topRight","success");
-                return this.props.handleAPI(updateObj,objData);
-            case typeAPI.FIND:
-                return this.props.handleAPI(findObj,objData);
-            default :return this.props.handleAPI(loadObj);
+
+    onSelectChange = (selectedRowKeys) => {
+        console.log('selectedRowKeys changed: ', selectedRowKeys);
+        this.setState({ selectedRowKeys });
+    }
+
+    handleChange = (pagination, filters, sorter) => {
+        this.setState({
+            filteredInfo: filters,
+            sortedInfo: sorter,
+            pagination: pagination
+        });
+
+    }
+
+    onRowSelect = (record) => {
+        this.setState({recordSelected:record});
+    }
+
+    clearFilters = (attr, name) => {
+        const filteredInfo = this.state.filteredInfo;
+        let arrayVal = filteredInfo[attr.val];
+        let ind = arrayVal.indexOf(name);
+        arrayVal.splice(ind, 1);
+        let attrFilter ={
+            [attr.val]: arrayVal
+        }
+        const obj= {...filteredInfo, ...attrFilter};
+        this.setState({ filteredInfo: obj });
+    }
+
+    clearSorted = () => {
+        this.setState({ sortedInfo: null, });
+    }
+    handleChangeSelectInRow =(value) => {
+        console.log("change value in rrow: ");
+        console.log(value, this.state.recordSelected);
+    }
+    
+    handleOnSearch= (val) =>{
+        console.log(this.state.pagination);
+        var accesstoken = sessionStorage.getItem(CONST_VARIABLE.ACCESS_TOKEN);
+        // console.log(val);
+        if(val!==''){
+            // this.props.countAllCar(accesstoken);    
+            this.props.handleSearchCar(val, this.state.pageIndex, this.state.pageSize, accesstoken);
+       
+        }else{
+            const {pageIndex, pageSize}= this.state;
+            this.props.loadDataPaging(pageIndex, pageSize,  accesstoken);
+            this.props.countAllCar(accesstoken);    
+
         }
     }
+
+
     componentWillMount(){
-        this.checkCallAPI(typeAPI.LOAD);
+        var accesstoken = sessionStorage.getItem(CONST_VARIABLE.ACCESS_TOKEN);
+        const {pageIndex, pageSize}= this.state;
+        this.props.loadDataPaging(pageIndex, pageSize,  accesstoken);
+        this.props.countAllCar(accesstoken);
     }
+
+    componentDidMount(){
+        var accesstoken = sessionStorage.getItem(CONST_VARIABLE.ACCESS_TOKEN);
+        const {pageIndex, pageSize}= this.state;
+        this.props.loadDataPaging(pageIndex, pageSize,  accesstoken);
+        this.props.countAllCar(accesstoken);
+    }
+
     handleSubmit=(obj)=>{
-        this.checkCallAPI(typeAPI.ADD,obj);
-        this.onClose();
+        var accesstoken = sessionStorage.getItem(CONST_VARIABLE.ACCESS_TOKEN);
+        this.props.handleAddCar(obj, accesstoken);
+        this.onCloseAdd();
+        showNotification("Thêm thành công", "Bạn vừa thực hiện thêm một xe!!!", "topRight", "success");
     }
+
     handleDelete=(id)=>{
-        this.checkCallAPI(typeAPI.DELETE,{id:id});
-        this.onClose();
-        this.onCloseDrawerEdit();
+        var accesstoken = sessionStorage.getItem(CONST_VARIABLE.ACCESS_TOKEN);
+        this.props.handleDeleteCar(id, accesstoken);
+        showNotification("Xóa thành công", "Bạn vừa thực hiện xóa một xe!!!", "topRight", "success");
     }
-    handleSubmitEdit=(obj)=>{
-        var object={
-            id:{id:obj.id},
-            data:obj
-        }
-        this.checkCallAPI(typeAPI.UPDATE,object);
-        this.onCloseDrawerEdit();
+
+    handleSubmitEdit=(id, obj)=>{
+        var accesstoken = sessionStorage.getItem(CONST_VARIABLE.ACCESS_TOKEN);
+        this.props.handleUpdateCar(id, obj, accesstoken);
+        this.onCloseEdit();
+        this.setState({id:null});
+        showNotification("Sửa thành công", "Bạn vừa thực hiện cập nhật thông tin một xe!!!", "topRight", "success");
     }
+
+   
     render(){
-        var objSetting={
-            loadding:false,
-            defaultPageSize:5,
-            onPageChange:this.onPageChange,
-            // onPageSizeChange:this.onPageSizeChange,
-            className: "-striped -highlight",
-            page:this.state.pageIndex,
-            pageSize:this.state.pageSize,
-            getObject:this.getItemRow
+        let { sortedInfo, filteredInfo } = this.state;
+        sortedInfo = sortedInfo || {};
+        filteredInfo = filteredInfo || {};
+        const info = {
+            sorted: sortedInfo,
+            filtered: filteredInfo
         }
-        const demoCol =[
+        const columns = [
             {
-                title: "id",
-                dataIndex: "id",
-                key:`ida`,
+                title: 'Tên xe',
+                dataIndex: 'name',
+                key: 'name',
+                sorter: (a, b) => a.name.length - b.name.length,
+                sortOrder: sortedInfo.columnKey === 'name' && sortedInfo.order,
+            }, 
+            {
+                title: 'Loại xe',
+                dataIndex: 'typeCar',
+                key: 'typeCar',
+                defaultSortOrder: 'ascend',
+                sorter: (a, b) => a.typeCar - b.typeCar,
+                sortOrder: sortedInfo.columnKey === 'typeCar' && sortedInfo.order,
+            }, 
+            {
+                title: 'Màu sắc',
+                dataIndex: 'color',
+                key: 'color',
+            }, 
+            {
+                title: 'Brank',
+                dataIndex: 'brank',
+                key: 'brank',
+            }, 
+            {
+                title: 'Mô tả',
+                dataIndex: 'description',
+                key: 'description',
+            }, 
+            {
+                title: 'Action',
+                align:'center',
+                render:(text, record, index)=>{
+                    return(
+                        <div>
+                            <Button onClick={()=>this.showDrawerEdit(text)} className='btn btn-table' icon='edit'></Button>
+                            <Button 
+                                onClick={()=>this.handleDelete(text)} 
+                                className='btn btn-table' 
+                                icon='delete'>
+                            </Button>
+                        </div>
+                    );
+                },
+                dataIndex: 'id',
+                key:'id',
+                width : 100
+               
             },
-           {
-               title: "Name",
-               dataIndex: "name",
-               key:`fullName`,
-           },
-           {
-               title: "Phone Number",
-               dataIndex: "phoneNumber",
-               key:`phoneNumber`,
-           },
-           {
-               title: "Email",
-               dataIndex: "email",
-               key:`email`,
-           },
-           {
-               key:`idb`,
-               dataIndex:"id",
-               align:'center',
-               render:(text)  => {
-                   return (
-                       <div className="button-table"> 
-                            <Button style={{border:'none'}} onClick={this.showDrawerEdit} icon="edit" />{'    '}
-                            <Button style={{border:'none'}}  icon="delete" />
-                       </div>
-                       )
-               }
-           },
-        ]
+       ];
+        
+        const config ={
+            table:{
+                // bordered: true
+            },
+            pagination:{
+                defaultPageSize:5,
+                total: this.props.numberCar
+            },
+        }
+        const event={
+            table:{
+                onChange:this.handleChange,
+                clearSorted: this.clearSorted,
+                clearFiltered: this.clearFilters,
+                onRow: this.onRowSelect,
+                onSearch: this.handleOnSearch
+            },
+            pagination:{
+                onChange:
+                    (page, pageSize)=>{
+                        const accesstoken= sessionStorage.getItem(CONST_VARIABLE.ACCESS_TOKEN);
+                        this.props.loadDataPaging(page, pageSize, accesstoken);
+                    },
+                onShowSizeChange:
+                    (page, pageSize)=>{
+                        const accesstoken= sessionStorage.getItem(CONST_VARIABLE.ACCESS_TOKEN);
+                        this.props.loadDataPaging(page, pageSize, accesstoken);
+                    }
+            }
+        }
+        const { selectedRowKeys } = this.state;
+        const rowSelection = {
+            selectedRowKeys,
+            onChange: this.onSelectChange,
+            hideDefaultSelections: true,
+            selections: [{
+                key: 'all-data',
+                text: 'Select All Data',
+                onSelect: () => {
+                this.setState({
+                    selectedRowKeys: [...Array(46).keys()], // 0...45
+                });
+                },
+            }, {
+                key: 'odd',
+                text: 'Select Odd Row',
+                onSelect: (changableRowKeys) => {
+                let newSelectedRowKeys = [];
+                newSelectedRowKeys = changableRowKeys.filter((key, index) => {
+                    if (index % 2 !== 0) {
+                    return false;
+                    }
+                    return true;
+                });
+                this.setState({ selectedRowKeys: newSelectedRowKeys });
+                },
+            }, {
+                key: 'even',
+                text: 'Select Even Row',
+                onSelect: (changableRowKeys) => {
+                let newSelectedRowKeys = [];
+                newSelectedRowKeys = changableRowKeys.filter((key, index) => {
+                    if (index % 2 !== 0) {
+                    return true;
+                    }
+                    return false;
+                });
+                this.setState({ selectedRowKeys: newSelectedRowKeys });
+                },
+            }],
+            // onSelection: this.onSelection,
+        };
+
+
         var listPropForDrawer={
             styleProps:{
               title:"Nhập thông tin!",
@@ -184,11 +300,14 @@ class CarManagement extends Component{
             onClose:this.onCloseAdd,
             visible:this.state.visibledAdd,
             hasButtonFooter:false,
-            componentWillShow:()=> <FormCar/>,
+            componentWillShow:(key)=> <FormCar
+                    key={key}
+                    onSubmitAdd={this.handleSubmit}
+                />,
         }
         var listPropForDrawerEdit={
             styleProps:{
-              title:"Nhập thông tin sửa chổ!",
+              title:"Nhập thông tin sửa đổi!",
               width:420,
               height:'100%',
               maskStyle:{
@@ -208,19 +327,27 @@ class CarManagement extends Component{
             onClose:this.onCloseEdit,
             visible:this.state.visibledEdit,
             hasButtonFooter:false,
-            componentWillShow:()=> <FormEditCar/>,
+            componentWillShow:(key)=> <FormEditCar 
+                key={key}
+                id={this.state.idEdit} 
+                car={this.props.itemCar}
+                onSubmitEdit={this.handleSubmitEdit}
+            />,
         }
         return (
             <Row className="content_manager_wrapper" style={{height:'100%'}}>
                 <PanelWrapper className={this.state.fullScreenMode ? "full-screen-mode" : ""}>
                     <FunctionbarContent showDrawerAdd={this.showDrawerAdd} handleFullScreenMode={this.handleFullScreenMode}/>
                     <Col md={24} className="table-wrapper">
-                        <TableContent 
-                            styleTable="TABLE_ANTD" 
-                            data={demoData} 
-                            col={demoCol} 
-                            ObjSetting={objSetting}
-                            />
+                        <TableContent
+                            rowSelection={rowSelection}
+                            data={this.props.car} 
+                            columns={columns} 
+                            config={config} 
+                            event={event}
+                            info={info}
+                        />
+                        
                     </Col>
                     <DrawerContent 
                         key={'addcar'}
@@ -246,13 +373,33 @@ class CarManagement extends Component{
 }
 const mapStateToProps = state => {
     return {
-        demo: state,
+        car: state.car,
+        itemCar: state.itemCar,
+        numberCar: state.numberCar
     }
 }
 const mapDispatchToProps = (dispatch, props) => {
     return {
-        handleAPI:(objectParam,objectData)=>{
-            dispatch(handleAPI(objectParam,objectData));
+        handleAddCar: (object, accesstoken)=>{
+            dispatch(reqAddCar(object, accesstoken));
+        },
+        handleFindCar: (id, accesstoken)=>{
+            dispatch(reqFindCar(id, accesstoken));
+        },
+        handleUpdateCar: (id, object, accesstoken)=>{
+            dispatch(reqUpdateCar(id, object, accesstoken));
+        },
+        handleDeleteCar: (id, accesstoken)=>{
+            dispatch(reqDeleteCar(id, accesstoken));
+        },
+        loadDataPaging: (pageIndex, pageSize, accesstoken)=>{
+            dispatch(reqLoadDataPaging(pageIndex, pageSize, accesstoken));
+        },
+        countAllCar: ( accesstoken)=>{
+            dispatch(reqCountData( accesstoken));
+        },
+        handleSearchCar: (keyword, pageIndex, pageSize, accesstoken)=>{
+            dispatch(reqSearchCar(keyword, pageIndex, pageSize, accesstoken))
         }
 
     }

@@ -36,8 +36,17 @@ class Sider extends Component {
               </Link>
             </Menu.Item>
           </MenuItemGroup>
+          
           <MenuItemGroup key="g2" title="Đơn hàng">
             <Menu.Item key="3">Danh sách đơn hàng</Menu.Item>
+          </MenuItemGroup>
+
+          <MenuItemGroup key="g4" title="Đối tác">
+              <Menu.Item key="4">
+                <Link to="management/partner">
+                  Quản lý đối tác
+                </Link>
+              </Menu.Item>
           </MenuItemGroup>
         </SubMenu>
       </Menu>

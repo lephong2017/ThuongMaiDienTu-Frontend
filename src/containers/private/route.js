@@ -1,11 +1,17 @@
 import { Route, } from 'react-router-dom';
 import React, { Component } from "react";
 import CarManagement from 'containers/private/management/car/index';
+import PartnerManagement from 'containers/private/management/partner/index';
 const adminRoutes = [
   {
     path: "car",
     exact: false,
     component: ()=> <CarManagement/>
+  },
+  {
+    path: "partner",
+    exact: false,
+    component: ()=> <PartnerManagement/>
   },
 ];
 

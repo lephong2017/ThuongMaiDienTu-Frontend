@@ -7,6 +7,7 @@ const { Meta } = Card;
 
 class ItemCar extends Component{
     render(){
+        const {car} =this.props;
         return(
             <Card
                 className="item-car"
@@ -16,7 +17,7 @@ class ItemCar extends Component{
                     [
                         <Icon type="eye" theme="outlined" />,
                         <Icon type="select" theme="outlined" />,
-                        <Link to={`detail`}>
+                        <Link to={`detail/${car.name}`}>
                             <Icon type="shopping-cart" theme="outlined" />
                         </Link>
                     ]
@@ -24,8 +25,8 @@ class ItemCar extends Component{
             >
                 <Meta
                     avatar={<Avatar icon="car" />}
-                    title="Giá: 200 000"
-                    description="Toyota"
+                    title={car.price}
+                    description={car.name}
                     />
             </Card>
         )

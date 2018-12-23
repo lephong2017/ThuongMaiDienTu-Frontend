@@ -1,0 +1,64 @@
+.table-operations {
+    margin-top: 16px;
+    margin-bottom: 16px;
+
+    button {
+        margin-right: 8px;
+    }
+}
+
+.btn {
+    border:none;
+    background: transparent;
+    box-shadow: none;
+}
+
+.btn-table {
+
+    &:hover {
+        background: transparent;
+        color:blue;
+    }
+}
+
+.btn-filter {
+    margin-bottom: 10px;
+}
+
+.pagination {
+    margin:10px 24px;
+}
+
+.pagination-table {
+    float:right;
+}
+
+.search-field {
+    display: flex;
+    margin: 10px 0;
+    justify-content: flex-end;
+    input {
+        border-radius: 0;
+    }
+}
+
+.filter-info-bar {
+    display: flex;
+    margin: 10px 0;
+}
+.component-table {
+    .react-resizable {
+        position: relative;
+    }
+
+    .react-resizable-handle {
+        position: absolute;
+        width: 10px;
+        height: 100%;
+        bottom: 0;
+        right: -5px;
+        cursor: col-resize;
+    }
+}
+
+  

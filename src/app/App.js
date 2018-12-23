@@ -10,7 +10,7 @@ class App extends Component {
     state={
         visible: false,
         showModal:false,
-        auth:true,
+        auth:false,
     }
     onCloseModal=()=>{
         this.setState({showModal:false});

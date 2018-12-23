@@ -1,0 +1,13 @@
+
+@import './themes/index';
+@import './field/Radius';
+@import './field/NoRadius';
+
+@media only screen and (max-width: 540px) {
+    .form-demo{
+        .row-form-item{
+            display: flex;
+            flex-direction: column;
+        }
+    }
+}

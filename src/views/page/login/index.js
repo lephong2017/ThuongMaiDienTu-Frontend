@@ -1,10 +1,11 @@
 import { Form, Input,  Button,  } from 'antd';
 import React,{Component} from 'react';
 
-import {actLogin} from 'actions/auth0/index';
+// import {actLogin} from 'actions/auth0/index'; 
 import { withRouter,} from 'react-router-dom';
 import { connect } from 'react-redux';
 import {showNotification} from 'components/notification/Notification';
+import {actLoginRequest} from 'actions/auth0/auth0';
 const FormItem = Form.Item;
 
 
@@ -18,15 +19,8 @@ class LoginForm extends Component {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        // const data ={
-        //   grant_type  :  values.password,
-        //   tenantId  :  tenantId,
-        //   username :  values.email,
-        //   password : values.password
-
-        // }
         showNotification("Đăng nhập rồi","Đợi xíu đi","topRight","success");
-        console.log('Received values of form: ', values);
+        this.props.handleLoginRequest(values);
       }
     });
   }
@@ -47,14 +41,14 @@ class LoginForm extends Component {
           // {...formItemLayout}
           label="E-mail"
         >
-          {getFieldDecorator('email', {
+          {getFieldDecorator('userName', {
             rules: [{
               type: 'email', message: 'Vui lòng nhập đúng định dạng E-mail!',
             }, {
               required: true, message: 'Vui lòng cung cấp E-mail của bạn!',
             }],
           })(
-            <Input />
+            <Input type='email' placeholder='Nhập tên đăng nhập đã đăng ký'/>
           )}
         </FormItem>
         <FormItem
@@ -66,7 +60,7 @@ class LoginForm extends Component {
               required: true, message: 'Vui lòng nhập password!',
             }]
           })(
-            <Input type="password" />
+            <Input type="password" placeholder='Nhập mật khẩu đã đăng ký'/>
           )}
         </FormItem>
        
@@ -83,14 +77,14 @@ const FormLogin= Form.create()(LoginForm);
 
 const mapStateToProps = state => {
   return {
-      auth: state.auth,
+      auth0: state.auth0,
   }
 }
 
 const mapDispatchToProps = (dispatch, props) => {
   return {
-    actLogin:(data)=>{
-          dispatch(actLogin(data));
+    handleLoginRequest:(data)=>{
+          dispatch(actLoginRequest(data));
     },
 
   }
