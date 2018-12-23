@@ -1,0 +1,10 @@
+export const LOAD_ORDERS = 'LOAD_ORDERS';
+
+export const ADD_ORDERS= 'ADD_ORDERS';
+export const EDIT_ORDERS= 'EDIT_ORDERS';
+export const UPDATE_ORDERS= 'UPDATE_ORDERS';
+export const DELETE_ORDERS= 'DELETE_ORDERS';
+export const IS_FETCHING_ORDERS= 'IS_FETCHING_ORDERS';
+export const FETCH_ORDERS_FILTER = 'FETCH_ORDERS_FILTER';
+export const FIND_ORDERS= 'FIND_ORDERS';
+export const COUNT_DATA= 'COUNT_DATA';

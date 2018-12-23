@@ -7,7 +7,15 @@ import numberCar from 'redux/car/numberData';
 
 import partner from 'redux/partner/partner';
 import itemPartner from 'redux/partner/itemPartner';
-import numberPartner from 'redux/partner/numberDataPartner';
+import numberDataPartner from 'redux/partner/numberDataPartner';
+
+import orders from 'redux/orders/orders';
+import itemOrders from 'redux/orders/itemOrders';
+import numberDataOrders from 'redux/orders/numberDataOrders';
+
+import typecar from 'redux/typecar/typecar';
+import itemTypecar from 'redux/typecar/itemTypecar';
+import numberTypecar from 'redux/typecar/numberTypecar';
 
 const appReducers = combineReducers({
     auth0,
@@ -19,7 +27,15 @@ const appReducers = combineReducers({
 
     partner,
     itemPartner,
-    numberPartner
+    numberDataPartner,
+
+    orders,
+    itemOrders,
+    numberDataOrders,
+
+    typecar,
+    itemTypecar,
+    numberTypecar,
 });
 
 export default appReducers;
