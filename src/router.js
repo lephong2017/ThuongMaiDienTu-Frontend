@@ -38,13 +38,13 @@ const PublicRoutes = ({ history, }) => {
             component={FinalRentalCar}
           />
           <Route
-            exact={false}
+            // exact={true}
             path={'/dashboard'}
             component={MainApp}
           />
           {/* <Route
-            exact
-            path={'/dashboard/Management'}
+            exact={true}
+            path={'/dashboard/management'}
             component={Management}
           /> */}
         </div>

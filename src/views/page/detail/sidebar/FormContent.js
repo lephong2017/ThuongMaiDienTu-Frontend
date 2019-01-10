@@ -23,6 +23,7 @@ class BookCar extends Component {
     dateRental:null,
     dateReturn:null,
     numDayRental:0,
+    err:'Số ngày mượn phải lớn hơn 1 ngày'
   };
 
   onChangeDateRental=(value, dateString)=> {
@@ -30,12 +31,40 @@ class BookCar extends Component {
     // console.log('Formatted Selected Time: ', dateString);
     this.setState({dateRental: dateString});
   }
+
+  getDateRental=(dateEnd, dateStart)=>{
+    let error='';
+    let yearStart = dateStart.getFullYear();
+    let yearEnd = dateEnd.getFullYear();
+    let year= yearEnd- yearStart;
+    let monthEnd = (year*12 )+ dateEnd.getMonth();
+    let monthStart = dateStart.getMonth();
+    let month = monthEnd- monthStart;
+    if(month>1){
+      error ='Số ngày mượn phải nhỏ hơn 1 tháng';
+      this.setState({numDayRental: day, err: error });
+      return  error;
+    } 
+    
+    let arr = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    let dayEnd = ((month) * arr[monthStart]) + dateEnd.getDate();
+    let dayStart = dateStart.getDate();
+    let day= dayEnd- dayStart;
+    if(day>1){
+      this.setState({numDayRental: day, err: 'OK' });
+    }else{
+      this.setState({err:'Phải mượn xe lớn hơn 1 ngày'});
+    }
+    return error;
+  }
   
   onChangeDateReturn=(value, dateString)=> {
     // console.log('Selected Time: ', value);
     // console.log('Formatted Selected Time: ', dateString);
     const numDayRental = new Date(dateString).getDate() - new Date(this.state.dateRental).getDate();
     this.setState({dateReturn: dateString, numDayRental: numDayRental });
+    this.getDateRental(new Date(dateString), new Date(this.state.dateRental));
+
   }
   
   onOk=(value)=> {
@@ -80,6 +109,7 @@ class BookCar extends Component {
 
   render() {
     // const { getFieldDecorator } = this.props.form;
+    console.log(this.state.err, this.state.numDayRental);
     const onSuccess = (payment) => {
 			console.log("The payment was succeeded!", payment);
 		}		
@@ -105,8 +135,8 @@ class BookCar extends Component {
 		};
 
 		const client = {
-            sandbox:    'AY1jSZZWe9ubj79SyF4ixwYn32ExUwpeBwUBGiqjcTF3vCdQN3VPOZ7l4GF7SsBYifOWxo4x0RlceB11',
-            production: 'EPOgRKs0mDvWhvRXnGFsAcqp3ny-hYeYoSPQPxIYKvc1kGKqgCpV0xI2c7bs0qU8okWyyqbl7ajjH43z',
+      sandbox:    'AY1jSZZWe9ubj79SyF4ixwYn32ExUwpeBwUBGiqjcTF3vCdQN3VPOZ7l4GF7SsBYifOWxo4x0RlceB11',
+      production: 'EPOgRKs0mDvWhvRXnGFsAcqp3ny-hYeYoSPQPxIYKvc1kGKqgCpV0xI2c7bs0qU8okWyyqbl7ajjH43z',
 		}
     const { formLayout } = this.state;
     const formItemLayout = formLayout === 'horizontal' ? {
@@ -202,7 +232,7 @@ class BookCar extends Component {
                 <FormItem style={{float:'right',width:'100%'}}>
                     <Row >
                 {
-                  (this.state.numDayRental>0)?
+                  (this.state.err==='OK')?
                     <Col md={24}>
                      <PaypalBtn 
                         env={env} 
@@ -219,7 +249,7 @@ class BookCar extends Component {
                         <Button style={{width:'100%'}} type="primary" htmlType="submit">Hoàn tất</Button>
                       </Link>
                     </Col>:
-                    <Col><span style={{color: 'red'}}>Phải mượn xe ít nhất một ngày</span></Col>
+                    <Col><span style={{color: 'red'}}>{this.state.err}</span></Col>
 
 
                 }

@@ -13,7 +13,7 @@ class App extends Component {
         auth:false,
     }
     onCloseModal=()=>{
-        this.setState({showModal:false});
+        this.setState({showModal:false, auth:true});
     }
     render(){
         const {url} = this.props.match;
@@ -34,6 +34,7 @@ class App extends Component {
                                 visible={this.state.showModal}
                                 title="Chào mừng bạn đến với hệ thống của chúng tôi!"
                                 closable={true}
+                                onCancel={this.onCloseModal}
                                 footer={null}
                                 width={900}
                             >   
@@ -46,15 +47,15 @@ class App extends Component {
                                         <Col md={8} className="service-items">
                                             <div className="image-service-1"></div>
                                             <div>Dùng thử tính năng cho thuê xe của hệ thống</div>
-                                            <Link to="management/car" >
-                                                <Button onClick={this.onCloseModal}  >
+                                            <Link to="dashboard/management" onClick={this.onCloseModal}  >
+                                                <Button  >
                                                 <Icon type="car" theme="outlined" />Dùng thử một lần</Button>
                                             </Link>
                                         </Col>
                                         <Col md={8} className="service-items">
                                             <div className="image-service-2"></div>
                                             <div>Dịch vụ này đang cập nhật</div>
-                                            <Link to="dashboard/management/car" >
+                                            <Link to="dashboard/management" >
                                                 <Button onClick={this.onCloseModal} disabled >
                                                 <Icon type="car" theme="outlined" />Dùng thử một lần</Button>
                                             </Link>
@@ -62,7 +63,7 @@ class App extends Component {
                                         <Col md={8} className="service-items">
                                             <div className="image-service-3"></div>
                                             <div>Dịch vụ này đang cập nhật</div>
-                                            <Link to="dashboard/management/car" >
+                                            <Link to="dashboard/management" >
                                                 <Button onClick={this.onCloseModal}  disabled={true}  >
                                                 <Icon type="car" theme="outlined"/>Dùng thử một lần</Button>
                                             </Link>
