@@ -79,17 +79,25 @@ class FormEditContent extends Component{
                 data:{
                     dataType:'EMAIL',
                     validation:{
-                        // rules: [
-                        //     {
-                        //       required: true,
-                        //       message: 'Trường dữ liệu này là bắt buộc!!!'
-                        //     }
-                        // ],
+                        rules: [
+                            {
+                              required: true,
+                              message: 'Trường dữ liệu này là bắt buộc!!!'
+                            }
+                        ],
                     }
                 },
                 render:{
                     placeholder:'Vui lòng nhập email của bạn',
                     label:'Email: ',
+                    validation:{
+                        rules: [
+                            {
+                              required: true,
+                              message: 'Trường dữ liệu này là bắt buộc!!!'
+                            }
+                        ],
+                    }
                 },
                 action:{
                 }
@@ -98,11 +106,19 @@ class FormEditContent extends Component{
                 attrbField:'phoneNumber',
                 data:{
                     dataType:'PHONE',
+                    validation:{
+                        rules: [
+                            {
+                              required: true,
+                              message: 'Trường dữ liệu này là bắt buộc!!!'
+                            }
+                        ],
+                    }
                 },
                 render:{
                     placeholder:'Vui lòng nhập số điện thoại ',
                     label:'Số điện thoại: ',
-
+                   
                 },
                 action:{
                 }

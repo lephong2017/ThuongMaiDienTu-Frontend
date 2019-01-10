@@ -126,13 +126,13 @@ class PartnerManagement extends Component{
         var accesstoken = sessionStorage.getItem(CONST_VARIABLE.ACCESS_TOKEN);
         this.props.handleAddPartner(obj, accesstoken);
         this.onCloseAdd();
-        showNotification("Thêm thành công", "Bạn vừa thực hiện thêm một xe!!!", "topRight", "success");
+        showNotification("Thêm thành công", "Bạn vừa thực hiện thêm một partner!!!", "topRight", "success");
     }
 
     handleDelete=(id)=>{
         var accesstoken = sessionStorage.getItem(CONST_VARIABLE.ACCESS_TOKEN);
         this.props.handleDeletePartner(id, accesstoken);
-        showNotification("Xóa thành công", "Bạn vừa thực hiện xóa một xe!!!", "topRight", "success");
+        showNotification("Xóa thành công", "Bạn vừa thực hiện xóa một partner!!!", "topRight", "success");
     }
 
     handleSubmitEdit=(id, obj)=>{
@@ -140,7 +140,7 @@ class PartnerManagement extends Component{
         this.props.handleUpdatePartner(id, obj, accesstoken);
         this.onCloseEdit();
         this.setState({id:null});
-        showNotification("Sửa thành công", "Bạn vừa thực hiện cập nhật thông tin một xe!!!", "topRight", "success");
+        showNotification("Sửa thành công", "Bạn vừa thực hiện cập nhật thông tin một partner!!!", "topRight", "success");
     }
 
    
@@ -372,7 +372,7 @@ const mapStateToProps = state => {
     return {
         partner: state.partner,
         itemPartner: state.itemPartner,
-        numberPartner: state.numberPartner
+        numberPartner: state.numberDataPartner
     }
 }
 const mapDispatchToProps = (dispatch, props) => {

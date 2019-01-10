@@ -15,7 +15,6 @@ class FormEditContent extends Component{
             edit:edit_view, 
             dataSubmit:{
             },
-            car:null,
             id:'',
 
         }
@@ -111,7 +110,7 @@ class FormEditContent extends Component{
                         type={type} 
                         listFields={listFields}
                         submit= {edit}
-                        formID= "editCar"
+                        formID= "editTypeCar"
                         mode= "edit"
                         handleSubmit= {this.handleSubmit}
                     />
