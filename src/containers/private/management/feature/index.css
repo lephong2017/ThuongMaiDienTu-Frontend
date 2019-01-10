@@ -1,0 +1,18 @@
+.content_manager_wrapper{
+    background: white;
+    /* padding:5px 24px; */
+    height: 100%;
+    /* border-bottom: 1px solid rgba(0,0,0,0.12); */
+}
+.table-wrapper{
+    padding: 5px 24px;
+    text-align: center;
+    padding-right: 27px;
+    height:100%;
+}
+.ant-layout{
+    height:100%;
+}
+.ant-layout-content {
+    background: white;
+}

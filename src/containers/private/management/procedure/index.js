@@ -6,19 +6,19 @@ import PanelWrapper from 'containers/wrapper/Panel.style';
 import TableContent from 'components/ptp__table/index';
 // import TableContent from 'components/table/MyTable';
 
-// import {demoData} from './list-Order-dumy';
+// import {demoData} from './list-Procedure-dumy';
 import DrawerContent from 'components/Drawer/Drawer';
-import FormOrder from './action/add/FormOrder'; 
-import FormEditOrder from './action/edit/edit'; 
+import FormProcedure from './action/add/FormProcedure'; 
+import FormEditProcedure from './action/edit/edit'; 
 
 import { withRouter, } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {showNotification} from 'components/notification/Notification';
-import {reqLoadDataPaging, reqSearchOrders, reqCountData,
-     reqFindOrders, reqDeleteOrders, reqAddOrders, reqUpdateOrders} from 'redux/orders/actions';
+import {reqLoadDataPaging, reqSearchProcedure, reqCountData,
+     reqFindProcedure, reqDeleteProcedure, reqAddProcedure, reqUpdateProcedure} from 'redux/procedure/actions';
 import * as CONST_VARIABLE from 'utils/const/index';
 
-class OrderManagement extends Component{
+class ProcedureManagement extends Component{
     state={
         pageSize:5,
         pageIndex:1,
@@ -47,7 +47,7 @@ class OrderManagement extends Component{
     onCloseAdd = () => { this.setState({ visibledAdd: false, }) };
 
     showDrawerEdit=(id)=>{ 
-        this.props.handleFindOrder(id);
+        this.props.handleFindProcedure(id);
         this.setState({visibledEdit:true, idEdit: id});
      }
     onCloseEdit = () => { this.setState({ visibledEdit: false, }) };
@@ -96,13 +96,13 @@ class OrderManagement extends Component{
         var accesstoken = sessionStorage.getItem(CONST_VARIABLE.ACCESS_TOKEN);
         // console.log(val);
         if(val!==''){
-            // this.props.countAllOrder(accesstoken);    
-            this.props.handleSearchOrder(val, this.state.pageIndex, this.state.pageSize, accesstoken);
+            // this.props.countAllProcedure(accesstoken);    
+            this.props.handleSearchProcedure(val, this.state.pageIndex, this.state.pageSize, accesstoken);
        
         }else{
             const {pageIndex, pageSize}= this.state;
             this.props.loadDataPaging(pageIndex, pageSize,  accesstoken);
-            this.props.countAllOrder(accesstoken);    
+            this.props.countAllProcedure(accesstoken);    
 
         }
     }
@@ -112,35 +112,35 @@ class OrderManagement extends Component{
         var accesstoken = sessionStorage.getItem(CONST_VARIABLE.ACCESS_TOKEN);
         const {pageIndex, pageSize}= this.state;
         this.props.loadDataPaging(pageIndex, pageSize,  accesstoken);
-        this.props.countAllOrder(accesstoken);
+        this.props.countAllProcedure(accesstoken);
     }
 
     componentDidMount(){
         var accesstoken = sessionStorage.getItem(CONST_VARIABLE.ACCESS_TOKEN);
         const {pageIndex, pageSize}= this.state;
         this.props.loadDataPaging(pageIndex, pageSize,  accesstoken);
-        this.props.countAllOrder(accesstoken);
+        this.props.countAllProcedure(accesstoken);
     }
 
     handleSubmit=(obj)=>{
         var accesstoken = sessionStorage.getItem(CONST_VARIABLE.ACCESS_TOKEN);
-        this.props.handleAddOrder(obj, accesstoken);
+        this.props.handleAddProcedure(obj, accesstoken);
         this.onCloseAdd();
-        showNotification("Thêm thành công", "Bạn vừa thực hiện thêm một đơn hàng!!!", "topRight", "success");
+        showNotification("Thêm thành công", "Bạn vừa thực hiện thêm một procedure!!!", "topRight", "success");
     }
 
     handleDelete=(id)=>{
         var accesstoken = sessionStorage.getItem(CONST_VARIABLE.ACCESS_TOKEN);
-        this.props.handleDeleteOrder(id, accesstoken);
-        showNotification("Xóa thành công", "Bạn vừa thực hiện xóa một đơn hàng!!!", "topRight", "success");
+        this.props.handleDeleteProcedure(id, accesstoken);
+        showNotification("Xóa thành công", "Bạn vừa thực hiện xóa một procedure!!!", "topRight", "success");
     }
 
     handleSubmitEdit=(id, obj)=>{
         var accesstoken = sessionStorage.getItem(CONST_VARIABLE.ACCESS_TOKEN);
-        this.props.handleUpdateOrder(id, obj, accesstoken);
+        this.props.handleUpdateProcedure(id, obj, accesstoken);
         this.onCloseEdit();
         this.setState({id:null});
-        showNotification("Sửa thành công", "Bạn vừa thực hiện cập nhật thông tin một đơn hàng!!!", "topRight", "success");
+        showNotification("Sửa thành công", "Bạn vừa thực hiện cập nhật thông tin một procedure!!!", "topRight", "success");
     }
 
    
@@ -154,41 +154,21 @@ class OrderManagement extends Component{
         }
         const columns = [
             {
-                title: 'Tên khách hàng',
-                dataIndex: 'nameCustomer',
-                key: 'nameCustomer',
-                sorter: (a, b) => a.nameCustomer.length - b.nameCustomer.length,
-                sortOrder: sortedInfo.columnKey === 'nameCustomer' && sortedInfo.order,
+                title: 'Tên tính năng',
+                dataIndex: 'name',
+                key: 'name',
+                sorter: (a, b) => a.name.length - b.name.length,
+                sortprocedure: sortedInfo.columnKey === 'name' && sortedInfo.procedure,
             }, 
             {
-                title: 'Tên xe',
-                dataIndex: 'nameCar',
-                key: 'nameCar',
-                defaultSortOrder: 'nameCar',
-                sorter: (a, b) => a.typeOrder - b.typeOrder,
-                sortOrder: sortedInfo.columnKey === 'nameCar' && sortedInfo.order,
+                title: 'Mô tả',
+                dataIndex: 'description',
+                key: 'description',
+                defaultSortProcedure: 'description',
+                sorter: (a, b) => a.typeProcedure - b.typeProcedure,
+                sortProcedure: sortedInfo.columnKey === 'description' && sortedInfo.procedure,
             }, 
-            {
-                title: 'Giá xe',
-                dataIndex: 'priceOrder',
-                key: 'priceOrder',
-                width:100
-            }, 
-            {
-                title: 'Ngày đặt',
-                dataIndex: 'dateOrder',
-                key: 'dateOrder',
-            }, 
-            {
-                title: 'Ngày thuê',
-                dataIndex: 'dateOfhire',
-                key: 'dateOfhire',
-            }, 
-            {
-                title: 'Ngày trả',
-                dataIndex: 'payDate',
-                key: 'payDate',
-            }, 
+           
             {
                 title: 'Action',
                 align:'center',
@@ -213,11 +193,11 @@ class OrderManagement extends Component{
         
         const config ={
             table:{
-                // bordered: true
+                // bprocedureed: true
             },
             pagination:{
                 defaultPageSize:5,
-                total: this.props.numberOrder
+                total: this.props.numberProcedure
             },
         }
         const event={
@@ -307,7 +287,7 @@ class OrderManagement extends Component{
             onClose:this.onCloseAdd,
             visible:this.state.visibledAdd,
             hasButtonFooter:false,
-            componentWillShow:(key)=> <FormOrder
+            componentWillShow:(key)=> <FormProcedure
                     key={key}
                     onSubmitAdd={this.handleSubmit}
                 />,
@@ -334,15 +314,15 @@ class OrderManagement extends Component{
             onClose:this.onCloseEdit,
             visible:this.state.visibledEdit,
             hasButtonFooter:false,
-            componentWillShow:(key)=> <FormEditOrder 
+            componentWillShow:(key)=> <FormEditProcedure 
                 key={key}
                 id={this.state.idEdit} 
-                order={this.props.itemOrders} 
+                procedure={this.props.itemProcedure} 
                 onSubmitEdit={this.handleSubmitEdit}
             />,
         }
         console.log("adasdasdas");
-        console.log(this.props.itemOrders);
+        console.log(this.props.itemProcedure);
         console.log("adasdasdas");
         return (
             <Row className="content_manager_wrapper" style={{height:'100%'}}>
@@ -351,7 +331,7 @@ class OrderManagement extends Component{
                     <Col md={24} className="table-wrapper">
                         <TableContent
                             rowSelection={rowSelection}
-                            data={this.props.order} 
+                            data={this.props.procedure} 
                             columns={columns} 
                             config={config} 
                             event={event}
@@ -360,7 +340,7 @@ class OrderManagement extends Component{
                         
                     </Col>
                     <DrawerContent 
-                        key={'addorder'}
+                        key={'addprocedure'}
                         styleProps={listPropForDrawer.styleProps} 
                         visible={listPropForDrawer.visible} 
                         onClose={listPropForDrawer.onClose}
@@ -368,7 +348,7 @@ class OrderManagement extends Component{
                         componentWillShow={listPropForDrawer.componentWillShow}
                     />
                     <DrawerContent 
-                        key={'editorder'}
+                        key={'editprocedure'}
                         styleProps={listPropForDrawerEdit.styleProps} 
                         visible={listPropForDrawerEdit.visible} 
                         onClose={listPropForDrawerEdit.onClose}
@@ -383,35 +363,35 @@ class OrderManagement extends Component{
 }
 const mapStateToProps = state => {
     return {
-        order: state.orders,
-        itemOrders: state.itemOrders,
-        numberOrder: state.numberDataOrders
+        procedure: state.procedure,
+        itemProcedure: state.itemProcedure,
+        numberProcedure: state.numberProcedure
     }
 }
 const mapDispatchToProps = (dispatch, props) => {
     return {
-        handleAddOrder: (object, accesstoken)=>{
-            dispatch(reqAddOrders(object, accesstoken));
+        handleAddProcedure: (object, accesstoken)=>{
+            dispatch(reqAddProcedure(object, accesstoken));
         },
-        handleFindOrder: (id, accesstoken)=>{
-            dispatch(reqFindOrders(id, accesstoken));
+        handleFindProcedure: (id, accesstoken)=>{
+            dispatch(reqFindProcedure(id, accesstoken));
         },
-        handleUpdateOrder: (id, object, accesstoken)=>{
-            dispatch(reqUpdateOrders(id, object, accesstoken));
+        handleUpdateProcedure: (id, object, accesstoken)=>{
+            dispatch(reqUpdateProcedure(id, object, accesstoken));
         },
-        handleDeleteOrder: (id, accesstoken)=>{
-            dispatch(reqDeleteOrders(id, accesstoken));
+        handleDeleteProcedure: (id, accesstoken)=>{
+            dispatch(reqDeleteProcedure(id, accesstoken));
         },
         loadDataPaging: (pageIndex, pageSize, accesstoken)=>{
             dispatch(reqLoadDataPaging(pageIndex, pageSize, accesstoken));
         },
-        countAllOrder: ( accesstoken)=>{
+        countAllProcedure: ( accesstoken)=>{
             dispatch(reqCountData( accesstoken));
         },
-        handleSearchOrder: (keyword, pageIndex, pageSize, accesstoken)=>{
-            dispatch(reqSearchOrders(keyword, pageIndex, pageSize, accesstoken))
+        handleSearchProcedure: (keyword, pageIndex, pageSize, accesstoken)=>{
+            dispatch(reqSearchProcedure(keyword, pageIndex, pageSize, accesstoken))
         }
 
     }
 }
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(OrderManagement));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ProcedureManagement));

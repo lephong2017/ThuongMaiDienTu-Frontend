@@ -48,6 +48,36 @@ class Sider extends Component {
                   Quản lý đơn hàng
                 </Link>
               </Menu.Item>
+              <Menu.Item key="6">
+                <Link to="management/customer">
+                  Quản lý khách hàng
+                </Link>
+              </Menu.Item>
+              <Menu.Item key="7">
+                <Link to="management/customercar">
+                  Quản lý khách hàng đặt xe
+                </Link>
+              </Menu.Item>
+              <Menu.Item key="8">
+                <Link to="management/feature">
+                  Quản lý tính năng
+                </Link>
+              </Menu.Item>
+              <Menu.Item key="9">
+                <Link to="management/packages">
+                  Quản lý gói dịch vụ
+                </Link>
+              </Menu.Item>
+              <Menu.Item key="9">
+                <Link to="management/payment">
+                  Quản lý payment
+                </Link>
+              </Menu.Item>
+              <Menu.Item key="9">
+                <Link to="management/procedure">
+                  Quản lý procedure
+                </Link>
+              </Menu.Item>
           </MenuItemGroup>
           
           {/* <MenuItemGroup key="g2" title="Đơn hàng">

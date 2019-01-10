@@ -6,19 +6,19 @@ import PanelWrapper from 'containers/wrapper/Panel.style';
 import TableContent from 'components/ptp__table/index';
 // import TableContent from 'components/table/MyTable';
 
-// import {demoData} from './list-Order-dumy';
+// import {demoData} from './list-Packages-dumy';
 import DrawerContent from 'components/Drawer/Drawer';
-import FormOrder from './action/add/FormOrder'; 
-import FormEditOrder from './action/edit/edit'; 
+import FormPackages from './action/add/FormPackages'; 
+import FormEditPackages from './action/edit/edit'; 
 
 import { withRouter, } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {showNotification} from 'components/notification/Notification';
-import {reqLoadDataPaging, reqSearchOrders, reqCountData,
-     reqFindOrders, reqDeleteOrders, reqAddOrders, reqUpdateOrders} from 'redux/orders/actions';
+import {reqLoadDataPaging, reqSearchPackage, reqCountData,
+     reqFindPackage, reqDeletePackage, reqAddPackage, reqUpdatePackage} from 'redux/packages/actions';
 import * as CONST_VARIABLE from 'utils/const/index';
 
-class OrderManagement extends Component{
+class PackagesManagement extends Component{
     state={
         pageSize:5,
         pageIndex:1,
@@ -47,7 +47,7 @@ class OrderManagement extends Component{
     onCloseAdd = () => { this.setState({ visibledAdd: false, }) };
 
     showDrawerEdit=(id)=>{ 
-        this.props.handleFindOrder(id);
+        this.props.handleFindPackages(id);
         this.setState({visibledEdit:true, idEdit: id});
      }
     onCloseEdit = () => { this.setState({ visibledEdit: false, }) };
@@ -96,13 +96,13 @@ class OrderManagement extends Component{
         var accesstoken = sessionStorage.getItem(CONST_VARIABLE.ACCESS_TOKEN);
         // console.log(val);
         if(val!==''){
-            // this.props.countAllOrder(accesstoken);    
-            this.props.handleSearchOrder(val, this.state.pageIndex, this.state.pageSize, accesstoken);
+            // this.props.countAllPackages(accesstoken);    
+            this.props.handleSearchPackages(val, this.state.pageIndex, this.state.pageSize, accesstoken);
        
         }else{
             const {pageIndex, pageSize}= this.state;
             this.props.loadDataPaging(pageIndex, pageSize,  accesstoken);
-            this.props.countAllOrder(accesstoken);    
+            this.props.countAllPackages(accesstoken);    
 
         }
     }
@@ -112,35 +112,35 @@ class OrderManagement extends Component{
         var accesstoken = sessionStorage.getItem(CONST_VARIABLE.ACCESS_TOKEN);
         const {pageIndex, pageSize}= this.state;
         this.props.loadDataPaging(pageIndex, pageSize,  accesstoken);
-        this.props.countAllOrder(accesstoken);
+        this.props.countAllPackages(accesstoken);
     }
 
     componentDidMount(){
         var accesstoken = sessionStorage.getItem(CONST_VARIABLE.ACCESS_TOKEN);
         const {pageIndex, pageSize}= this.state;
         this.props.loadDataPaging(pageIndex, pageSize,  accesstoken);
-        this.props.countAllOrder(accesstoken);
+        this.props.countAllPackages(accesstoken);
     }
 
     handleSubmit=(obj)=>{
         var accesstoken = sessionStorage.getItem(CONST_VARIABLE.ACCESS_TOKEN);
-        this.props.handleAddOrder(obj, accesstoken);
+        this.props.handleAddPackages(obj, accesstoken);
         this.onCloseAdd();
-        showNotification("Thêm thành công", "Bạn vừa thực hiện thêm một đơn hàng!!!", "topRight", "success");
+        showNotification("Thêm thành công", "Bạn vừa thực hiện thêm một tính năng!!!", "topRight", "success");
     }
 
     handleDelete=(id)=>{
         var accesstoken = sessionStorage.getItem(CONST_VARIABLE.ACCESS_TOKEN);
-        this.props.handleDeleteOrder(id, accesstoken);
-        showNotification("Xóa thành công", "Bạn vừa thực hiện xóa một đơn hàng!!!", "topRight", "success");
+        this.props.handleDeletePackages(id, accesstoken);
+        showNotification("Xóa thành công", "Bạn vừa thực hiện xóa một tính năng!!!", "topRight", "success");
     }
 
     handleSubmitEdit=(id, obj)=>{
         var accesstoken = sessionStorage.getItem(CONST_VARIABLE.ACCESS_TOKEN);
-        this.props.handleUpdateOrder(id, obj, accesstoken);
+        this.props.handleUpdatePackages(id, obj, accesstoken);
         this.onCloseEdit();
         this.setState({id:null});
-        showNotification("Sửa thành công", "Bạn vừa thực hiện cập nhật thông tin một đơn hàng!!!", "topRight", "success");
+        showNotification("Sửa thành công", "Bạn vừa thực hiện cập nhật thông tin một tính năng!!!", "topRight", "success");
     }
 
    
@@ -154,41 +154,21 @@ class OrderManagement extends Component{
         }
         const columns = [
             {
-                title: 'Tên khách hàng',
-                dataIndex: 'nameCustomer',
-                key: 'nameCustomer',
-                sorter: (a, b) => a.nameCustomer.length - b.nameCustomer.length,
-                sortOrder: sortedInfo.columnKey === 'nameCustomer' && sortedInfo.order,
+                title: 'Tên gói',
+                dataIndex: 'name',
+                key: 'name',
+                sorter: (a, b) => a.name.length - b.name.length,
+                sortpackages: sortedInfo.columnKey === 'name' && sortedInfo.packages,
             }, 
             {
-                title: 'Tên xe',
-                dataIndex: 'nameCar',
-                key: 'nameCar',
-                defaultSortOrder: 'nameCar',
-                sorter: (a, b) => a.typeOrder - b.typeOrder,
-                sortOrder: sortedInfo.columnKey === 'nameCar' && sortedInfo.order,
+                title: 'Giá',
+                dataIndex: 'price',
+                key: 'price',
+                defaultSortPackages: 'price',
+                sorter: (a, b) => a.typePackages - b.typePackages,
+                sortPackages: sortedInfo.columnKey === 'price' && sortedInfo.packages,
             }, 
-            {
-                title: 'Giá xe',
-                dataIndex: 'priceOrder',
-                key: 'priceOrder',
-                width:100
-            }, 
-            {
-                title: 'Ngày đặt',
-                dataIndex: 'dateOrder',
-                key: 'dateOrder',
-            }, 
-            {
-                title: 'Ngày thuê',
-                dataIndex: 'dateOfhire',
-                key: 'dateOfhire',
-            }, 
-            {
-                title: 'Ngày trả',
-                dataIndex: 'payDate',
-                key: 'payDate',
-            }, 
+           
             {
                 title: 'Action',
                 align:'center',
@@ -213,11 +193,11 @@ class OrderManagement extends Component{
         
         const config ={
             table:{
-                // bordered: true
+                // bPackagesed: true
             },
             pagination:{
                 defaultPageSize:5,
-                total: this.props.numberOrder
+                total: this.props.numberPackages
             },
         }
         const event={
@@ -307,7 +287,7 @@ class OrderManagement extends Component{
             onClose:this.onCloseAdd,
             visible:this.state.visibledAdd,
             hasButtonFooter:false,
-            componentWillShow:(key)=> <FormOrder
+            componentWillShow:(key)=> <FormPackages
                     key={key}
                     onSubmitAdd={this.handleSubmit}
                 />,
@@ -334,15 +314,15 @@ class OrderManagement extends Component{
             onClose:this.onCloseEdit,
             visible:this.state.visibledEdit,
             hasButtonFooter:false,
-            componentWillShow:(key)=> <FormEditOrder 
+            componentWillShow:(key)=> <FormEditPackages 
                 key={key}
                 id={this.state.idEdit} 
-                order={this.props.itemOrders} 
+                packages={this.props.itemPackages} 
                 onSubmitEdit={this.handleSubmitEdit}
             />,
         }
         console.log("adasdasdas");
-        console.log(this.props.itemOrders);
+        console.log(this.props.itemPackages);
         console.log("adasdasdas");
         return (
             <Row className="content_manager_wrapper" style={{height:'100%'}}>
@@ -351,7 +331,7 @@ class OrderManagement extends Component{
                     <Col md={24} className="table-wrapper">
                         <TableContent
                             rowSelection={rowSelection}
-                            data={this.props.order} 
+                            data={this.props.packages} 
                             columns={columns} 
                             config={config} 
                             event={event}
@@ -360,7 +340,7 @@ class OrderManagement extends Component{
                         
                     </Col>
                     <DrawerContent 
-                        key={'addorder'}
+                        key={'addpackages'}
                         styleProps={listPropForDrawer.styleProps} 
                         visible={listPropForDrawer.visible} 
                         onClose={listPropForDrawer.onClose}
@@ -368,7 +348,7 @@ class OrderManagement extends Component{
                         componentWillShow={listPropForDrawer.componentWillShow}
                     />
                     <DrawerContent 
-                        key={'editorder'}
+                        key={'editpackages'}
                         styleProps={listPropForDrawerEdit.styleProps} 
                         visible={listPropForDrawerEdit.visible} 
                         onClose={listPropForDrawerEdit.onClose}
@@ -383,35 +363,35 @@ class OrderManagement extends Component{
 }
 const mapStateToProps = state => {
     return {
-        order: state.orders,
-        itemOrders: state.itemOrders,
-        numberOrder: state.numberDataOrders
+        packages: state.packages,
+        itemPackages: state.itemPackages,
+        numberPackages: state.numberPackages
     }
 }
 const mapDispatchToProps = (dispatch, props) => {
     return {
-        handleAddOrder: (object, accesstoken)=>{
-            dispatch(reqAddOrders(object, accesstoken));
+        handleAddPackages: (object, accesstoken)=>{
+            dispatch(reqAddPackage(object, accesstoken));
         },
-        handleFindOrder: (id, accesstoken)=>{
-            dispatch(reqFindOrders(id, accesstoken));
+        handleFindPackages: (id, accesstoken)=>{
+            dispatch(reqFindPackage(id, accesstoken));
         },
-        handleUpdateOrder: (id, object, accesstoken)=>{
-            dispatch(reqUpdateOrders(id, object, accesstoken));
+        handleUpdatePackages: (id, object, accesstoken)=>{
+            dispatch(reqUpdatePackage(id, object, accesstoken));
         },
-        handleDeleteOrder: (id, accesstoken)=>{
-            dispatch(reqDeleteOrders(id, accesstoken));
+        handleDeletePackages: (id, accesstoken)=>{
+            dispatch(reqDeletePackage(id, accesstoken));
         },
         loadDataPaging: (pageIndex, pageSize, accesstoken)=>{
             dispatch(reqLoadDataPaging(pageIndex, pageSize, accesstoken));
         },
-        countAllOrder: ( accesstoken)=>{
+        countAllPackages: ( accesstoken)=>{
             dispatch(reqCountData( accesstoken));
         },
-        handleSearchOrder: (keyword, pageIndex, pageSize, accesstoken)=>{
-            dispatch(reqSearchOrders(keyword, pageIndex, pageSize, accesstoken))
+        handleSearchPackages: (keyword, pageIndex, pageSize, accesstoken)=>{
+            dispatch(reqSearchPackage(keyword, pageIndex, pageSize, accesstoken))
         }
 
     }
 }
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(OrderManagement));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PackagesManagement));

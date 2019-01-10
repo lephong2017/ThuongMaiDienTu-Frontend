@@ -15,7 +15,7 @@ class FormEditContent extends Component{
             edit:edit_view, 
             dataSubmit:{
             },
-            Partner:null,
+            customer:null,
             id:'',
 
         }
@@ -33,7 +33,6 @@ class FormEditContent extends Component{
                 id:'12',
                 purchDate: '2018-12-22T09:48:25.350Z'
             }
-            console.log(values);
             this.props.onSubmitAdd({...values, ...obj});
         }
 
@@ -62,14 +61,34 @@ class FormEditContent extends Component{
         ]
         const listFields=[
             {
-                attrbField:'nameCompany',
+                attrbField:'fistNameAndLastName',
                 data:{
                     dataType:'TEXT',
                 },
                 render:{
-                    placeholder:'Vui lòng nhập công ty',
-                    label:'Tên công ty: ',
+                    placeholder:'Vui lòng nhập tên của bạn',
+                    label:'Tên khách hàng: ',
 
+                },
+                action:{
+                }
+            },
+            {
+                attrbField:'phoneNumber',
+                data:{
+                    dataType:'NUMBER',
+                    validation:{
+                        rules: [
+                            {
+                              required: true,
+                              message: 'Trường dữ liệu này là bắt buộc!!!'
+                            }
+                        ],
+                    },
+                },
+                render:{
+                    placeholder:'Vui lòng nhập số điện thoại ',
+                    label:'Số điện thoại: ',
                 },
                 action:{
                 }
@@ -85,78 +104,17 @@ class FormEditContent extends Component{
                               message: 'Trường dữ liệu này là bắt buộc!!!'
                             }
                         ],
-                    }
+                    },
                 },
                 render:{
-                    placeholder:'Vui lòng nhập email của bạn',
+                    placeholder:'Vui lòng nhập email ',
                     label:'Email: ',
-                    validation:{
-                        rules: [
-                            {
-                              required: true,
-                              message: 'Trường dữ liệu này là bắt buộc!!!'
-                            }
-                        ],
-                    }
+
                 },
                 action:{
                 }
             },
-            {
-                attrbField:'phoneNumber',
-                data:{
-                    dataType:'PHONE',
-                    validation:{
-                        rules: [
-                            {
-                              required: true,
-                              message: 'Trường dữ liệu này là bắt buộc!!!'
-                            }
-                        ],
-                    }
-                },
-                render:{
-                    placeholder:'Vui lòng nhập số điện thoại ',
-                    label:'Số điện thoại: ',
-                   
-                },
-                action:{
-                }
-            },
-            
-            {
-                attrbField:'partnerPayment',
-                data:{
-                    dataType:'SELECT',
-                    config:{
-                        options:[
-                            {
-                                text:'Thanh toán online',
-                                value:'online',
-                            },
-                            {
-                                text:'Tiền mặt',
-                                value:'tienmat',
-                            },
-                        ]
-                    },
-                    validation:{
-                        rules: [
-                            {
-                              required: true,
-                              message: 'Trường dữ liệu này là bắt buộc!!!'
-                            }
-                        ],
-                    },
-                    defaultValue:'online',
-                },
-                render:{
-                    placeholder:'Vui lòng chọn phương thức thanh toán',
-                    label:'Phương thức thanh toán: ',
-                },
-                action:{
-                }
-            },
+           
             
         ] 
        
@@ -171,7 +129,7 @@ class FormEditContent extends Component{
                         type={type} 
                         listFields={listFields}
                         submit= {edit}
-                        formID= "editCar"
+                        formID= "editCustomer"
                         mode= "edit"
                         handleSubmit= {this.handleSubmit}
                     />
