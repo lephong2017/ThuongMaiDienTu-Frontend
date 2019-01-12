@@ -70,7 +70,14 @@ class FormEditContent extends Component{
                 render:{
                     placeholder:'Vui lòng nhập công ty',
                     label:'Tên công ty: ',
-
+                },
+                validation:{
+                    rules: [
+                        {
+                          required: true,
+                          message: 'Trường dữ liệu này là bắt buộc!!!'
+                        }
+                    ],
                 },
                 action:{
                 }
@@ -79,20 +86,26 @@ class FormEditContent extends Component{
                 attrbField:'email',
                 data:{
                     dataType:'EMAIL',
+                   
+                    defaultValue:partner.email,
                     validation:{
-                        // rules: [
-                        //     {
-                        //       required: true,
-                        //       message: 'Trường dữ liệu này là bắt buộc!!!'
-                        //     }
-                        // ],
+                        rules: [
+                            {
+                              required: true,
+                              message: 'Trường dữ liệu này là bắt buộc!!!'
+                            },
+                            {
+                                type: 'email',
+                                message: 'Bạn phải nhập đúng định dạng email!!!'
+                              },
+                        ],
                     },
-                    defaultValue:partner.email
                 },
                 render:{
                     placeholder:'Vui lòng nhập email của bạn',
                     label:'Email: ',
                 },
+               
                 action:{
                 }
             },

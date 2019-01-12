@@ -100,16 +100,22 @@ class FormEditContent extends Component{
                     validation:{
                         rules: [
                             {
+                              type: 'email',
+                              message: 'Bạn phải nhập đúng định dạng email!!!'
+                            },
+                            {
                               required: true,
                               message: 'Trường dữ liệu này là bắt buộc!!!'
                             }
                         ],
-                    },
+                    }
+                    
+                  
                 },
                 render:{
                     placeholder:'Vui lòng nhập email ',
                     label:'Email: ',
-
+                   
                 },
                 action:{
                 }

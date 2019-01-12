@@ -166,7 +166,7 @@ class FormEditContent extends Component{
                         type={type} 
                         listFields={listFields}
                         submit= {edit}
-                        formID= "editCar"
+                        formID= "editOrder"
                         mode= "edit"
                         handleSubmit= {this.handleSubmit}
                     />

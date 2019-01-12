@@ -75,7 +75,7 @@ class FormEditContent extends Component{
                 },
                 render:{
                     placeholder:'Vui lòng nhập tên gói thanh toán',
-                    label:'Tên hói thanh toán: ',
+                    label:'Tên gói thanh toán: ',
 
                 },
                 action:{
@@ -117,7 +117,7 @@ class FormEditContent extends Component{
                         type={type} 
                         listFields={listFields}
                         submit= {edit}
-                        formID= "editPayment"
+                        formID= "addPayment"
                         mode= "edit"
                         handleSubmit= {this.handleSubmit}
                     />
