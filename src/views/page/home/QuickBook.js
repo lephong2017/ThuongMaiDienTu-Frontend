@@ -20,6 +20,7 @@ class BookCar extends Component {
     city:'ThuDuc',
     dateRental:null,
     dateReturn:null,
+    disable: true
   };
 
   handleSubmit = (e) => {
@@ -63,22 +64,26 @@ class BookCar extends Component {
 
   onChangeDateRental=(value, dateString)=> {
     this.setState({dateRental: dateString});
+    if(this.state.dateReturn) {
+      this.setState({disable:false})
+    }
   }
 
   onChangeDateReturn=(value, dateString)=> {
     const numDayRental = new Date(dateString).getDate() - new Date(this.state.dateRental).getDate();
     this.setState({dateReturn: dateString, numDayRental: numDayRental });
-
+    if(this.state.dateRental) {
+      this.setState({disable:false})
+    }
   }
 
   render() {
-    // const { getFieldDecorator } = this.props.form;
+    const { getFieldDecorator } = this.props.form;
     const { formLayout } = this.state;
     const formItemLayout = formLayout === 'horizontal' ? {
         labelCol: { span: 4 },
         wrapperCol: { span: 14 },
       } : null;
-      
     return (
       <Row className="form_content">
           <Col span={24} >
@@ -102,6 +107,11 @@ class BookCar extends Component {
                     {...formItemLayout}
                     label="Chọn ngày thuê "
                     >
+                    {getFieldDecorator('dateRental', {
+                      rules: [{
+                        required: true, message: 'Vui lòng chọn ngày thuê xe!',
+                      }],
+                    })(
                       <DatePicker
                         format="YYYY-MM-DD"
                         placeholder="Select Time"
@@ -110,11 +120,17 @@ class BookCar extends Component {
                         onChange={this.onChangeDateRental}
                         style={{width:'100%'}}
                         />
+                    )}
                 </FormItem>
                 <FormItem
                     {...formItemLayout}
                     label="Chọn ngày trả"
                     >
+                    {getFieldDecorator('dateReturn', {
+                      rules: [{
+                        required: true, message: 'Vui lòng chọn ngày trả xe!',
+                      }],
+                    })(
                       <DatePicker
                         // showTime
                         format="YYYY-MM-DD"
@@ -125,6 +141,7 @@ class BookCar extends Component {
                         // onOk={this.onOk}
                         style={{width:'100%'}}
                         />
+                    )}
                 </FormItem>
                 <FormItem style={{float:'right'}}>
                         <Link to={{ 
@@ -135,7 +152,7 @@ class BookCar extends Component {
                               dateReturn: this.state.dateReturn
                               }
                             }}>
-                          <Button type="primary" htmlType="submit">Chọn xe</Button>
+                          <Button disabled={this.state.disable} type="primary" htmlType="submit">Chọn xe</Button>
                         </Link>
                 </FormItem>
             </Form>

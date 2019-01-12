@@ -13,7 +13,7 @@ class GridItem extends Component{
             { 
                 products.map((car,ind)=>{
                     return(
-                    <Col sm={24} md={6} style={gridStyle}>
+                    <Col key={car.id} sm={24} md={6} style={gridStyle}>
                         <ItemCar 
                             city={city}
                             dateReturn={dateReturn}

@@ -239,7 +239,7 @@ class BookCar extends Component {
                       <hr/>
                       <Row style={rowStyleOrder} className="row-info-order">
                           <Col span={12}><span>TỔNG</span></Col>
-                          <Col span={12}><span className="span-info-order">{this.state.numDayRental* itemCar.price}</span></Col>
+                          <Col span={12}><span className="span-info-order">{`${this.state.numDayRental* itemCar.price}`}</span></Col>
                       </Row>
 
                 </FormItem>

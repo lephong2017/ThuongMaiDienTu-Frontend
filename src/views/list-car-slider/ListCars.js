@@ -30,12 +30,12 @@ class ListCarSlider extends Component{
                 {this.state.listParner.map((slide) =>
                     <div id="slider" key={slide.image}>
                         <div id="slider-img">
-                            <li>
+                            {/* <li> */}
                                 <img                     
                                 src={slide.image} 
                                 alt={slide.image} 
                                 className = "img-slider"/> 
-                            </li>
+                            {/* </li> */}
                         </div>
                     </div>
                 )}

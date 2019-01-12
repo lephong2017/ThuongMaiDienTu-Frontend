@@ -20,7 +20,7 @@ class Sider extends Component {
         onClick={this.handleClick}
         style={{ width: 256 }}
         defaultSelectedKeys={['1']}
-        defaultOpenKeys={['sub1']}
+        defaultOpenKeys={['sub1', 'sub2']}
         mode="inline"
       >
         <SubMenu key="sub1" title={<span><Icon type="mail" /><span>Thông tin</span></span>}>
@@ -31,10 +31,8 @@ class Sider extends Component {
                 <Menu.Item key="8">Cá nhân</Menu.Item>
             </SubMenu>
         </SubMenu>
-        <SubMenu key="sub2" title={<span><Icon type="appstore" /><span>Quản lý </span></span>}>
-          
+        <SubMenu key="sub2" title={<span><Icon type="appstore" /><span>Quản lý của admin</span></span>}>
           <MenuItemGroup key="g1" title="Module">
-
             <Menu.Item key="car">
                 Tất cả xe của hệ thống
             </Menu.Item>
@@ -73,23 +71,13 @@ class Sider extends Component {
 
           </MenuItemGroup>
           
-          {/* <MenuItemGroup key="g2" title="Đơn hàng">
-            <Menu.Item key="3">Danh sách đơn hàng</Menu.Item>
-          </MenuItemGroup>
-
-          <MenuItemGroup key="g4" title="Đối tác">
-              
-          </MenuItemGroup>
-          <MenuItemGroup key="g5" title="Đơn hàng">
-            
-          </MenuItemGroup> */}
         </SubMenu>
-        <SubMenu key="sub3" title={<span><Icon type="mail" /><span>Thông tin</span></span>}>
-            <Menu.Item key="5">Cập nhật mật khẩu</Menu.Item>
-            <Menu.Item key="6">Cập nhật thông tin</Menu.Item>
-            <SubMenu key="sub3" title="Giới thiệu">
-                <Menu.Item key="7">Hệ thống</Menu.Item>
-                <Menu.Item key="8">Cá nhân</Menu.Item>
+        <SubMenu key="sub4" title={<span><Icon type="mail" /><span>Thông tin</span></span>}>
+            <Menu.Item key="sub4item1">Cập nhật mật khẩu</Menu.Item>
+            <Menu.Item key="sub4item2">Cập nhật thông tin</Menu.Item>
+            <SubMenu key="sub41" title="Giới thiệu">
+                <Menu.Item key="sub41item1">Hệ thống</Menu.Item>
+                <Menu.Item key="sub41item2">Cá nhân</Menu.Item>
             </SubMenu>
         </SubMenu>
       </Menu>

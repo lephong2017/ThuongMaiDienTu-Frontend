@@ -110,39 +110,6 @@ class RegistrationForm extends Component {
             <Input type="password" onBlur={this.handleConfirmBlur} placeholder='Nhập lại mật khẩu của bạn'/>
           )}
         </FormItem>
-{/*         
-        
-        <FormItem
-          // {...formItemLayout}
-          label="Số điện thoại"
-        >
-          {getFieldDecorator('phone', {
-            rules: [ {
-              required: true, message: 'Vui lòng cung cấp số điện thoại của bạn!',
-            }],
-          })(
-            <Input type='number' placeholder='Nhập số điện thoại của bạn!'/>
-          )}
-        </FormItem>
-        <FormItem
-          // {...formItemLayout}
-          label="Địa chỉ"
-        >
-          {getFieldDecorator('address', {
-            rules: [ {
-              required: true, message: 'Vui lòng cung cấp địa chỉ của bạn!',
-            }],
-          })(
-            <Input placeholder='Nhập địa chỉ của bạn!'/>
-          )}
-        </FormItem>
-        <FormItem>
-          {getFieldDecorator('agreement', {
-            valuePropName: 'checked',
-          })(
-            <Checkbox>Tôi <Link to="#">đồng ý</Link> với điều khoản của bạn</Checkbox>
-          )}
-        </FormItem> */}
         <FormItem >
           <Button style={{float:'right'}} type="primary" htmlType="submit">Đăng ký</Button>
         </FormItem>

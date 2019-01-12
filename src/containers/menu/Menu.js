@@ -7,6 +7,7 @@ import Login from 'views/page/login/index';
 import Drawer from 'components/Drawer/Drawer';
 import { withRouter,} from 'react-router-dom';
 import { connect } from 'react-redux';
+import {updateIndex} from 'utils/key-component/settings_key_antd';
 const SubMenu = Menu.SubMenu;
 class HeaderContent extends Component {
   
@@ -92,7 +93,7 @@ class HeaderContent extends Component {
       onClose:this.onCloseLogin,
       visible:this.state.visibleLogin,
       hasButtonFooter:false,
-      componentWillShow:()=> <Login onClose={this.onCloseLogin}/>,
+      componentWillShow:()=> <Login key={`${updateIndex()}`} onClose={this.onCloseLogin}/>,
   }
     const listPropForDrawerRegister={
       styleProps:{
@@ -116,7 +117,7 @@ class HeaderContent extends Component {
       onClose:this.onCloseRegister,
       visible:this.state.visibleRegister,
       hasButtonFooter:false,
-      componentWillShow:()=> <Register onClose={this.onCloseRegister}/>,
+      componentWillShow:()=> <Register key={`${updateIndex()}`} onClose={this.onCloseRegister}/>,
   }
     return (
       <Menu
@@ -131,13 +132,13 @@ class HeaderContent extends Component {
         </Menu.Item>
         {
           (this.props.auth0)?
-          <div></div>:
+        <div key={`${updateIndex()}`}></div>:
           <Menu.Item key={"login"}>
               <Button onClick={this.handleClick}>Đăng nhập</Button>
           </Menu.Item>
         }
         <Drawer 
-            key={'register'}
+            key={'registerDrawer'}
             styleProps={listPropForDrawerRegister.styleProps} 
             visible={listPropForDrawerRegister.visible} 
             onClose={listPropForDrawerRegister.onClose}
@@ -145,7 +146,7 @@ class HeaderContent extends Component {
             componentWillShow={listPropForDrawerRegister.componentWillShow}
         />
         <Drawer 
-            key={'login'}
+            key={'loginDrawer'}
             styleProps={listPropForDrawerLogin.styleProps} 
             visible={listPropForDrawerLogin.visible} 
             onClose={listPropForDrawerLogin.onClose}

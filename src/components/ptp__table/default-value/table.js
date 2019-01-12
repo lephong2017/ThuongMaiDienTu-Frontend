@@ -1,8 +1,9 @@
+import {updateIndex} from 'utils/key-component/settings_key_antd';
 const table=
 {
     size: "small",
     bordered: false,
-    rowKey: "uid",
+    rowKey: `uid${updateIndex()}`,
     indentSize: 10,
     scroll: {
         // x:'50%',
