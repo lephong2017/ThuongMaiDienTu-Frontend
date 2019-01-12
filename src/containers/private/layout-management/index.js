@@ -9,7 +9,7 @@ class LayoutContent extends Component{
         const {url} = this.props.match;
         return(
             <Layout style={{display:'flex', flexDirection:'row',height:'100%',border:'1px solid rgba(0,0,0,0.12)'}}>
-                <SidebarContent/>
+                <SidebarContent url={url}/>
                 <Content>
                     <Layout >
                         <BreadcumbContent/>

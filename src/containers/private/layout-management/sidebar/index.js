@@ -1,14 +1,18 @@
 import { Menu, Icon } from 'antd';
 import React , {Component} from 'react';
 import {Link} from 'react-router-dom';
+import history from '../../../../history';
 import './index.css';
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
 
 class Sider extends Component {
+
   handleClick = (e) => {
-    console.log('click ', e);
+    history.push( this.props.url+'/'+ e.key);
+    window.location.reload();
   }
+
 
   render() {
     return (
@@ -29,55 +33,44 @@ class Sider extends Component {
         </SubMenu>
         <SubMenu key="sub2" title={<span><Icon type="appstore" /><span>Quản lý </span></span>}>
           
-          <MenuItemGroup key="g1" title="Xe">
+          <MenuItemGroup key="g1" title="Module">
 
-            <Menu.Item key="1">
-              <Link to="management/car">
-                Danh sách xe cho thuê
-              </Link>
+            <Menu.Item key="car">
+                Tất cả xe của hệ thống
             </Menu.Item>
 
-            <Menu.Item key="4">
-                <Link to="management/partner">
+            <Menu.Item key="partner">
                   Quản lý đối tác
-                </Link>
               </Menu.Item>
 
-              <Menu.Item key="5">
-                <Link to="management/oders">
+              <Menu.Item key="oders">
                   Quản lý đơn hàng
-                </Link>
               </Menu.Item>
-              <Menu.Item key="6">
-                <Link to="management/customer">
+
+              <Menu.Item key="customer">
                   Quản lý khách hàng
-                </Link>
               </Menu.Item>
-              <Menu.Item key="7">
-                <Link to="management/customercar">
-                  Quản lý khách hàng đặt xe
-                </Link>
+
+              {/* <Menu.Item key="customercar">
+                  Khách hàng cho thê xe
+              </Menu.Item> */}
+
+              <Menu.Item key="feature">
+                  Tính năng xe
               </Menu.Item>
-              <Menu.Item key="8">
-                <Link to="management/feature">
-                  Quản lý tính năng
-                </Link>
+
+              <Menu.Item key="packages">
+                  Gói dịch vụ
               </Menu.Item>
-              <Menu.Item key="9">
-                <Link to="management/packages">
-                  Quản lý gói dịch vụ
-                </Link>
+
+              <Menu.Item key="payment">
+                  Phương thức thanh toán
               </Menu.Item>
-              <Menu.Item key="9">
-                <Link to="management/payment">
-                  Quản lý payment
-                </Link>
+
+              <Menu.Item key="procedure">
+                  Thủ tục đặt xe
               </Menu.Item>
-              <Menu.Item key="9">
-                <Link to="management/procedure">
-                  Quản lý procedure
-                </Link>
-              </Menu.Item>
+
           </MenuItemGroup>
           
           {/* <MenuItemGroup key="g2" title="Đơn hàng">

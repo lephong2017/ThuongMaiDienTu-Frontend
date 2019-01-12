@@ -297,7 +297,7 @@ class PartnerManagement extends Component{
             visible:this.state.visibledAdd,
             hasButtonFooter:false,
             componentWillShow:(key)=> <FormPartner
-                    key={key}
+                    key={'FormPartner'}
                     onSubmitAdd={this.handleSubmit}
                 />,
         }
@@ -324,7 +324,7 @@ class PartnerManagement extends Component{
             visible:this.state.visibledEdit,
             hasButtonFooter:false,
             componentWillShow:(key)=> <FormEditPartner 
-                key={key}
+                key={'FormEditPartner'}
                 id={this.state.idEdit} 
                 partner={this.props.itemPartner}
                 onSubmitEdit={this.handleSubmitEdit}
@@ -368,7 +368,6 @@ class PartnerManagement extends Component{
     }
 }
 const mapStateToProps = state => {
-    console.log(state.Partner);
     return {
         partner: state.partner,
         itemPartner: state.itemPartner,

@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 
 
 const edit_view = 0, edit_submit= 1;
-class FormEditContent extends Component{
+class FormAddContent extends Component{
     constructor(props){
         super(props);
 
@@ -27,16 +27,14 @@ class FormEditContent extends Component{
 
     handleSubmit = (values) => {
         this.setState({edit: edit_view});
-        
         if(values!=='error'){
             const obj= {
                 id:'12',
                 purchDate: '2018-12-22T09:48:25.350Z'
             }
-            console.log(values);
             this.props.onSubmitAdd({...values, ...obj});
+            // this.setState({edit: edit_view});
         }
-
     }
 
     render(){
@@ -81,8 +79,8 @@ class FormEditContent extends Component{
                     validation:{
                         rules: [
                             {
-                              required: true,
-                              message: 'Trường dữ liệu này là bắt buộc!!!'
+                              type: 'email',
+                              message: 'Bạn phải nhập đúng định dạng email!!!'
                             }
                         ],
                     }
@@ -171,7 +169,7 @@ class FormEditContent extends Component{
                         type={type} 
                         listFields={listFields}
                         submit= {edit}
-                        formID= "editCar"
+                        formID= "addpartner"
                         mode= "edit"
                         handleSubmit= {this.handleSubmit}
                     />
@@ -200,4 +198,4 @@ const mapDispatchToProps = (dispatch, props) => {
     }
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(FormEditContent));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(FormAddContent));

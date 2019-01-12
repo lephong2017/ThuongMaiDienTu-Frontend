@@ -4,7 +4,7 @@ import App from 'containers/private/layout-management/index';
 const adminRoutes = [
   {
     path: "management",
-    exact: true,
+    exact: false,
     component: (props)=> <App {...props}/>
   },
 ];

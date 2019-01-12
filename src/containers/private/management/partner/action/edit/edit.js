@@ -35,7 +35,7 @@ class FormEditContent extends Component{
             }
             this.props.onSubmitEdit( id, {...values, ...obj});
         }
-
+        // this.setState({edit: edit_view});
     }
 
     render(){

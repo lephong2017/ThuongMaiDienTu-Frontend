@@ -8,7 +8,7 @@ class FormLayoutContent extends Component {
   constructor (props) {
     super(props);
     this.state = {
-      submit: props.submit
+      submit: null
     };
   }
 
@@ -58,6 +58,7 @@ class FormLayoutContent extends Component {
       }
   }
   render () {
+    console.log(this.props.submit);
     const { formID, layouts, actions, trigger, classNames, type, listFields, submit } = this.props;
 
     const formItemLayout = type === 'horizontal' ? {
@@ -66,7 +67,6 @@ class FormLayoutContent extends Component {
     } : null;
     if (submit === edit_submit) {
       document.getElementById(`submitBtn-${formID}`).click();
-      
     }
     return (layouts) ?
       (
