@@ -40,12 +40,13 @@ class ContentApp extends Component{
     }
 
     onShowSizeChange = (current, pageSize)=> {
-        console.log(current, pageSize);
+        // console.log(current, pageSize);
         const accesstoken = sessionStorage.getItem(CONST_VARIABLE.ACCESS_TOKEN);
         this.props.loadProductAct(current,pageSize,accesstoken);
     }
 
     onSearch= (keyword, order) =>{
+        console.log(keyword);
         const accesstoken = sessionStorage.getItem(CONST_VARIABLE.ACCESS_TOKEN);
         const {pageIndex, pageSize, priceStart, priceEnd} = this.state;
         this.props.searchProductAct(keyword, pageIndex, pageSize, order, priceStart, priceEnd, accesstoken);

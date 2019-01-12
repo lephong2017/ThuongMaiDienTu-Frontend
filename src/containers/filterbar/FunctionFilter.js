@@ -9,8 +9,8 @@ class HeaderContent extends Component {
     order: 'ASC'
   }
   handleChange=(val)=>{
-    this.setState({order: val});
-    this.props.onSearch('', val);
+    this.setState({order: val.key});
+    this.props.onSearch('', val.key);
   }
 
   render() {
@@ -30,7 +30,7 @@ class HeaderContent extends Component {
       <Menu.Item key="filter">
         <Select labelInValue defaultValue={{ key: 'ASC' }} style={{ width: '120%' }} onChange={this.handleChange}>
           <Option value="ASC">Giá tăng dần</Option>
-          <Option value="DES">Giá giảm dần</Option>
+          <Option value="des">Giá giảm dần</Option>
         </Select>
       </Menu.Item>
       

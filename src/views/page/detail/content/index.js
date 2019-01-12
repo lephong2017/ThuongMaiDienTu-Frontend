@@ -2,114 +2,146 @@ import { Row, Col,Rate,Icon  } from 'antd';
 import React, {Component} from 'react';
 import './InfoCar.css';
 import imageCar from 'images/car/hyundai.png';
+import {reqFindCar} from 'redux/car/actions';
+import {loadDataDetailOfCar} from 'redux/car-detail/actProduct';
+import { withRouter,} from 'react-router-dom';
+import { connect } from 'react-redux';
+import * as CONST_VARIABLE from 'utils/const/index';
 class ContentInfoCar extends Component{
+
+    componentWillMount(){
+        this.props.handleDataDetail(this.props.id, CONST_VARIABLE.ACCESS_TOKEN);
+        this.props.handleFindCar(this.props.id, CONST_VARIABLE.ACCESS_TOKEN);
+
+    }
+
     render(){
         const rowInfoImgStyle={
             display:'flex',
             flexDirection:'column',
         }
+        const {carDetail, itemCar} = this.props;
+        
         return(
-            <Row >
-                <Col md={24} style={rowInfoImgStyle}>
-                    <Row className="infor-car" gutter={8}>
-                        <Col md={4} className="image_car">
-                            <img src={imageCar} width="100%" height="100%" alt="" />
-                        </Col>
-                        <Col md={15} >
-                            <Row className="car_name">
-                                <Col md={24}>
-                                    <h5>HYUNDAI I10 HATCHBACK 1.0 AT 2017</h5>
-                                    <Rate allowClear={false} defaultValue={3} /> 
-                                </Col>
-                                <Col md={20} className="grid-feature">
-                                    <Row style={{display:'flex', flexDirection:'row'}}> 
-                                        <Col md={8} className="grid-icon-feature">
-                                            <Icon type="select" theme="outlined" />
-                                            <span className="text-feature">Xăng</span>
-                                        </Col>
-                                        <Col md={8} className="grid-icon-feature">
-                                            <Icon type="select" theme="outlined" />
-                                            <span className="text-feature">1.5 Lit</span>
-                                        </Col>
-                                        <Col md={8} className="grid-icon-feature">
-                                            <Icon type="select" theme="outlined" />
-                                            <span className="text-feature">Số tự động</span>
-                                        </Col>
-                                    </Row>
-                                    <Row style={{display:'flex', flexDirection:'row'}}> 
-                                        <Col md={8} className="grid-icon-feature">
-                                            <Icon type="select" theme="outlined" />
-                                            <span className="text-feature">5 chỗ</span>
-                                        </Col>
-                                        <Col md={8} className="grid-icon-feature">
-                                            <Icon type="select" theme="outlined" />
-                                            <span className="text-feature">Sedan</span>
-                                        </Col>
-                                        <Col md={8} className="grid-icon-feature">
-                                            <Icon type="select" theme="outlined" />
-                                            <span className="text-feature">250km/h</span>
-                                        </Col>
-                                    </Row>
-                                </Col>
-                            </Row>
-                        </Col>
-                    </Row>
-                    <Row style={{padding:'20px 20px'}}> 
-                        <p className="title-label">Tính năng:</p>
-                        <Col md={6}>
-                            <Icon type="select" theme="outlined" />
-                            <span className="text-feature">Điều hòa (A/C)</span>
-                        </Col>
-                        <Col md={6}>
-                            <Icon type="select" theme="outlined" />
-                            <span className="text-feature">Định vị (GPS)</span>
-                        </Col>
-                        <Col md={6}>
-                            <Icon type="select" theme="outlined" />
-                            <span className="text-feature">Blutooh</span>
-                        </Col>
-                        <Col md={6}>
-                            <Icon type="select" theme="outlined" />
-                            <span className="text-feature">Khe cắm USB</span>
-                        </Col>
-                    </Row>
-                    <Row style={{padding:'20px 20px'}}> 
-                        <p className="title-label">Thủ tục: </p>
-                        <Col md={6}>
-                            <Icon type="select" theme="outlined" />
-                            <span className="text-feature">CMND</span>
-                        </Col>
-                        <Col md={6}>
-                            <Icon type="select" theme="outlined" />
-                            <span className="text-feature">Đặt cọc</span>
-                        </Col>
-                        <Col md={6}>
-                            <Icon type="select" theme="outlined" />
-                            <span className="text-feature">Bằng lái</span>
-                        </Col>
-                        <Col md={6}>
-                            <Icon type="select" theme="outlined" />
-                            <span className="text-feature">Sổ hộ khẩu</span>
-                        </Col>
-                    </Row>
-                    <Row style={{padding:'20px 20px'}}> 
-                        <p className="title-label">Chấp nhận thanh toán: </p>
-                        <Col md={6}>
-                            <Icon type="select" theme="outlined" />
-                            <span className="text-feature">Trả sau</span>
-                        </Col>
-                    </Row>
-                    <Row style={{padding:'20px 20px'}}> 
-                        <p className="title-label">Ghi chú: </p>
-                        <Col md={24}>
-                            <p className="text-note">- CMND: Bản gốc </p>
-                            <p className="text-note">- Đặt cọc: giá trị từ 20 triệu đồng trở lên hoặc tài sản tương đương</p>
-                            <p className="text-note">- Sổ hộ khẩu: Bản gốc (hộ khẩu TP hoặc Giấy phép đăng ký kinh doanh)</p>
-                        </Col>
-                    </Row>
-                </Col>
-            </Row>
-        )
+        <Row >
+        {
+        (carDetail.name)?
+            (
+            <Col md={24} style={rowInfoImgStyle}>
+                <Row className="infor-car" gutter={8}>
+                    <Col md={4} className="image_car">
+                        <img src={imageCar} width="100%" height="100%" alt="" />
+                    </Col>
+                    <Col md={15} >
+                        <Row className="car_name">
+                            <Col md={24}>
+                                <h5>{itemCar.name}</h5>
+                                <Rate allowClear={false} defaultValue={3} /> 
+                                <p>{itemCar.description}</p>
+                            </Col>
+                            <Col md={20} className="grid-feature">
+                                <Row style={{display:'flex', flexDirection:'row'}}> 
+                                    <Col md={8} className="grid-icon-feature">
+                                        <Icon type="select" theme="outlined" />
+                                        <span className="text-feature">Xăng</span>
+                                    </Col>
+                                    <Col md={8} className="grid-icon-feature">
+                                        <Icon type="select" theme="outlined" />
+                                        <span className="text-feature">1.5 Lit</span>
+                                    </Col>
+                                    <Col md={8} className="grid-icon-feature">
+                                        <Icon type="select" theme="outlined" />
+                                        <span className="text-feature">Số tự động</span>
+                                    </Col>
+                                </Row>
+                                <Row style={{display:'flex', flexDirection:'row'}}> 
+                                    <Col md={8} className="grid-icon-feature">
+                                        <Icon type="select" theme="outlined" />
+                                        <span className="text-feature">5 chỗ</span>
+                                    </Col>
+                                    <Col md={8} className="grid-icon-feature">
+                                        <Icon type="select" theme="outlined" />
+                                        <span className="text-feature">Sedan</span>
+                                    </Col>
+                                    <Col md={8} className="grid-icon-feature">
+                                        <Icon type="select" theme="outlined" />
+                                        <span className="text-feature">250km/h</span>
+                                    </Col>
+                                </Row>
+                            </Col>
+                        </Row>
+                    </Col>
+                </Row>
+                <Row style={{padding:'20px 20px'}}> 
+                    <p className="title-label">Tính năng:</p>
+                    {
+                        carDetail.feature.map((val, ind)=>{
+                            return(
+                            <Col md={6} key={val}>
+                                <Icon type="select" theme="outlined" />
+                                <span className="text-feature">{val}</span>
+                            </Col>
+                            )         
+                        })
+                    }
+                </Row>
+                <Row style={{padding:'20px 20px'}}> 
+                    <p className="title-label">Thủ tục: </p>
+                    {
+                        carDetail.procedure.map((val, ind)=>{
+                            return (
+                            <Col key={val} md={6}>
+                                <Icon type="select" theme="outlined" />
+                                <span className="text-feature">{val}</span>
+                            </Col>
+                            )
+                        })
+                    }
+                    
+                    
+                </Row>
+                <Row style={{padding:'20px 20px'}}> 
+                    <p className="title-label">Chấp nhận thanh toán: </p>
+                    <Col md={6}>
+                        <Icon type="select" theme="outlined" />
+                        <span className="text-feature">Trả sau</span>
+                    </Col>
+                </Row>
+                <Row style={{padding:'20px 20px'}}> 
+                    <p className="title-label">Ghi chú: </p>
+                    <Col md={24}>
+                        <p className="text-note">- Nên mang theo tiền mặt khi nhận xe </p>
+                        <p className="text-note">- Phải giữ gìn cẩn thận sản phẩm của đối tác trong quá trình thuê xe</p>
+                    </Col>
+                </Row>
+            </Col>
+            ):
+            (
+                <p></p>
+            )
+        }
+        </Row>
+      )
     }
 }
-export default ContentInfoCar;
+
+const mapStateToProps = state => {
+    return {
+        carDetail: state.carDetail,
+        itemCar: state.itemCar
+    }
+  }
+  
+  const mapDispatchToProps = (dispatch, props) => {
+    return {
+        handleDataDetail:(id ,accesstoken)=>{
+            dispatch(loadDataDetailOfCar(id ,accesstoken)) ;
+        },
+        handleFindCar:(id ,accesstoken)=>{
+            dispatch(reqFindCar(id ,accesstoken)) ;
+        },
+
+    }
+  }
+  
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ContentInfoCar));

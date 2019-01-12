@@ -3,6 +3,7 @@ import { Table, Button, Row, Col, Icon, Input} from 'antd';
 import './table.style.scss';
 import defaultValue from './default-value';
 import { Resizable } from 'react-resizable';
+import {CSVLink, CSVDownload} from "react-csv";
 const Search = Input.Search;
 const ResizeableTitle = (props) => {
     const { onResize, width, ...restProps } = props;
@@ -164,12 +165,22 @@ class TableContent extends React.Component {
                     </div>
                 </Col>
             </Row>
-            <Row className="search-field">
-                <Search
-                    placeholder="input search text"
-                    onSearch={value => event.table.onSearch(value)}
-                    style={{ width: 200 }}
-                />
+            <Row style={{display:'flex',}}>
+                <Col md={12} style={{marginTop:'10px'}}>
+                    <Button  style={{float:'left'}}>
+                        <CSVLink data={data} target="_blank">Link CSV </CSVLink>
+                    </Button>
+                    {/* <Button>
+                        <CSVDownload data={data} target="_blank">Download CSV</CSVDownload>
+                    </Button> */}
+                </Col>
+                <Col md={12} style={{float:'right'}} className="search-field">
+                    <Search
+                        placeholder="input search text"
+                        onSearch={value => event.table.onSearch(value)}
+                        style={{ width: 200 }}
+                    />
+                </Col>
             </Row>
             <Table 
                 className="component-table"

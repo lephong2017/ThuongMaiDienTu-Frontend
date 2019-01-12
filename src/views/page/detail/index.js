@@ -21,6 +21,7 @@ class ContentApp extends Component{
         });
     }
       render() {
+        const id = this.props.match.params.id;
         return (
             <Layout>
                 <Header className="header_content">
@@ -38,7 +39,7 @@ class ContentApp extends Component{
                                         <Content style={{ padding: '12px 0', background: '#fff' }}>
                                             <Row>
                                                 <Col md={24} sm={24}>
-                                                    <InfoCarContent/>
+                                                    <InfoCarContent id={id}/>
                                                 </Col>
                                             </Row>
                                         </Content>
