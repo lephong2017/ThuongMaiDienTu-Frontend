@@ -1,9 +1,8 @@
-import { Card, Icon, Avatar } from 'antd';
+import { Card, Icon, Avatar, Row, Col } from 'antd';
 import React,{Component} from 'react';
 import img from 'images/banner6.png';
 import {Link} from 'react-router-dom';
 import './css/product.css';
-const { Meta } = Card;
 
 class ItemCar extends Component{
     render(){
@@ -11,8 +10,8 @@ class ItemCar extends Component{
         return(
             <Card
                 className="item-car"
-                style={{ width: '100%' }}
-                cover={<img alt="example"  src={img} />}
+                style={{ width: '100%'  }}
+                cover={<img height="135px" alt="example"  src={car.imageLink} />}
                 actions={
                     [
                         <Icon type="eye" theme="outlined" />,
@@ -23,11 +22,10 @@ class ItemCar extends Component{
                     ]
                 }
             >
-                <Meta
-                    avatar={<Avatar icon="car" />}
-                    title={car.price}
-                    description={car.name}
-                    />
+                <div style={{height:'40px', textAlign:'center'}} >
+                    <span style={{color:'red', fontSize:20}}>{car.price}</span>
+                    <div>{car.name}</div>
+                </div>
             </Card>
         )
     }

@@ -27,6 +27,7 @@
     "react-bootstrap": "^0.32.4",
     "react-bootstrap-daterangepicker": "^4.1.0",
     "react-check-auth": "^0.2.0-alpha.2",
+    "react-csv": "^1.0.19",
     "react-document-meta": "^3.0.0-beta.2",
     "react-dom": "^16.6.0",
     "react-i18next": "^8.0.7",

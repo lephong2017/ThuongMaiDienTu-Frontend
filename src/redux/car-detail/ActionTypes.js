@@ -1,0 +1,1 @@
+export const LOAD_DETAIL_CAR = 'LOAD_DETAIL_CAR';
