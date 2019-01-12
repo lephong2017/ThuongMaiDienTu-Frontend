@@ -81,7 +81,11 @@ class FormAddContent extends Component{
                             {
                               type: 'email',
                               message: 'Bạn phải nhập đúng định dạng email!!!'
-                            }
+                            },
+                            {
+                                required: true,
+                                message: 'Trường dữ liệu này là bắt buộc!!!'
+                              }
                         ],
                     }
                 },

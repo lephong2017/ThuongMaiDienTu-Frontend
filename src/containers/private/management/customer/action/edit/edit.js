@@ -101,6 +101,18 @@ class FormEditContent extends Component{
                 data:{
                     dataType:'EMAIL',
                     defaultValue:customer.email,
+                    validation:{
+                        rules: [
+                            {
+                              required: true,
+                              message: 'Trường dữ liệu này là bắt buộc!!!'
+                            },
+                            {
+                                type: 'email',
+                                message: 'Bạn phải nhập đúng định dạng email!!!'
+                              },
+                        ],
+                    }
                 },
                 render:{
                     placeholder:'Vui lòng nhập email ',

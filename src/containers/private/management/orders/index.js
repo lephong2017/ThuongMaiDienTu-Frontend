@@ -186,8 +186,8 @@ class OrderManagement extends Component{
             }, 
             {
                 title: 'Ngày trả',
-                dataIndex: 'payDate',
-                key: 'payDate',
+                dataIndex: 'carReturnDay',
+                key: 'carReturnDay',
             }, 
             {
                 title: 'Action',
