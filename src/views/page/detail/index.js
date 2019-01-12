@@ -14,6 +14,16 @@ const { Header, Content,Footer } = Layout;
 class ContentApp extends Component{
     state={
         collapsed: false, 
+        city:null,
+        dateRental:null,
+        dateReturn:null
+    }
+    componentWillMount(){
+        this.setState({
+            dateRental:this.props.location.state.dateRental,
+            dateReturn:this.props.location.state.dateReturn,
+            city: this.props.location.state.city
+        });
     }
     toggle = () => {
         this.setState({
@@ -22,6 +32,7 @@ class ContentApp extends Component{
     }
       render() {
         const id = this.props.match.params.id;
+        const {dateReturn, dateRental, city} = this.state;
         return (
             <Layout>
                 <Header className="header_content">
@@ -47,7 +58,12 @@ class ContentApp extends Component{
                                 </Row>
                             </Col>
                             <Col md={6} className="sidebar_content" >
-                                 <SidebarContent  />
+                                 <SidebarContent 
+                                    city={city}
+                                    dateReturn={dateReturn}
+                                    dateRental={dateRental}
+                                    id={id}
+                                 />
                             </Col>
                         </Row>
 

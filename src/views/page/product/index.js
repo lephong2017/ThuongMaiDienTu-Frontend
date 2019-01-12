@@ -21,7 +21,10 @@ class ContentApp extends Component{
         pageIndex:1, 
         pageSize: 12,
         priceStart:0, 
-        priceEnd:1000000
+        priceEnd:1000000,
+        dateRental:null,
+        dateReturn:null,
+        city:null,
     }
     toggle = () => {
         this.setState({
@@ -33,6 +36,12 @@ class ContentApp extends Component{
         const {pageIndex, pageSize,} = this.state;
         this.props.loadProductAct(pageIndex,pageSize,accesstoken);
         this.props.loadCountData();
+
+        this.setState({
+            dateRental:this.props.location.state.dateRental,
+            dateReturn:this.props.location.state.dateReturn,
+            city: this.props.location.state.city
+        });
     }
 
     componentDidMount(){
@@ -59,9 +68,14 @@ class ContentApp extends Component{
         const order= 'ASC';
         this.props.searchProductAct(keyword, pageIndex, pageSize, order, priceStart, priceEnd, accesstoken);
     }
+
+    onChangeCity=(val)=>{this.setState({city:val})}
+    onChangeDateRental=(val)=>{this.setState({dateRental:val})}
+    onChangeDateReturn=(val)=>{this.setState({dateReturn:val})}
     
     render() {
         const {car} = this.props;
+        const {dateReturn, dateRental, city} = this.state;
     return (
     <Layout>
         <Header className="header_content">
@@ -74,7 +88,15 @@ class ContentApp extends Component{
             <Layout>
                 <Row className="resposive_content_find_car" gutter={8} >
                     <Col md={6} className="sidebar_content" >
-                        <SidebarContent onSearchPrice={this.onSearchPrice} collapsed={this.state.collapsed}/>
+                        <SidebarContent 
+                            city={city}
+                            dateReturn={dateReturn}
+                            dateRental={dateRental}
+                            onSearchPrice={this.onSearchPrice} 
+                            onChangeCity={this.onChangeCity}
+                            onChangeDateRental={this.onChangeDateRental}
+                            onChangeDateReturn={this.onChangeDateReturn}
+                            collapsed={this.state.collapsed}/>
                     </Col>
                     <Col md={18}>
                         <Row style={{display:'flex',flexDirection:'column'}}>
@@ -86,7 +108,11 @@ class ContentApp extends Component{
                                 <Content style={{ marginTop: '34px', padding: '12px 0', background: '#fff' }}>
                                     <Row>
                                         <Col md={24} sm={24}>
-                                            <GridCard products={car}/>
+                                            <GridCard 
+                                                city={city}
+                                                dateReturn={dateReturn}
+                                                dateRental={dateRental}
+                                                products={car}/>
                                         </Col>
                                     </Row>
                                     <Row>

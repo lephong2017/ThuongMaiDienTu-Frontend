@@ -2,7 +2,7 @@ import { Form,DatePicker , Select, Row, Col, Button, } from 'antd';
 import React,{Component} from 'react';
 import moment from 'moment';
 import {Link} from 'react-router-dom';
-import './css/form.css';
+import 'views/page/home/css/form.css';
 const FormItem = Form.Item;
 const Option = Select.Option;
 
@@ -59,16 +59,18 @@ class BookCar extends Component {
 
   handleCityChange=(val)=>{
     this.setState({city:val});
+    this.props.onChangeCity(val);
   }
 
   onChangeDateRental=(value, dateString)=> {
     this.setState({dateRental: dateString});
+    this.props.onChangeDateRental(dateString);
   }
 
   onChangeDateReturn=(value, dateString)=> {
     const numDayRental = new Date(dateString).getDate() - new Date(this.state.dateRental).getDate();
     this.setState({dateReturn: dateString, numDayRental: numDayRental });
-
+    this.props.onChangeDateReturn(dateString);
   }
 
   render() {
@@ -78,7 +80,7 @@ class BookCar extends Component {
         labelCol: { span: 4 },
         wrapperCol: { span: 14 },
       } : null;
-      
+      const {dateReturn, dateRental, city} = this.props;
     return (
       <Row className="form_content">
           <Col span={24} >
@@ -88,10 +90,8 @@ class BookCar extends Component {
                     label="Chọn Tỉnh/ Thành phố"
                     >
                     <Select
-                        value={this.state.city}
-                        // size={size}
                         style={{ width: '100%' }}
-                        defaultValue="ThuDuc"
+                        defaultValue={city}
                         onChange={this.handleCityChange}
                         >
                             <Option value="BinhDuong">Bình Dương</Option>
@@ -104,11 +104,12 @@ class BookCar extends Component {
                     >
                       <DatePicker
                         format="YYYY-MM-DD"
-                        placeholder="Select Time"
+                        placeholder="Select date"
                         disabledDate={this.disabledDate}
                         disabledTime={this.disabledRangeTime}
                         onChange={this.onChangeDateRental}
                         style={{width:'100%'}}
+                        defaultValue={moment(dateRental, 'YYYY-MM-DD')}
                         />
                 </FormItem>
                 <FormItem
@@ -117,16 +118,16 @@ class BookCar extends Component {
                     >
                       <DatePicker
                         // showTime
-                        format="YYYY-MM-DD"
-                        placeholder="Select Time"
+                        format="YYYY-MM-D"
+                        placeholder="Select date"
                         disabledDate={this.disabledDate}
                         disabledTime={this.disabledRangeTime}
                         onChange={this.onChangeDateReturn}
-                        // onOk={this.onOk}
                         style={{width:'100%'}}
+                        defaultValue={moment(dateReturn, 'YYYY-MM-DD')}
                         />
                 </FormItem>
-                <FormItem style={{float:'right'}}>
+                {/* <FormItem style={{float:'right'}}>
                         <Link to={{ 
                             pathname: '/tim-xe', 
                             state: { 
@@ -137,7 +138,7 @@ class BookCar extends Component {
                             }}>
                           <Button type="primary" htmlType="submit">Chọn xe</Button>
                         </Link>
-                </FormItem>
+                </FormItem> */}
             </Form>
           </Col>
       </Row>

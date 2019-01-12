@@ -6,13 +6,20 @@ const gridStyle = {
 };
 class GridItem extends Component{
     renderListCard=(products)=>{
+        
+        const {dateReturn, dateRental, city} = this.props;
         return(
             <Row title="List car" className="responsive_list_car" gutter={0}>
             { 
                 products.map((car,ind)=>{
                     return(
                     <Col sm={24} md={6} style={gridStyle}>
-                        <ItemCar key={ind} car={car}/>
+                        <ItemCar 
+                            city={city}
+                            dateReturn={dateReturn}
+                            dateRental={dateRental}
+                            key={ind} 
+                            car={car}/>
                     </Col>
                     )
                 })

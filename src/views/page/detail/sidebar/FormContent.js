@@ -23,8 +23,19 @@ class BookCar extends Component {
     dateRental:null,
     dateReturn:null,
     numDayRental:0,
-    err:'Số ngày mượn phải lớn hơn 1 ngày'
+    err:'Số ngày mượn phải lớn hơn 1 ngày',
+    city:null,
+
   };
+
+  componentWillMount(){
+    this.setState({
+      dateRental:this.props.dateRental,
+      dateReturn:this.props.dateReturn,
+      city: this.props.city
+    });
+    this.getDateRental(new Date(this.props.dateReturn), new Date(this.props.dateRental));
+  }
 
   onChangeDateRental=(value, dateString)=> {
     // console.log('Selected Time: ', value);
@@ -109,7 +120,6 @@ class BookCar extends Component {
 
   render() {
     // const { getFieldDecorator } = this.props.form;
-    console.log(this.state.err, this.state.numDayRental);
     const onSuccess = (payment) => {
 			console.log("The payment was succeeded!", payment);
 		}		
@@ -124,7 +134,7 @@ class BookCar extends Component {
 
 		let env = 'sandbox'; // you can set here to 'production' for production
 		let currency = 'USD'; // or you can set this value from your props or state  
-		let total = this.state.numDayRental*900000;  // same as above, this is the total amount (based on currency) to be 
+		let total = this.state.numDayRental* this.props.itemCar.price;  // same as above, this is the total amount (based on currency) to be 
 		let locale = 'en_US'; 
 		let style = {
 			'label':'pay', 
@@ -149,6 +159,8 @@ class BookCar extends Component {
         // alignItems:'left',
         justifyContent:'space-between'
     }
+    const {dateReturn, dateRental, city} = this.state;
+    const {itemCar} = this.props;
     return (
       <Row className="form_content">
           <Col md={24} >
@@ -174,13 +186,14 @@ class BookCar extends Component {
                     >
                       <DatePicker
                         // showTime
-                        format="YYYY-MM-DD HH:mm:ss"
+                        format="YYYY-MM-DD"
                         placeholder="Select Time"
                         disabledDate={this.disabledDate}
                         disabledTime={this.disabledRangeTime}
                         onChange={this.onChangeDateRental}
                         // onOk={this.onOk}
                         style={{width:'100%'}}
+                        defaultValue={moment(dateRental, 'YYYY-MM-DD')}
                         />
                 </FormItem>
                 <FormItem
@@ -189,12 +202,13 @@ class BookCar extends Component {
                     >
                       <DatePicker
                         // showTime
-                        format="YYYY-MM-DD HH:mm:ss"
+                        format="YYYY-MM-DD"
                         placeholder="Select Time"
                         disabledDate={this.disabledDate}
                         disabledTime={this.disabledRangeTime}
                         onChange={this.onChangeDateReturn}
                         // onOk={this.onOk}
+                        defaultValue={moment(dateReturn, 'YYYY-MM-DD')}
                         style={{width:'100%'}}
                         />
                 </FormItem>
@@ -216,7 +230,7 @@ class BookCar extends Component {
                     >
                       <Row style={rowStyleOrder} className="row-info-order">
                           <Col span={12} ><span>Đơn giá ngày</span></Col>
-                          <Col span={12} ><span className="span-info-order">900 000đ</span></Col>
+                          <Col span={12} ><span className="span-info-order">{itemCar.price}</span></Col>
                       </Row>
                       <Row style={rowStyleOrder} className="row-info-order">
                           <Col span={12}><span>Ngày</span></Col>
@@ -225,7 +239,7 @@ class BookCar extends Component {
                       <hr/>
                       <Row style={rowStyleOrder} className="row-info-order">
                           <Col span={12}><span>TỔNG</span></Col>
-                          <Col span={12}><span className="span-info-order">{this.state.numDayRental*900000}</span></Col>
+                          <Col span={12}><span className="span-info-order">{this.state.numDayRental* itemCar.price}</span></Col>
                       </Row>
 
                 </FormItem>

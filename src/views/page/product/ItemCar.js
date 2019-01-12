@@ -7,6 +7,7 @@ import './css/product.css';
 class ItemCar extends Component{
     render(){
         const {car} =this.props;
+        const {dateReturn, dateRental, city} = this.props;
         return(
             <Card
                 className="item-car"
@@ -16,7 +17,16 @@ class ItemCar extends Component{
                     [
                         <Icon type="eye" theme="outlined" />,
                         <Icon type="select" theme="outlined" />,
-                        <Link to={`detail/${car.id}`}>
+                        <Link 
+                            to={{ 
+                                pathname: `detail/${car.id}`, 
+                                state: { 
+                                    city: city, 
+                                    dateRental: dateRental,
+                                    dateReturn: dateReturn
+                                }
+                            }}
+                        >
                             <Icon type="shopping-cart" theme="outlined" />
                         </Link>
                     ]
@@ -24,7 +34,7 @@ class ItemCar extends Component{
             >
                 <div style={{height:'40px', textAlign:'center'}} >
                     <span style={{color:'red', fontSize:20}}>{car.price}</span>
-                    <div>{car.name}</div>
+                    <div style={{color:'BLUE'}}>{car.name}</div>
                 </div>
             </Card>
         )

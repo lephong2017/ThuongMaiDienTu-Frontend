@@ -3,7 +3,7 @@ import { Table, Button, Row, Col, Icon, Input} from 'antd';
 import './table.style.scss';
 import defaultValue from './default-value';
 import { Resizable } from 'react-resizable';
-import {CSVLink, CSVDownload} from "react-csv";
+import {CSVLink, } from "react-csv";
 const Search = Input.Search;
 const ResizeableTitle = (props) => {
     const { onResize, width, ...restProps } = props;

@@ -12,6 +12,9 @@ class App extends Component {
         visible: false,
         showModal:false,
         auth:false,
+        // visible: false,
+        // showModal:true,
+        // auth:true,
     }
     onCloseModal=()=>{
         this.setState({showModal:false, auth:true});

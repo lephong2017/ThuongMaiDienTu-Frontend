@@ -1,7 +1,6 @@
 import { Row, Col,Rate,Icon  } from 'antd';
 import React, {Component} from 'react';
 import './InfoCar.css';
-import imageCar from 'images/car/hyundai.png';
 import {reqFindCar} from 'redux/car/actions';
 import {loadDataDetailOfCar} from 'redux/car-detail/actProduct';
 import { withRouter,} from 'react-router-dom';
@@ -30,7 +29,7 @@ class ContentInfoCar extends Component{
             <Col md={24} style={rowInfoImgStyle}>
                 <Row className="infor-car" gutter={8}>
                     <Col md={4} className="image_car">
-                        <img src={imageCar} width="100%" height="100%" alt="" />
+                        <img src={itemCar.imageLink} width="100%" height="100%" alt="" />
                     </Col>
                     <Col md={15} >
                         <Row className="car_name">
