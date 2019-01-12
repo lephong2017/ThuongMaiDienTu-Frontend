@@ -1,4 +1,5 @@
 import React,{Component} from 'react';
+// import AppRouter from 'containers/private/route';
 import AppRouter from './AppRoute';
 import {Link,} from 'react-router-dom';
 import { Layout,Row,Col,Button, Icon,Modal } from 'antd';

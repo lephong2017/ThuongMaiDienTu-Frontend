@@ -124,7 +124,7 @@ class BookCar extends Component {
 
 		let env = 'sandbox'; // you can set here to 'production' for production
 		let currency = 'USD'; // or you can set this value from your props or state  
-		let total = 1;  // same as above, this is the total amount (based on currency) to be 
+		let total = this.state.numDayRental*900000;  // same as above, this is the total amount (based on currency) to be 
 		let locale = 'en_US'; 
 		let style = {
 			'label':'pay', 
