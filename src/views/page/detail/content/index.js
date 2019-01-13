@@ -108,7 +108,7 @@ class ContentInfoCar extends Component{
                 </Row>
                 <Row style={{padding:'20px 20px'}}> 
                     <p className="title-label">Ghi chú: </p>
-                    <Col md={24}>
+                    <Col md={24} style={{marginTop: 10}}>
                         <p className="text-note">- Nên mang theo tiền mặt khi nhận xe </p>
                         <p className="text-note">- Phải giữ gìn cẩn thận sản phẩm của đối tác trong quá trình thuê xe</p>
                     </Col>

@@ -1,11 +1,12 @@
 import React,{Component} from 'react';
 // import AppRouter from 'containers/private/route';
 import AppRouter from './AppRoute';
-import {Link,} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import { Layout,Row,Col,Button, Icon,Modal } from 'antd';
 import MenuContent from 'containers/menu/Menu';
 import './css/App.css';
 import Pricing from 'containers/private/pricing/pricing';
+import * as CONST_VARIABLE from 'utils/const';
 const {  Content } = Layout;
 class App extends Component {
     state={
@@ -15,13 +16,45 @@ class App extends Component {
         // visible: false,
         // showModal:true,
         // auth:true,
+        error: null,
+        showError: false
     }
+
+    componentWillMount(){
+        // this.setState({
+        //     auth: true,
+        //     showModal:true
+        // });
+        this.setState({
+            auth: false,
+            showModal:false
+        });
+    }
+
     onCloseModal=()=>{
+        var ok = sessionStorage.getItem(CONST_VARIABLE.ACCESS_TOKEN);
+        if(ok){
+            this.setState({error:'Bạn cần phải đăng nhập trước!!!'});
+        }
         this.setState({showModal:false, auth:true});
     }
+
+    onSelectPackage = (val) => {
+        // var ok = sessionStorage.getItem(CONST_VARIABLE.ACCESS_TOKEN);
+        if( val !== 1 ){
+            this.setState({
+                error:'Bạn cần phải đăng nhập trước!!!',
+                showError:true
+            });
+        }
+        console.log(val);
+    }
+
+
     render(){
         const {url} = this.props.match;
         const {auth} = this.state;
+
        return (
             <Layout>
                 {
@@ -30,9 +63,24 @@ class App extends Component {
                         <Col md={24} style={{height:'50px',width:'100%', background: "#fafafa",}}>
                             <MenuContent/>
                         </Col>
+                        {
+                            (this.state.error)?
+                            <Col md={24} >
+                                <div className={(this.state.showError)?'error-block':'error-none'}>
+                                    <span>{this.state.error}</span>
+                                    <Button 
+                                        onClick={()=> this.setState({showError:false})}
+                                        className="btn btn-close-message"><Icon type="close"/></Button>
+                                </div>
+                            </Col>:
+                            <Col md={24}>
+                            </Col>
+                        }
+
                         <Col md={24} >
-                            <Pricing/>
+                            <Pricing onSelectPackage={this.onSelectPackage}/>
                         </Col>
+
                         <Col md={24} style={{height:'50px',width:'100%', background: "#fafafa",}}>
                             <Modal
                                 visible={this.state.showModal}

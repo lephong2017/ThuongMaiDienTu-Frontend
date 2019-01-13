@@ -60,3 +60,22 @@ import image-service-3 from 'images\car\hyundai.png'; */
     margin: 0 auto;
     text-align: center;
 }
+.error-block{
+    background-color: red;
+    color: rgb(23, 22, 22);
+    font-size: 20px;
+    font-weight: bold;
+    padding: 10px;
+    border: 1px solid green;
+    margin: 0 15px;
+
+}
+.error-none{
+    display: none;
+    
+}
+.btn-close-message {
+    float: right !important;
+    padding: 5px !important;
+
+}

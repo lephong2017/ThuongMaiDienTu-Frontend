@@ -4,24 +4,7 @@ import './css/pricing.css';
 import {Link} from 'react-router-dom';
 import InfiniteScroll from 'react-infinite-scroller';
 import plus2Image from 'images/car/hyundai.png';
-const data = [
-    {
-        title: 'Ant Design Title 1',
-        description:'Ant Design, a design language for background applications, is refined by Ant UED Team'
-    },
-    {
-        title: 'Ant Design Title 2',
-        description:'Ant Design, a design language for background applications, is refined by Ant UED Team'
-    },
-    {
-        title: 'Ant Design Title 3',
-        description:'Ant Design, a design language for background applications, is refined by Ant UED Team'
-    },
-    {
-        title: 'Ant Design Title 4',
-        description:'Ant Design, a design language for background applications, is refined by Ant UED Team'
-    },
-  ];
+import {data, data30, data365} from './data';
 class Pricing extends Component{
     renderListDetail=(dataRender)=>{
         return <InfiniteScroll
@@ -54,9 +37,13 @@ class Pricing extends Component{
                     <div className="content-package">
                         Bạn sẽ đăng tải được 5 xe lên hệ thống của chúng tôi.
                         <div className="image-about-package">
-                            <img src={plus2Image}/>
+                            <img alt="Hình ảnh bảng dùng thử" src={plus2Image}/>
                         </div>
-                        <Button className="btn-select-package" ><Icon type="check"/>Chọn gói</Button>
+                        <Button 
+                            onClick={()=>this.props.onSelectPackage(1)}
+                            className="btn-select-package" >
+                            <Icon type="check"/>Chọn gói
+                        </Button>
                     </div>
                     <div className="detail-package">
                         {this.renderListDetail(data)}
@@ -67,12 +54,16 @@ class Pricing extends Component{
                     <div className="content-package">
                         Bạn sẽ đăng tải được 15 xe lên hệ thống của chúng tôi.
                         <div className="image-about-package">
-                            <img src={plus2Image}/>
+                            <img alt="Hình ảnh bảng dùng 1 tháng" src={plus2Image}/>
                         </div>
-                        <Button className="btn-select-package" ><Icon type="check"/>Chọn gói</Button>
+                        <Button 
+                            onClick={()=>this.props.onSelectPackage(2)}
+                            className="btn-select-package" >
+                            <Icon type="check"/>Chọn gói
+                        </Button>
                     </div>
                     <div className="detail-package">
-                        {this.renderListDetail(data)}
+                        {this.renderListDetail(data30)}
                     </div>
                 </Col>
                 <Col md={8} className="package-service-pricing">
@@ -80,12 +71,16 @@ class Pricing extends Component{
                     <div className="content-package">
                         Bạn sẽ đăng tải được 25 xe lên hệ thống của chúng tôi.
                         <div className="image-about-package">
-                            <img src={plus2Image}/>
+                            <img alt="Hình ảnh bảng dùng 365 ngàt" src={plus2Image}/>
                         </div>
-                        <Button className="btn-select-package" ><Icon type="check"/>Chọn gói</Button>
+                        <Button 
+                            onClick={()=>this.props.onSelectPackage(3)}
+                            className="btn-select-package" >
+                            <Icon type="check"/>Chọn gói
+                        </Button>
                     </div>
                     <div className="detail-package">
-                        {this.renderListDetail(data)}
+                        {this.renderListDetail(data365)}
                     </div>
                 </Col>
             </Row>

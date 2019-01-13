@@ -4,7 +4,7 @@ import App from 'containers/private/layout-management/index';
 const adminRoutes = [
   {
     path: "management",
-    exact: false,
+    exact: true,
     component: (props)=> <App {...props}/>
   },
 ];
@@ -18,7 +18,8 @@ class AppRouter extends Component {
           const { path,component, exact, ...otherProps } = singleRoute;
           return (
             <Route
-              exact={exact === false ? false : true}
+              // exact={exact === false ? false : true}
+              exact={false}
               key={path}
               path={`${url}/${path}`}
               component={component}
