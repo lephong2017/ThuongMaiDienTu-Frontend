@@ -120,3 +120,19 @@ export const actAddCar = (data) => {
         data
     }
 }
+
+export const reqLoadCarFilterDateAndLocation = ( location, dateRental, dateReturn, accesstoken) => {
+   console.log(location);
+    return (dispatch) => {
+        return callApis(`Query/FilterLocationAndDateDontBusy?location=${location}&dateStart=${dateRental}&dateEnd=${dateReturn}`, 'GET', null, accesstoken).then(res => {
+            dispatch(actLoadCarFilterDateAndLocation(res.data));
+        }).catch(error => console.log("Fetch Error "+ error));
+    }
+}
+
+export const actLoadCarFilterDateAndLocation = (data) => {
+    return {
+        type: Types.LOAD_CAR_FILTER_LOCATION_AND_DATE,
+        data
+    }
+}

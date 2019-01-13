@@ -12,6 +12,9 @@ const car = (state = listCar, action) => {
         case Types.UPDATE_CAR: 
             return action.data;
         
+        case Types.LOAD_CAR_FILTER_LOCATION_AND_DATE: 
+            return action.data;
+        
         default: return state;
         }
     };

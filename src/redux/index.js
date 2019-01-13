@@ -1,6 +1,5 @@
 import { combineReducers } from 'redux';
 import auth0 from 'redux/auth0/auth0';
-import products from 'redux/product/product';
 import car from 'redux/car/car';
 import carDetail from 'redux/car-detail/carDetail';
 import itemCar from 'redux/car/itemCar';
@@ -45,7 +44,6 @@ import itemProcedure from 'redux/procedure/itemProcedure';
 import numberProcedure  from 'redux/procedure/numberProcedure';
 const appReducers = combineReducers({
     auth0,
-    products,
 
     car,
     carDetail,

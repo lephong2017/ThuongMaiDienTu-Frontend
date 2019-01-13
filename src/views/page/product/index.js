@@ -12,7 +12,7 @@ import './css/sidebar.css';
 import { withRouter,Link} from 'react-router-dom';
 import { connect } from 'react-redux';
 import {reqLoadDataPaging, reqSearchProduct, reqCountData} from 'redux/car/actions';
-
+import {reqLoadCarFilterDateAndLocation} from 'redux/car/actions';
 import * as CONST_VARIABLE from 'utils/const/index';
 const { Header, Content,Footer } = Layout;
 class ContentApp extends Component{
@@ -69,9 +69,18 @@ class ContentApp extends Component{
         this.props.searchProductAct(keyword, pageIndex, pageSize, order, priceStart, priceEnd, accesstoken);
     }
 
-    onChangeCity=(val)=>{this.setState({city:val})}
-    onChangeDateRental=(val)=>{this.setState({dateRental:val})}
-    onChangeDateReturn=(val)=>{this.setState({dateReturn:val})}
+    onChangeCity=(val)=>{
+        this.setState({city:val} );
+        this.props.handleLoadCarFilterDateAndLocation(val, this.state.dateRental, this.state.dateReturn, 'accesstoken');
+    }
+    onChangeDateRental=(val)=>{
+        this.setState({dateRental:val})
+        this.props.handleLoadCarFilterDateAndLocation(this.state.city, val, this.state.dateReturn, 'accesstoken');
+    }
+    onChangeDateReturn=(val)=>{
+        this.setState({dateReturn:val})
+        this.props.handleLoadCarFilterDateAndLocation(this.state.city, this.state.dateRental, val, 'accesstoken');
+    }
     
     render() {
         const {car} = this.props;
@@ -156,6 +165,10 @@ const mapStateToProps = state => {
 
         loadCountData:()=>{
             dispatch(reqCountData()) ;
+        },
+
+        handleLoadCarFilterDateAndLocation:(location, dateRental, datereturn, accesstoken)=>{
+            dispatch(reqLoadCarFilterDateAndLocation(location, dateRental, datereturn, accesstoken)) ;
         },
 
     }

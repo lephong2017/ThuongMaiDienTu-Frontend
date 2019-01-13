@@ -15,6 +15,22 @@ export const actCountData = (data) => {
         data
     }
 }
+
+export const reqAllLocation = (accesstoken) => {
+    return (dispatch) => {
+        return callApis(`Location/GetAllLocation`, 'GET', null, accesstoken).then(res => {
+            dispatch(actAllLocation(res.data));
+        }).catch(error => console.log("Fetch Error "+ error));
+    }
+}
+
+export const actAllLocation = (data) => {
+    return {
+        type: Types.ALL_LOCATION,
+        data
+    }
+}
+
 export const reqSearchLocation = (keyword, pageIndex, pageSize, accesstoken) => {
     return (dispatch) => {
         return callApis(`Location/PagingCondition/pagesize/pageNow/condition?pagesize=${pageSize}&pageNow=${pageIndex}&condition=${keyword}`, 'GET', null, accesstoken).then(res => {

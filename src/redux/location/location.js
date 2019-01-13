@@ -11,6 +11,8 @@ const LOCATION = (state = listLOCATION, action) => {
             return action.data;
         case Types.UPDATE_LOCATION: 
             return action.data;
+        case Types.ALL_LOCATION: 
+            return action.data;
         
         default: return state;
         }

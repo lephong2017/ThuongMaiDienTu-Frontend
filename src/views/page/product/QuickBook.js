@@ -1,8 +1,10 @@
 import { Form,DatePicker , Select, Row, Col, Button, } from 'antd';
 import React,{Component} from 'react';
 import moment from 'moment';
-import {Link} from 'react-router-dom';
+import { withRouter,Link} from 'react-router-dom';
+import { connect } from 'react-redux';
 import 'views/page/home/css/form.css';
+import {reqAllLocation,} from 'redux/location/actions';
 const FormItem = Form.Item;
 const Option = Select.Option;
 
@@ -73,8 +75,28 @@ class BookCar extends Component {
     this.props.onChangeDateReturn(dateString);
   }
 
+  componentWillMount(){
+    this.props.handleReqAllLocation('123456789');
+  }
+  change_alias=(alias)=> {
+    var str = alias;
+    str = str.toLowerCase();
+    str = str.replace(" ",""); 
+    str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g,"a"); 
+    str = str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g,"e"); 
+    str = str.replace(/ì|í|ị|ỉ|ĩ/g,"i"); 
+    str = str.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g,"o"); 
+    str = str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g,"u"); 
+    str = str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g,"y"); 
+    str = str.replace(/đ/g,"d");
+    str = str.replace(/!|@|%|\^|\*|\(|\)|\+|\=|\<|\>|\?|\/|,|\.|\:|\;|\'|\"|\&|\#|\[|\]|~|\$|_|`|-|{|}|\||\\/g,"");
+    str = str.replace(/ + /g,"");
+    str = str.trim(); 
+    return str;
+}
   render() {
     // const { getFieldDecorator } = this.props.form;
+    const {location} = this.props;
     const { formLayout } = this.state;
     const formItemLayout = formLayout === 'horizontal' ? {
         labelCol: { span: 4 },
@@ -89,13 +111,18 @@ class BookCar extends Component {
                     {...formItemLayout}
                     label="Chọn Tỉnh/ Thành phố"
                     >
-                    <Select
-                        style={{ width: '100%' }}
-                        defaultValue={city}
-                        onChange={this.handleCityChange}
-                        >
-                            <Option value="BinhDuong">Bình Dương</Option>
-                            <Option value="ThuDuc">Thủ Đức</Option>
+                  <Select
+                      style={{ width: '100%' }}
+                      defaultValue={city}
+                      onChange={this.handleCityChange}
+                      >
+                    {
+                      (location)?
+                      location.map((val, ind)=>{
+                         return <Option key={val} value={this.change_alias(val)}>{val}</Option>
+                      }):
+                        <Option key='thuduc' value="Thủ Đức">Thủ Đức</Option>
+                    }
                     </Select>
                 </FormItem>
                 <FormItem
@@ -147,4 +174,21 @@ class BookCar extends Component {
 }
 
 const QuickBook = Form.create()(BookCar );
-export default QuickBook;
+
+
+const mapStateToProps = state => {
+  return {
+      location: state.location
+  }
+}
+
+const mapDispatchToProps = (dispatch, props) => {
+  return {
+    handleReqAllLocation:(accesstoken)=>{
+          dispatch(reqAllLocation(accesstoken)) ;
+      },
+
+  }
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(QuickBook));
