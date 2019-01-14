@@ -15,6 +15,7 @@ class FormEditContent extends Component{
             edit:edit_view, 
             dataSubmit:{
             },
+            feature:null,
             id:'',
 
         }
@@ -28,19 +29,17 @@ class FormEditContent extends Component{
         this.setState({edit: edit_view});
         
         if(values!=='error'){
-            const id= this.props.id;
             const obj= {
-                id: id,
+                id:'12',
+                purchDate: '2018-12-22T09:48:25.350Z'
             }
-            this.props.onSubmitEdit( id, {...values, ...obj});
+            this.props.onSubmitAdd({...values, ...obj});
         }
 
     }
 
     render(){
         const { edit,  } = this.state;
-        const { order } = this.props;
-        console.log(order);
         const classNames="field-no-radius form-light";
         const type="vertical";
         const trigger =[
@@ -62,59 +61,9 @@ class FormEditContent extends Component{
         ]
         const listFields=[
             {
-                attrbField:'nameCustomer',
+                attrbField:'idPartner',
                 data:{
                     dataType:'TEXT',
-                    defaultValue:order.nameCustomer,
-                },
-                render:{
-                    placeholder:'Vui lòng nhập tên khách hàng',
-                    label:'Tên khách hàng: ',
-
-                },
-                action:{
-                }
-            },
-            {
-                attrbField:'nameCar',
-                data:{
-                    dataType:'TEXT',
-                    defaultValue:order.nameCar,
-                    validation:{
-                        rules: [
-                            {
-                              required: true,
-                              message: 'Trường dữ liệu này là bắt buộc!!!'
-                            }
-                        ],
-                    }
-                },
-                render:{
-                    placeholder:'Vui lòng nhập tên xe',
-                    label:'Tên xe: ',
-                },
-                action:{
-                }
-            },
-            {
-                attrbField:'priceOrder',
-                data:{
-                    dataType:'NUMBER',
-                    //defaultValue:order.priceOrder,
-                },
-                render:{
-                    placeholder:'Vui lòng nhập giá ',
-                    label:'Giá: ',
-
-                },
-                action:{
-                }
-            },
-            {
-                attrbField:'dateOfhire',
-                data:{
-                    dataType:'DATE_PICKER',
-                    // defaultValue:order.dateOfhire,
                     validation:{
                         rules: [
                             {
@@ -125,17 +74,17 @@ class FormEditContent extends Component{
                     },
                 },
                 render:{
-                    placeholder:'Vui lòng chọn ngày thuê',
-                    label:'Ngày thuê: ',
+                    placeholder:'Vui lòng nhập mã partner',
+                    label:'Mã partner: ',
+
                 },
                 action:{
                 }
             },
             {
-                attrbField:'payDate',
+                attrbField:'idPackage',
                 data:{
-                    dataType:'DATE_PICKER',
-                    defaultValue:order.payDate,
+                    dataType:'TEXT',
                     validation:{
                         rules: [
                             {
@@ -146,12 +95,34 @@ class FormEditContent extends Component{
                     },
                 },
                 render:{
-                    placeholder:'Vui lòng chọn ngày trả',
-                    label:'Ngày trả: ',
+                    placeholder:'Vui lòng nhập mã gói dịch vụ ',
+                    label:'Mã gói: ',
                 },
                 action:{
                 }
             },
+            {
+                attrbField:'dateTenant',
+                data:{
+                    dataType:'DATE_PICKER',
+                    validation:{
+                        rules: [
+                            {
+                              required: true,
+                              message: 'Trường dữ liệu này là bắt buộc!!!'
+                            }
+                        ],
+                    },
+                },
+                render:{
+                    placeholder:'Vui lòng nhập chọn ngày',
+                    label:'Ngày',
+                },
+                action:{
+                }
+            },
+            
+           
             
         ] 
        
@@ -166,7 +137,7 @@ class FormEditContent extends Component{
                         type={type} 
                         listFields={listFields}
                         submit= {edit}
-                        formID= "editOrder"
+                        formID= "addPartnerPackage"
                         mode= "edit"
                         handleSubmit= {this.handleSubmit}
                     />

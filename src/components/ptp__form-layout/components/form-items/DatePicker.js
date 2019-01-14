@@ -43,6 +43,8 @@ export default class extends Component{
           getFieldDecorator(`${attr}`, checkRule)(
             <DatePicker 
                 key={attr}
+
+                showTime
                 onChange={this.triggerChange}
                 placeholder={render.placeholder}  
                 style={{width:'100%'}}

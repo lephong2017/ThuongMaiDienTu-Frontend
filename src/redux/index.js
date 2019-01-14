@@ -42,6 +42,10 @@ import numberPayment  from 'redux/payment/numberPayment';
 import procedure from 'redux/procedure/procedure';
 import itemProcedure from 'redux/procedure/itemProcedure';
 import numberProcedure  from 'redux/procedure/numberProcedure';
+
+import partnerPackage from 'redux/partnerPackage/partnerPackage';
+import itemPartnerPackage from 'redux/partnerPackage/itemPartnerPackage';
+import numberPartnerPackage  from 'redux/partnerPackage/numberPartnerPackage';
 const appReducers = combineReducers({
     auth0,
 
@@ -86,6 +90,10 @@ const appReducers = combineReducers({
     procedure,
     itemProcedure,
     numberProcedure,
+    //#endregion
+    partnerPackage,
+    itemPartnerPackage,
+    numberPartnerPackage,
  
 });
 

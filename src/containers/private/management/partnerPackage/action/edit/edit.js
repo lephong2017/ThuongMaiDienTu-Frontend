@@ -39,8 +39,8 @@ class FormEditContent extends Component{
 
     render(){
         const { edit,  } = this.state;
-        const { order } = this.props;
-        console.log(order);
+        const { partnerPackage } = this.props;
+        console.log(partnerPackage);
         const classNames="field-no-radius form-light";
         const type="vertical";
         const trigger =[
@@ -62,24 +62,10 @@ class FormEditContent extends Component{
         ]
         const listFields=[
             {
-                attrbField:'nameCustomer',
+                attrbField:'idPartner',
                 data:{
                     dataType:'TEXT',
-                    defaultValue:order.nameCustomer,
-                },
-                render:{
-                    placeholder:'Vui lòng nhập tên khách hàng',
-                    label:'Tên khách hàng: ',
-
-                },
-                action:{
-                }
-            },
-            {
-                attrbField:'nameCar',
-                data:{
-                    dataType:'TEXT',
-                    defaultValue:order.nameCar,
+                    defaultValue:partnerPackage.idPartner,
                     validation:{
                         rules: [
                             {
@@ -90,31 +76,18 @@ class FormEditContent extends Component{
                     }
                 },
                 render:{
-                    placeholder:'Vui lòng nhập tên xe',
-                    label:'Tên xe: ',
-                },
-                action:{
-                }
-            },
-            {
-                attrbField:'priceOrder',
-                data:{
-                    dataType:'NUMBER',
-                    //defaultValue:order.priceOrder,
-                },
-                render:{
-                    placeholder:'Vui lòng nhập giá ',
-                    label:'Giá: ',
+                    placeholder:'Vui lòng nhập mã partner',
+                    label:'Mã partner: ',
 
                 },
                 action:{
                 }
             },
             {
-                attrbField:'dateOfhire',
+                attrbField:'idPackage',
                 data:{
-                    dataType:'DATE_PICKER',
-                    // defaultValue:order.dateOfhire,
+                    dataType:'TEXT',
+                    defaultValue:partnerPackage.idPackage,
                     validation:{
                         rules: [
                             {
@@ -122,20 +95,20 @@ class FormEditContent extends Component{
                               message: 'Trường dữ liệu này là bắt buộc!!!'
                             }
                         ],
-                    },
+                    }
                 },
                 render:{
-                    placeholder:'Vui lòng chọn ngày thuê',
-                    label:'Ngày thuê: ',
+                    placeholder:'Vui lòng nhập mã gói',
+                    label:'mã gói: ',
                 },
                 action:{
                 }
             },
             {
-                attrbField:'payDate',
+                attrbField:'dateTenant',
                 data:{
                     dataType:'DATE_PICKER',
-                    defaultValue:order.payDate,
+                    // defaultValue:partnerPackage.dateTenant,
                     validation:{
                         rules: [
                             {
@@ -146,12 +119,14 @@ class FormEditContent extends Component{
                     },
                 },
                 render:{
-                    placeholder:'Vui lòng chọn ngày trả',
-                    label:'Ngày trả: ',
+                    placeholder:'Vui lòng chọn ngày',
+                    label:'Ngày: ',
                 },
                 action:{
                 }
             },
+            
+           
             
         ] 
        
@@ -166,7 +141,7 @@ class FormEditContent extends Component{
                         type={type} 
                         listFields={listFields}
                         submit= {edit}
-                        formID= "editOrder"
+                        formID= "editpartnerPackage"
                         mode= "edit"
                         handleSubmit= {this.handleSubmit}
                     />

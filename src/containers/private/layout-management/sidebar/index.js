@@ -69,6 +69,9 @@ class Sider extends Component {
                   Thủ tục đặt xe
               </Menu.Item>
 
+              <Menu.Item key="partnerpackage">
+                  Gói partner
+              </Menu.Item>
           </MenuItemGroup>
           
         </SubMenu>

@@ -10,6 +10,8 @@ import LocationManagement from 'containers/private/management/location/index';
 import PackagesManagement from 'containers/private/management/packages/index';
 import PaymentManagement from 'containers/private/management/payment/index';
 import ProcedureManagement from 'containers/private/management/procedure/index';
+import PartnerPackageManagement from 'containers/private/management/partnerPackage/index';
+
 const adminRoutes = [
   {
     path: "car",
@@ -61,6 +63,11 @@ const adminRoutes = [
     path: "procedure",
     exact: false,
     component: ()=> <ProcedureManagement/>
+  },
+  {
+    path: "partnerpackage",
+    exact: false,
+    component: ()=> <PartnerPackageManagement/>
   },
  
 ];
