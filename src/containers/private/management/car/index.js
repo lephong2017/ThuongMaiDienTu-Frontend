@@ -53,7 +53,6 @@ class CarManagement extends Component{
 
 
     onSelectChange = (selectedRowKeys) => {
-        console.log('selectedRowKeys changed: ', selectedRowKeys);
         this.setState({ selectedRowKeys });
     }
 
@@ -86,14 +85,11 @@ class CarManagement extends Component{
         this.setState({ sortedInfo: null, });
     }
     handleChangeSelectInRow =(value) => {
-        console.log("change value in rrow: ");
-        console.log(value, this.state.recordSelected);
+        // console.log(value, this.state.recordSelected);
     }
     
     handleOnSearch= (val) =>{
-        console.log(this.state.pagination);
         var accesstoken = sessionStorage.getItem(CONST_VARIABLE.ACCESS_TOKEN);
-        // console.log(val);
         if(val!==''){
             // this.props.countAllCar(accesstoken);    
             this.props.handleSearchCar(val, this.state.pageIndex, this.state.pageSize, accesstoken);

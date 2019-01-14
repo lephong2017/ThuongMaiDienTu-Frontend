@@ -1,0 +1,2 @@
+export const SENDMAIL = 'SENDMAIL';
+export const SENDMAIL_ALL_PARTNER = 'SENDMAIL_ALL_PARTNER';

@@ -18,6 +18,8 @@ import {reqLoadDataPaging, reqSearchPartnerTenantPackage, reqCountData,
      reqFindPartnerTenantPackage, reqDeletePartnerTenantPackage, reqAddPartnerTenantPackage, reqUpdatePartnerTenantPackage} from 'redux/partnerPackage/actions';
 import * as CONST_VARIABLE from 'utils/const/index';
 
+import {reqSendEmail} from 'redux/sendmail/actions';
+
 class PartnerPackageManagement extends Component{
     state={
         pageSize:5,
@@ -143,6 +145,9 @@ class PartnerPackageManagement extends Component{
         showNotification("Sửa thành công", "Bạn vừa thực hiện cập nhật thông tin một tính năng!!!", "topRight", "success");
     }
 
+    sendMail=(email)=>{
+        this.props.handleSendMail(email);
+    }
    
     render(){
         let { sortedInfo, filteredInfo } = this.state;
@@ -320,13 +325,23 @@ class PartnerPackageManagement extends Component{
                 onSubmitEdit={this.handleSubmitEdit}
             />,
         }
-        console.log("adasdasdas");
-        console.log(this.props.itemFeature);
-        console.log("adasdasdas");
+        const { partnerHire} = this.props;
         return (
             <Row className="content_manager_wrapper" style={{height:'100%'}}>
                 <PanelWrapper className={this.state.fullScreenMode ? "full-screen-mode" : ""}>
                     <FunctionbarContent showDrawerAdd={this.showDrawerAdd} handleFullScreenMode={this.handleFullScreenMode}/>
+                    {
+                        partnerHire.map((val, ind)=>{
+                            return <div key={ind} className="notification-bar">
+                                <span>{val.nameParnert}</span>
+                                <Button onClick={()=>this.sendMail(val.email)} className="btn-noti btn-mail-notification-right">
+                                    <Icon type='mail'/>
+                                     Gởi mail
+                                </Button>
+                            </div>
+                        })
+                    }
+                    
                     <Col md={24} className="table-wrapper">
                         <TableContent
                             rowSelection={rowSelection}
@@ -364,6 +379,7 @@ const mapStateToProps = state => {
     return {
         partnerPackage: state.partnerPackage,
         itemPartnerPackage: state.itemPartnerPackage,
+        partnerHire: state.partnerHire,
         numberPartnerPackage: state.numberPartnerPackage
     }
 }
@@ -389,6 +405,9 @@ const mapDispatchToProps = (dispatch, props) => {
         },
         handleSearchPartnerTenantPackage: (keyword, pageIndex, pageSize, accesstoken)=>{
             dispatch(reqSearchPartnerTenantPackage(keyword, pageIndex, pageSize, accesstoken))
+        },
+        handleSendMail: (email)=>{
+            dispatch(reqSendEmail(email))
         }
 
     }

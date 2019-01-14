@@ -43,6 +43,7 @@ import procedure from 'redux/procedure/procedure';
 import itemProcedure from 'redux/procedure/itemProcedure';
 import numberProcedure  from 'redux/procedure/numberProcedure';
 
+import partnerHire  from 'redux/partnerPackage/partnerHire';
 import partnerPackage from 'redux/partnerPackage/partnerPackage';
 import itemPartnerPackage from 'redux/partnerPackage/itemPartnerPackage';
 import numberPartnerPackage  from 'redux/partnerPackage/numberPartnerPackage';
@@ -92,6 +93,7 @@ const appReducers = combineReducers({
     numberProcedure,
     //#endregion
     partnerPackage,
+    partnerHire,
     itemPartnerPackage,
     numberPartnerPackage,
  

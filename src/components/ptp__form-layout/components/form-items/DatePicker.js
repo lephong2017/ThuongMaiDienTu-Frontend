@@ -44,7 +44,7 @@ export default class extends Component{
             <DatePicker 
                 key={attr}
 
-                showTime
+                // showTime
                 onChange={this.triggerChange}
                 placeholder={render.placeholder}  
                 style={{width:'100%'}}

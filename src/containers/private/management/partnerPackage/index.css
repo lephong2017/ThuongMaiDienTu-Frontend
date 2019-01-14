@@ -16,3 +16,37 @@
 .ant-layout-content {
     background: white;
 }
+
+.notification-bar{
+    background-color: goldenrod;
+    margin: 10px;
+    padding: 4px;
+
+}
+
+.btn-noti{
+    float: right !important;
+}
+
+.btn-close__notification-right {
+    background-color: transparent !important;
+    border: none;
+    position: relative;
+    top: -4px;
+}
+
+
+.btn-close__notification-right:hover {
+    color: red !important;
+}
+
+.btn-mail-notification-right {
+    background-color: transparent !important;
+    border: none;
+    position: relative;
+    top: -4px;
+}
+
+.btn-mail-notification-right:hover {
+    color:rgb(74, 247, 74) !important;
+}

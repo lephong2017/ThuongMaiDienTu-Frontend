@@ -4,7 +4,7 @@ import {layouts} from '../layout';
 import {Row, Col, Button, Icon} from 'antd';
 import { withRouter} from 'react-router-dom';
 import { connect } from 'react-redux';
-
+import moment from 'moment';
 
 const edit_view = 0, edit_submit= 1;
 class FormEditContent extends Component{
@@ -40,7 +40,6 @@ class FormEditContent extends Component{
     render(){
         const { edit,  } = this.state;
         const { order } = this.props;
-        console.log(order);
         const classNames="field-no-radius form-light";
         const type="vertical";
         const trigger =[
@@ -100,7 +99,7 @@ class FormEditContent extends Component{
                 attrbField:'priceOrder',
                 data:{
                     dataType:'NUMBER',
-                    //defaultValue:order.priceOrder,
+                    defaultValue:order.priceOrder,
                 },
                 render:{
                     placeholder:'Vui lòng nhập giá ',
@@ -114,7 +113,7 @@ class FormEditContent extends Component{
                 attrbField:'dateOfhire',
                 data:{
                     dataType:'DATE_PICKER',
-                    // defaultValue:order.dateOfhire,
+                    defaultValue:moment(order.dateOfhire, 'YYYY/MM/DD'),
                     validation:{
                         rules: [
                             {
@@ -135,7 +134,7 @@ class FormEditContent extends Component{
                 attrbField:'payDate',
                 data:{
                     dataType:'DATE_PICKER',
-                    defaultValue:order.payDate,
+                    defaultValue:moment(order.carReturnDay, 'YYYY/MM/DD'),
                     validation:{
                         rules: [
                             {

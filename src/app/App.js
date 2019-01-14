@@ -7,6 +7,9 @@ import MenuContent from 'containers/menu/Menu';
 import './css/App.css';
 import Pricing from 'containers/private/pricing/pricing';
 import * as CONST_VARIABLE from 'utils/const';
+import { withRouter, } from 'react-router-dom';
+import { connect } from 'react-redux';
+import {reqSendEmailAllPartner} from 'redux/sendmail/actions';
 const {  Content } = Layout;
 class App extends Component {
     state={
@@ -138,4 +141,18 @@ class App extends Component {
        );
     }
 }
-export default App;
+
+const mapStateToProps = state => {
+    return {
+        partnerHire: state.partnerHire,
+    }
+}
+const mapDispatchToProps = (dispatch, props) => {
+    return {
+        handleSendMail: (listPartner)=>{
+            dispatch(reqSendEmailAllPartner(listPartner))
+        }
+
+    }
+}
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

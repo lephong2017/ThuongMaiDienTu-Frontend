@@ -15,6 +15,22 @@ export const actCountData = (data) => {
         data
     }
 }
+
+export const reqGetListPartnerNearHire = () => {
+    return (dispatch) => {
+        return callApis(`Query/LayDanhSachGanHetHan`, 'GET', null, null).then(res => {
+            dispatch(actGetListNearHire(res.data));
+        }).catch(error => console.log("Fetch Error "+ error));
+    }
+}
+
+export const actGetListNearHire = (data) => {
+    return {
+        type: Types.GET_PARTNER_NEAR_HIRE,
+        data
+    }
+}
+
 export const reqSearchPartnerTenantPackage = (keyword, pageIndex, pageSize, accesstoken) => {
     return (dispatch) => {
         return callApis(`PartnerTenantPackage/PagingCondition/pagesize/pageNow/condition?pagesize=${pageSize}&pageNow=${pageIndex}&condition=${keyword}`, 'GET', null, accesstoken).then(res => {
