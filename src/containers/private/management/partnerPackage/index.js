@@ -163,7 +163,11 @@ class PartnerPackageManagement extends Component{
                 dataIndex: 'idPackage',
                 key: 'idPackage',
             }, 
-           
+            {
+                title: 'Ngày',
+                dataIndex: 'dateTenant',
+                key: 'dateTenant',
+            }, 
             {
                 title: 'Action',
                 align:'center',
