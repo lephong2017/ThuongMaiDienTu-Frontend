@@ -109,7 +109,7 @@ class BookCar extends Component {
             <Form layout={null} onSubmit={this.handleSubmit}>
                 <FormItem
                     {...formItemLayout}
-                    label="Chọn Tỉnh/ Thành phố"
+                    label="Chọn Tỉnh/ Thành phố" 
                     >
                   <Select
                       style={{ width: '100%' }}
