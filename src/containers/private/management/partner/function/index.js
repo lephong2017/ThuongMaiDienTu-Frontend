@@ -24,7 +24,7 @@ class FunctionContent extends Component{
         return(
             <Row className="function-bar-wrapper">
                 <Col md={24}>
-                    <Button type="default" onClick={this.showDrawer} size="small" className="function-btn-left">
+                    <Button disabled={this.props.disabled}  type="default" onClick={this.showDrawer} size="small" className="function-btn-left">
                         <Icon type="plus" theme="outlined" />
                     </Button>
                     <Button type="default" size="small" className="function-btn-right">

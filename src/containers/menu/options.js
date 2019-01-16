@@ -6,11 +6,6 @@ const options = [
       leftIcon: "ion-pie-graph"
     },
     {
-      key: "dashboard",
-      label: "Dùng thử",
-      leftIcon: "ion-pie-graph"
-    },
-    {
       key: "about",
       label: "Giới thiệu",
       leftIcon: "ion-pie-graph"

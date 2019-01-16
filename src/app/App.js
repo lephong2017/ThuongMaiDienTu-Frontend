@@ -16,22 +16,23 @@ class App extends Component {
         visible: false,
         showModal:false,
         auth:false,
-        // visible: false,
-        // showModal:true,
-        // auth:true,
         error: null,
         showError: false
     }
 
     componentWillMount(){
-        // this.setState({
-        //     auth: true,
-        //     showModal:true
-        // });
-        this.setState({
-            auth: false,
-            showModal:false
-        });
+        const role = sessionStorage.getItem(CONST_VARIABLE.ROLE_ACCOUNT);
+        if(role){
+            this.setState({
+                auth: false,
+                showModal:false
+            });
+        }else{
+            this.setState({
+                auth: true,
+                showModal:true
+            });
+        }
     }
 
     onCloseModal=()=>{
@@ -132,7 +133,7 @@ class App extends Component {
                     <Row>
                         <Layout>
                             <Content>
-                                    <AppRouter url={url} style={{height:'100%'}}/>
+                                    <AppRouter url={url} style={{height:'100%'}}/> 
                             </Content>
                         </Layout>
                     </Row>

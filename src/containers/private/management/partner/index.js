@@ -5,7 +5,7 @@ import FunctionbarContent from './function/index';
 import PanelWrapper from 'containers/wrapper/Panel.style';
 import TableContent from 'components/ptp__table/index';
 // import TableContent from 'components/table/MyTable';
-
+import * as Role_User from 'settings/role';
 // import {demoData} from './list-Partner-dumy';
 import DrawerContent from 'components/Drawer/Drawer';
 import FormPartner from './action/add/FormPartner'; 
@@ -35,6 +35,7 @@ class PartnerManagement extends Component{
         data:[],
         idEdit:null
     }
+
     handleFullScreenMode=(val)=> {
         this.setState(() => {
             return {
@@ -143,8 +144,36 @@ class PartnerManagement extends Component{
         showNotification("Sửa thành công", "Bạn vừa thực hiện cập nhật thông tin một partner!!!", "topRight", "success");
     }
 
+    disableADD = () =>{
+        const role = sessionStorage.getItem(CONST_VARIABLE.ROLE_ACCOUNT);
+        var listRole = [];
+        if(role === 'MANAGER') {
+            listRole= Role_User.findRoleManager('PARTNER');
+        }
+        return listRole.includes(Role_User.ADD);
+    }
+    disableEdit = () =>{
+        const role = sessionStorage.getItem(CONST_VARIABLE.ROLE_ACCOUNT);
+        var listRole = [];
+        if(role === 'MANAGER') {
+            listRole= Role_User.findRoleManager('PARTNER');
+        }
+        return listRole.includes(Role_User.EDIT);
+    }
+    disableDelele = () =>{
+        const role = sessionStorage.getItem(CONST_VARIABLE.ROLE_ACCOUNT);
+        var listRole = [];
+        if(role === 'MANAGER') {
+            listRole= Role_User.findRoleManager('PARTNER');
+        }
+        return listRole.includes(Role_User.DELETE);
+    }
    
     render(){
+        const disableAdd = this.disableADD()?false:true;
+        const disableDelete = this.disableDelele()?false:true;
+        const disableEdit = this.disableEdit()?false:true;
+
         let { sortedInfo, filteredInfo } = this.state;
         sortedInfo = sortedInfo || {};
         filteredInfo = filteredInfo || {};
@@ -152,6 +181,7 @@ class PartnerManagement extends Component{
             sorted: sortedInfo,
             filtered: filteredInfo
         }
+
         const columns = [
             {
                 title: 'Tên công ty',
@@ -184,8 +214,14 @@ class PartnerManagement extends Component{
                 render:(text, record, index)=>{
                     return(
                         <div>
-                            <Button onClick={()=>this.showDrawerEdit(text)} className='btn btn-table' icon='edit'></Button>
                             <Button 
+                                disabled={disableEdit}
+                                onClick={()=>this.showDrawerEdit(text)} 
+                                className='btn btn-table' 
+                                icon='edit'>
+                            </Button>
+                            <Button 
+                                disabled={disableDelete} 
                                 onClick={()=>this.handleDelete(text)} 
                                 className='btn btn-table' 
                                 icon='delete'>
@@ -332,8 +368,10 @@ class PartnerManagement extends Component{
         }
         return (
             <Row className="content_manager_wrapper" style={{height:'100%'}}>
+                {
+                (this.props.partner.length > 0)?
                 <PanelWrapper className={this.state.fullScreenMode ? "full-screen-mode" : ""}>
-                    <FunctionbarContent showDrawerAdd={this.showDrawerAdd} handleFullScreenMode={this.handleFullScreenMode}/>
+                    <FunctionbarContent disabled={disableAdd} showDrawerAdd={this.showDrawerAdd} handleFullScreenMode={this.handleFullScreenMode}/>
                     <Col md={24} className="table-wrapper">
                         <TableContent
                             rowSelection={rowSelection}
@@ -343,7 +381,6 @@ class PartnerManagement extends Component{
                             event={event}
                             info={info}
                         />
-                        
                     </Col>
                     <DrawerContent 
                         key={'addPartner'}
@@ -362,6 +399,15 @@ class PartnerManagement extends Component{
                         componentWillShow={listPropForDrawerEdit.componentWillShow}
                     />
                 </PanelWrapper>
+                :
+                <div style={{
+                    color: 'red',
+                    padding: '10px',
+                    margin: '10px',
+                    }}>
+                    Tài khoản của bạn không đủ quyền truy cập vào trang này!!!
+                </div>
+                }
 
             </Row>
         );

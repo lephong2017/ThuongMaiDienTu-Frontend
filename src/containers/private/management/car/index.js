@@ -5,7 +5,7 @@ import FunctionbarContent from './function/index';
 import PanelWrapper from 'containers/wrapper/Panel.style';
 import TableContent from 'components/ptp__table/index';
 // import TableContent from 'components/table/MyTable';
-
+import * as Role_User from 'settings/role';
 // import {demoData} from './list-car-dumy';
 import DrawerContent from 'components/Drawer/Drawer';
 import FormCar from './action/add/FormCar'; 
@@ -138,8 +138,37 @@ class CarManagement extends Component{
         showNotification("Sửa thành công", "Bạn vừa thực hiện cập nhật thông tin một xe!!!", "topRight", "success");
     }
 
+    disableADD = () =>{
+        const role = sessionStorage.getItem(CONST_VARIABLE.ROLE_ACCOUNT);
+        var listRole = [];
+        if(role === 'MANAGER') {
+            listRole= Role_User.findRoleManager('CAR');
+        }
+        return listRole.includes(Role_User.ADD);
+    }
+
+    disableEdit = () =>{
+        const role = sessionStorage.getItem(CONST_VARIABLE.ROLE_ACCOUNT);
+        var listRole = [];
+        if(role === 'MANAGER') {
+            listRole= Role_User.findRoleManager('CAR');
+        }
+        return listRole.includes(Role_User.EDIT);
+    }
+
+    disableDelele = () =>{
+        const role = sessionStorage.getItem(CONST_VARIABLE.ROLE_ACCOUNT);
+        var listRole = [];
+        if(role === 'MANAGER') {
+            listRole= Role_User.findRoleManager('CAR');
+        }
+        return listRole.includes(Role_User.DELETE);
+    }
    
     render(){
+        const disableAdd = this.disableADD()?false:true;
+        const disableDelete = this.disableDelele()?false:true;
+        const disableEdit = this.disableEdit()?false:true;
         let { sortedInfo, filteredInfo } = this.state;
         sortedInfo = sortedInfo || {};
         filteredInfo = filteredInfo || {};
@@ -184,8 +213,12 @@ class CarManagement extends Component{
                 render:(text, record, index)=>{
                     return(
                         <div>
-                            <Button onClick={()=>this.showDrawerEdit(text)} className='btn btn-table' icon='edit'></Button>
                             <Button 
+                                disabled={disableEdit}
+                                onClick={()=>this.showDrawerEdit(text)} 
+                                className='btn btn-table' icon='edit'></Button>
+                            <Button 
+                                disabled={disableDelete}
                                 onClick={()=>this.handleDelete(text)} 
                                 className='btn btn-table' 
                                 icon='delete'>
@@ -332,8 +365,10 @@ class CarManagement extends Component{
         }
         return (
             <Row className="content_manager_wrapper" style={{height:'100%'}}>
+                {
+                (this.props.car.length > 0)?
                 <PanelWrapper className={this.state.fullScreenMode ? "full-screen-mode" : ""}>
-                    <FunctionbarContent showDrawerAdd={this.showDrawerAdd} handleFullScreenMode={this.handleFullScreenMode}/>
+                    <FunctionbarContent disabled={disableAdd} showDrawerAdd={this.showDrawerAdd} handleFullScreenMode={this.handleFullScreenMode}/>
                     <Col md={24} className="table-wrapper">
                         <TableContent
                             rowSelection={rowSelection}
@@ -343,7 +378,6 @@ class CarManagement extends Component{
                             event={event}
                             info={info}
                         />
-                        
                     </Col>
                     <DrawerContent 
                         key={'addcar'}
@@ -362,7 +396,15 @@ class CarManagement extends Component{
                         componentWillShow={listPropForDrawerEdit.componentWillShow}
                     />
                 </PanelWrapper>
-
+                :
+                <div style={{
+                    color: 'red',
+                    padding: '10px',
+                    margin: '10px',
+                    }}>
+                    Tài khoản của bạn không đủ quyền truy cập vào trang này!!!
+                </div>
+                }
             </Row>
         );
     }

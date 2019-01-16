@@ -1,7 +1,7 @@
 import axios from 'axios';
-import  config from 'settings/index';
+import config from 'settings/index';
 
-export default function callApi(endpoint, method = 'GET', body,accesstoken) {
+export default function callApiAuth0(endpoint, method = 'GET', body) {
     return axios({
         url: `${config.API_URL_S}/${endpoint}`,
         method,
@@ -9,7 +9,6 @@ export default function callApi(endpoint, method = 'GET', body,accesstoken) {
             'access-control-request-origin':'*',
             'content-type' : 'application/json-patch+json',
             'accept':'application/json',
-            // 'Authorization': 'Bearer ' + accesstoken,
         },
         data: body
     }).catch(err => {

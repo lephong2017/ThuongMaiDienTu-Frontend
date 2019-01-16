@@ -8,6 +8,7 @@ import Drawer from 'components/Drawer/Drawer';
 import { withRouter,} from 'react-router-dom';
 import { connect } from 'react-redux';
 import {updateIndex} from 'utils/key-component/settings_key_antd';
+import * as CONST_VARIABLE from 'utils/const/index';
 const SubMenu = Menu.SubMenu;
 class HeaderContent extends Component {
   
@@ -119,6 +120,8 @@ class HeaderContent extends Component {
       hasButtonFooter:false,
       componentWillShow:()=> <Register key={`${updateIndex()}`} onClose={this.onCloseRegister}/>,
   }
+  const role = sessionStorage.getItem(CONST_VARIABLE.ROLE_ACCOUNT);
+  const user = JSON.parse(sessionStorage.getItem(CONST_VARIABLE.LOGIN));
     return (
       <Menu
         onClick={this.handleClick}
@@ -126,17 +129,45 @@ class HeaderContent extends Component {
         mode="horizontal"
       >
         {options.map(singleOption =>  this.getMenuItem({singleOption })  )}
-
-        <Menu.Item key={"register"}>
-            <Button onClick={this.handleClick}>Đăng ký</Button>
-        </Menu.Item>
         {
-          (this.props.auth0)?
+          (role)?
+            <Menu.Item key={"dashboard/management"}>
+              <Link to="dashboard/management">
+                <Button onClick={this.handleClick}>Quản lý</Button>
+              </Link>
+            </Menu.Item>
+          :
+            <Menu.Item key={"dashboard"}>
+              <Link to="dashboard/management">
+                <Button onClick={this.handleClick}>Dùng thử</Button>
+              </Link>
+            </Menu.Item>
+        }
+        
+        {
+        (role)?
+          <div key={`${updateIndex()}`}></div>:
+          <Menu.Item key={"register"}>
+              <Button onClick={this.handleClick}>Đăng ký</Button>
+          </Menu.Item>
+        }
+
+        {
+        (role)?
         <div key={`${updateIndex()}`}></div>:
           <Menu.Item key={"login"}>
               <Button onClick={this.handleClick}>Đăng nhập</Button>
           </Menu.Item>
         }
+
+        {
+          (user)?
+          <Menu.Item key={"username"}>
+            <span style={{color: 'red', textTransform: 'UPPERCASE'}}>{user.userName}</span>
+          </Menu.Item>:
+          <span></span>
+        }
+
         <Drawer 
             key={'registerDrawer'}
             styleProps={listPropForDrawerRegister.styleProps} 

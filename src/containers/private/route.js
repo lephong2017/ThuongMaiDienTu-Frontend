@@ -11,6 +11,7 @@ import PackagesManagement from 'containers/private/management/packages/index';
 import PaymentManagement from 'containers/private/management/payment/index';
 import ProcedureManagement from 'containers/private/management/procedure/index';
 import PartnerPackageManagement from 'containers/private/management/partnerPackage/index';
+import * as CONST_VARIABLE from 'utils/const/index';
 
 const adminRoutes = [
   {
@@ -72,12 +73,19 @@ const adminRoutes = [
  
 ];
 
+const partnerRoutes = [
+ 
+];
+
 class AppRouter extends Component { 
   render() {
+    const role = sessionStorage.getItem(CONST_VARIABLE.ROLE_ACCOUNT);
     const { url, style } = this.props;
     return (
       <div style={style}>
-        {adminRoutes.map(singleRoute => {
+        {
+          (role==='ADMIN' || role==='MANAGER')?
+          adminRoutes.map(singleRoute => {
           const { path,component, exact, ...otherProps } = singleRoute;
           return (
             <Route
@@ -89,7 +97,22 @@ class AppRouter extends Component {
               {...otherProps}
             />
           );
-        })}
+        })
+        :
+        partnerRoutes.map(singleRoute => {
+          const { path,component, exact, ...otherProps } = singleRoute;
+          return (
+            <Route
+              // exact={exact === false ? false : true}
+              exact={true}
+              key={path}
+              path={`${url}/${path}`}
+              component={component}
+              {...otherProps}
+            />
+          );
+        })
+        }
       </div>
     );
   }
