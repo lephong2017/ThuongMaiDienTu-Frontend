@@ -1,6 +1,7 @@
 import React ,{Component} from 'react';
 import { Layout ,Row,Col } from 'antd';
 import SidebarContent from 'views/page/detail/sidebar/Sidebar';
+import SidebarInfoCustomer from 'views/page/detail/sidebar/InfoCustomer';
 import HeaderContent from 'views/layout/Header';
 import FooterContent from 'views/layout/Footer';
 // import FunctionFilter from 'containers/filterbar/FunctionFilter';
@@ -16,7 +17,8 @@ class ContentApp extends Component{
         collapsed: false, 
         city:null,
         dateRental:null,
-        dateReturn:null
+        dateReturn:null,
+        customerInfo:null,
     }
     componentWillMount(){
         this.setState({
@@ -24,6 +26,10 @@ class ContentApp extends Component{
             dateReturn:this.props.location.state.dateReturn,
             city: this.props.location.state.city
         });
+    }
+    saveInfoCustomer= (val) =>{
+        console.log(val);
+        this.setState({customerInfo : val});
     }
     toggle = () => {
         this.setState({
@@ -44,7 +50,12 @@ class ContentApp extends Component{
                     </div>
                     <Layout>
                         <Row className="resposive_content_detail_car" gutter={8} >
-                            <Col md={18}>
+                            <Col md={6} className="sidebar_content" >
+                                 <SidebarInfoCustomer 
+                                    saveInfoCustomer={this.saveInfoCustomer}
+                                     id={id} />
+                            </Col>
+                            <Col md={12}>
                                 <Row style={{display:'flex',flexDirection:'column'}}>
                                     <Col md={24}>
                                         <Content style={{ padding: '12px 0', background: '#fff' }}>
@@ -63,6 +74,7 @@ class ContentApp extends Component{
                                     dateReturn={dateReturn}
                                     dateRental={dateRental}
                                     id={id}
+                                    customerInfo={this.state.customerInfo }
                                  />
                             </Col>
                         </Row>

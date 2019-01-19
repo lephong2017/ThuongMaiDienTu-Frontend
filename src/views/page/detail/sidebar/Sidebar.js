@@ -16,6 +16,7 @@ class SidebarContent extends Component{
     componentWillMount(){
         this.props.handleFindCar(this.props.id, CONST_VARIABLE.ACCESS_TOKEN);
     }
+    
     render(){
         const rowstyle={
             display:'flex',
@@ -24,7 +25,7 @@ class SidebarContent extends Component{
             alignItems:'center',
             backgroundColor:'rgba(255, 255, 255, 0.815)',
         }
-        const {dateReturn, dateRental, city, itemCar} = this.props;
+        const {dateReturn, dateRental,customerInfo, city, itemCar} = this.props;
         return (
             <Row style={rowstyle}>
                 <Col md={20}>
@@ -33,6 +34,7 @@ class SidebarContent extends Component{
                         dateReturn={dateReturn}
                         dateRental={dateRental}
                         itemCar={itemCar}
+                        customerInfo={customerInfo}
                     />
                 </Col>
             </Row>
@@ -44,12 +46,13 @@ const mapStateToProps = state => {
         itemCar: state.itemCar
     }
   }
-  
+   
   const mapDispatchToProps = (dispatch, props) => {
     return {
         handleFindCar:(id ,accesstoken)=>{
             dispatch(reqFindCar(id ,accesstoken)) ;
         },
+        
     }
   }
   

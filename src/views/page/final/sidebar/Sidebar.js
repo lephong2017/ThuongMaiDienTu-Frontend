@@ -23,14 +23,15 @@ class SidebarContent extends Component{
             alignItems:'center',
             padding:'10px 10px'
         }
+
         return (
             <Row style={rowstyle} gutter={16}>
                 <Col md={22} >
-                    <InfoCustomer/>
+                    <InfoCustomer info={this.props.info.customer}/>
                 </Col>
                 <br/>
                 <Col md={22}>
-                    <InfoDetail/>
+                    <InfoDetail info= {this.props.info.order}/>
                 </Col>
             </Row>
         )

@@ -21,6 +21,8 @@ class ContentApp extends Component{
         });
     }
       render() {
+         const info = this.props.location.info;
+         
         return (
             <Layout>
                 <Header className="header_content">
@@ -33,7 +35,7 @@ class ContentApp extends Component{
                     <Layout>
                         <Row className="resposive_content_final_order" gutter={16} >
                             <Col md={6} className="sidebar_content" >
-                                <SidebarContent collapsed={this.state.collapsed}/>
+                                <SidebarContent info={info} collapsed={this.state.collapsed}/>
                             </Col>
                             <Col md={17} style={{padding: 16, background: '#fff',height:"100%"}}>
                                 <FormInfoCustomer/>

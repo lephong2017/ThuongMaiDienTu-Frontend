@@ -5,6 +5,10 @@ import carDetail from 'redux/car-detail/carDetail';
 import itemCar from 'redux/car/itemCar';
 import numberCar from 'redux/car/numberData';
 
+import carPartner from 'redux/carPartner/carPartner';
+import itemCarPartner from 'redux/carPartner/itemCarPartner';
+import numberCarPartner from 'redux/carPartner/numberDataPartner';
+
 import partner from 'redux/partner/partner';
 import itemPartner from 'redux/partner/itemPartner';
 import numberDataPartner from 'redux/partner/numberDataPartner';
@@ -12,6 +16,10 @@ import numberDataPartner from 'redux/partner/numberDataPartner';
 import orders from 'redux/orders/orders';
 import itemOrders from 'redux/orders/itemOrders';
 import numberDataOrders from 'redux/orders/numberDataOrders';
+
+import ordersPartner from 'redux/ordersPartner/ordersPartner';
+import itemOrdersPartner from 'redux/ordersPartner/itemOrdersPartner';
+import numberDataOrdersPartner from 'redux/ordersPartner/numberDataOrdersPartner';
 
 import typecar from 'redux/typecar/typecar';
 import itemTypecar from 'redux/typecar/itemTypecar';
@@ -96,7 +104,12 @@ const appReducers = combineReducers({
     partnerHire,
     itemPartnerPackage,
     numberPartnerPackage,
- 
+
+    //car partner
+    carPartner, itemCarPartner, numberCarPartner,
+
+    //order partner
+    ordersPartner, itemOrdersPartner, numberDataOrdersPartner
 });
 
 

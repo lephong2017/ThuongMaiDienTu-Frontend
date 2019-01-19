@@ -81,8 +81,8 @@ class Sider extends Component {
         </SubMenu>
 
         <SubMenu key="sub4" title={<span><Icon type="mail" /><span>Quản lý của partner</span></span>}>
-            <Menu.Item key="CarOfPartner">Quản lý xe</Menu.Item>
-            <Menu.Item key="OrdersOfPartner">Đơn hàng</Menu.Item>
+            <Menu.Item key="carOfPartner">Quản lý xe</Menu.Item>
+            <Menu.Item key="ordersOfPartner">Đơn hàng</Menu.Item>
             <Menu.Item key="InfoService">Thông tin dịch vụ</Menu.Item>
         </SubMenu>
       </Menu>

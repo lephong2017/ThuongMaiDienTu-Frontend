@@ -1,4 +1,5 @@
 import callApis from 'utils/callAPI/apiCaller';
+import {callApiNotToken} from 'utils/callAPI/apiCaller';
 import * as Types from './ActionTypes';
 
 export const reqCountData = (accesstoken) => {
@@ -18,7 +19,7 @@ export const actCountData = (data) => {
 
 export const reqAllLocation = (accesstoken) => {
     return (dispatch) => {
-        return callApis(`Location/GetAllLocation`, 'GET', null, accesstoken).then(res => {
+        return callApiNotToken(`Location/GetAllLocation`, 'GET', null, accesstoken).then(res => {
             dispatch(actAllLocation(res.data));
         }).catch(error => console.log("Fetch Error "+ error));
     }

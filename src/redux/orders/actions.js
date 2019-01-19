@@ -17,7 +17,10 @@ export const actCountData = (data) => {
 }
 export const reqSearchOrders = (keyword, pageIndex, pageSize, accesstoken) => {
     return (dispatch) => {
-        return callApis(`Orders/PagingCondition/pagesize/pageNow/condition?pagesize=${pageSize}&pageNow=${pageIndex}&condition=${keyword}`, 'GET', null, accesstoken).then(res => {
+        return callApis(`Orders/PagingConditio
+        
+        
+        n/pagesize/pageNow/condition?pagesize=${pageSize}&pageNow=${pageIndex}&condition=${keyword}`, 'GET', null, accesstoken).then(res => {
             dispatch(actLoadDataPaging(res.data));
         }).catch(error => console.log("Fetch Error "+ error));
     }
@@ -103,7 +106,6 @@ export const actUpdateOrders = (data) => {
 export const reqAddOrders = ( Orders, accesstoken) => {
     return (dispatch) => {
         return callApis(`Orders/Create`, 'POST', Orders, accesstoken).then(res => {
-            console.log(res.data);
             return callApis(`Orders/Paging/pagesize/pageNow?pagesize=5&pageNow=1`, 'GET', null, accesstoken).then(res => {
                 dispatch(actAddOrders(res.data));
             }).catch(error => console.log("Fetch Error "+ error));

@@ -1,10 +1,15 @@
 import { Form, Input,DatePicker , Select, Row, Col, Button,  } from 'antd';
 import React,{Component} from 'react';
 import moment from 'moment';
-import {Link} from 'react-router-dom';
 import '../css/form.css';
-
+// import history from '../../../../history';
+import {Link} from 'react-router-dom';
 import PaypalBtn from 'react-paypal-checkout';
+import {reqAddOrders} from 'redux/orders/actions';
+import { withRouter,} from 'react-router-dom';
+import { connect } from 'react-redux';
+import * as CONST_VARIABLE from 'utils/const/index';
+
 const FormItem = Form.Item;
 const Option = Select.Option;
 
@@ -25,6 +30,8 @@ class BookCar extends Component {
     numDayRental:0,
     err:'Số ngày mượn phải lớn hơn 1 ngày',
     city:null,
+    locationReceive: 'AT_PRODUCER',
+    orderInfo:null
 
   };
 
@@ -79,16 +86,24 @@ class BookCar extends Component {
   }
   
   onOk=(value)=> {
-    // console.log('onOk: ', value);
+    console.log('onOk: ', value);
   }
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.form.validateFieldsAndScroll((err, values) => {
-      if (!err) {
-        console.log('Received values of form: ', values);
-      }
-    });
+    const access_token = sessionStorage.getItem(CONST_VARIABLE.ACCESS_TOKEN);
+    var order ={
+      nameCustomer: this.props.customerInfo.fistNameAndLastName,
+      nameCar: this.props.itemCar.id,
+      priceOrder: this.state.numDayRental * this.props.itemCar.price,
+      dateOfhire: this.state.dateRental,
+      carReturnDay: this.state.dateReturn,
+      locationReceive: this.state.locationReceive
+    }
+    this.setState({orderInfo: order});
+    this.props.handleAddOrders(order, access_token);
+    // history.push('/final');
+    // window.location.reload();
   }
   
   disabledDate=(current) =>{
@@ -116,6 +131,10 @@ class BookCar extends Component {
       disabledMinutes: () => range(0, 31),
       disabledSeconds: () => [55, 56],
     };
+  }
+
+  handleReviceCarChange = (val)=>{
+    this.setState({locationReceive:val})
   }
 
   render() {
@@ -161,6 +180,7 @@ class BookCar extends Component {
     }
     const {dateReturn, dateRental, city} = this.state;
     const {itemCar} = this.props;
+    const disabledBtnFinish= (!this.props.customerInfo)?true:false;
     return (
       <Row className="form_content">
           <Col md={24} >
@@ -170,11 +190,11 @@ class BookCar extends Component {
                     label="Hình thức nhận xe"
                     >
                     <Select
-                        // value={state.currency}
+                        value={this.state.locationReceive}
                         // size={size}
                         defaultValue="AT_PRODUCER"
                         style={{ width: '100%' }}
-                        // onChange={this.handleCurrencyChange}
+                        onChange={this.handleReviceCarChange}
                         >
                             <Option value="AT_HOME">Nhận xe tại nhà</Option>
                             <Option value="AT_PRODUCER">Nhận xe tại đại lý</Option>
@@ -186,6 +206,7 @@ class BookCar extends Component {
                     >
                       <DatePicker
                         // showTime
+                        disabled 
                         format="YYYY-MM-DD"
                         placeholder="Select Time"
                         disabledDate={this.disabledDate}
@@ -202,6 +223,7 @@ class BookCar extends Component {
                     >
                       <DatePicker
                         // showTime
+                        disabled 
                         format="YYYY-MM-DD"
                         placeholder="Select Time"
                         disabledDate={this.disabledDate}
@@ -259,13 +281,22 @@ class BookCar extends Component {
                         onSuccess={onSuccess} 
                         onCancel={onCancel}
                       />
-                      <Link to="/final">
-                        <Button style={{width:'100%'}} type="primary" htmlType="submit">Hoàn tất</Button>
-                      </Link>
+                        <Link to={{
+                          pathname: `/final`,
+                          info: {
+                            customer: this.props.customerInfo,
+                            order: {
+                              priceOrder: this.state.numDayRental * this.props.itemCar.price,
+                              dateOfhire: this.state.dateRental,
+                              carReturnDay: this.state.dateReturn,
+                              locationReceive: this.state.locationReceive
+                            }
+                          } 
+                        }}>
+                          <Button disabled={disabledBtnFinish} style={{width:'100%'}} type="primary" htmlType="submit">Hoàn tất</Button>
+                        </Link>
                     </Col>:
                     <Col><span style={{color: 'red'}}>{this.state.err}</span></Col>
-
-
                 }
                        
                   </Row>
@@ -277,5 +308,20 @@ class BookCar extends Component {
   }
 }
 
-const QuickBook = Form.create()(BookCar );
-export default QuickBook;
+const QuickBook = Form.create()(BookCar); 
+
+const mapStateToProps = state => {
+  return {
+      itemCar: state.itemCar
+  }
+}
+ 
+const mapDispatchToProps = (dispatch, props) => {
+  return {
+      handleAddOrders:(Order ,accesstoken)=>{
+          dispatch(reqAddOrders(Order ,accesstoken)) ;
+      },
+  }
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(QuickBook));

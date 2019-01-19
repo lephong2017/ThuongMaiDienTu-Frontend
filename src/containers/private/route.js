@@ -1,8 +1,10 @@
 import { Route, } from 'react-router-dom';
 import React, { Component } from "react";
 import CarManagement from 'containers/private/management/car/index';
+import CarOfPartnerManagement from 'containers/private/management/carPartner/index';
 import PartnerManagement from 'containers/private/management/partner/index';
 import OrderManagement from 'containers/private/management/orders/index';
+import OrderOfPartnerManagement from 'containers/private/management/ordersPartner/index';
 import TypecarManagement from 'containers/private/management/typecar/index';
 import CustomerManagement from 'containers/private/management/customer/index';
 import FeatureManagement from 'containers/private/management/feature/index';
@@ -74,7 +76,16 @@ const adminRoutes = [
 ];
 
 const partnerRoutes = [
- 
+  {
+    path: "ordersOfPartner",
+    exact: false,
+    component: ()=> <OrderOfPartnerManagement/>
+  },
+  {
+    path: "carOfPartner",
+    exact: false,
+    component: ()=> <CarOfPartnerManagement/>
+  },
 ];
 
 class AppRouter extends Component { 

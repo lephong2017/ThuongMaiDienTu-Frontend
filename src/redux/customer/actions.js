@@ -1,5 +1,6 @@
 import callApis from 'utils/callAPI/apiCaller';
-import * as Types from './ActionTypes';
+import * as Types from './ActionTypes'; 
+import {callApiNotToken} from 'utils/callAPI/apiCaller';
 
 export const reqCountData = (accesstoken) => {
     return (dispatch) => {
@@ -26,7 +27,7 @@ export const reqSearchCustomer = (keyword, pageIndex, pageSize, accesstoken) => 
 
 export const reqLoadDataPaging = (pageIndex,pageSize,accesstoken) => {
     return (dispatch) => {
-        return callApis(`Customer/Paging/pagesize/pageNow?pagesize=${pageSize}&pageNow=${pageIndex}`, 'GET', null, accesstoken).then(res => {
+        return callApiNotToken(`Customer/Paging/pagesize/pageNow?pagesize=${pageSize}&pageNow=${pageIndex}`, 'GET', null, accesstoken).then(res => {
             console.log(res.data);    
             dispatch(actLoadDataPaging(res.data));
         }).catch(error => console.log("Fetch Error "+ error));
@@ -102,9 +103,9 @@ export const actUpdateCustomer = (data) => {
 
 export const reqAddCustomer = ( Customer, accesstoken) => {
     return (dispatch) => {
-        return callApis(`Customer/Create`, 'POST', Customer, accesstoken).then(res => {
+        return callApiNotToken(`Customer/Create`, 'POST', Customer, accesstoken).then(res => {
             console.log(res.data);
-            return callApis(`Customer/Paging/pagesize/pageNow?pagesize=5&pageNow=1`, 'GET', null, accesstoken).then(res => {
+            return callApiNotToken(`Customer/Paging/pagesize/pageNow?pagesize=5&pageNow=1`, 'GET', null, accesstoken).then(res => {
                 dispatch(actAddCustomer(res.data));
             }).catch(error => console.log("Fetch Error "+ error));
         }).catch(error => console.log("Fetch Error "+ error));

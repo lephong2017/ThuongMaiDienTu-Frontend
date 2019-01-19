@@ -9,7 +9,9 @@ class BookCar extends Component {
   };
   
   render() {
-
+    const {info} = this.props;
+    console.log(info);
+      
     return ( 
       <Row className="form_content">
           <Col span={24} >
@@ -31,25 +33,24 @@ class BookCar extends Component {
             <Row>
               <Col md={24}>
                 <p className="title-label">Giá trị:</p>
-                <span className="text-order">1.800.000 VNĐ</span>
-              </Col>
-            </Row>
-            <Row>
-              <Col md={24}>
-                <p className="title-label">Loại xe:</p>
-                <span className="text-order">yota Vios 1.5G (CVT) 2018</span>
+                <span className="text-order">{info.priceOrder} VNĐ</span>
               </Col>
             </Row>
             <Row>
               <Col md={24}>
                 <p className="title-label">Hình thức nhận xe:</p>
-                <span className="text-order">Nhận xe tại đại lý</span>
+                <span className="text-order">
+                  {
+                    (info.locationReceive==='AT_HOME')?"Nhận xe tại nhà":
+                    "Nhận xe tại đại lý"
+                  }
+                  </span>
               </Col>
             </Row>
             <Row>
               <Col md={24}>
                 <p className="title-label">Thời gian:</p>
-                <span className="text-order">07:00 02/11/2018 - 19:00 03/11/2018</span>
+                <span className="text-order">{info.dateOfhire} - {info.carReturnDay}</span>
               </Col>
             </Row>
           </Col>
