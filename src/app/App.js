@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 // import AppRouter from 'containers/private/route';
 import AppRouter from './AppRoute';
-import {Link, Redirect} from 'react-router-dom';
+import {Link, } from 'react-router-dom';
 import { Layout,Row,Col,Button, Icon,Modal } from 'antd';
 import MenuContent from 'containers/menu/Menu';
 import './css/App.css';

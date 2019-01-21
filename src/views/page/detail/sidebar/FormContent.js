@@ -4,7 +4,7 @@ import moment from 'moment';
 import '../css/form.css';
 // import history from '../../../../history';
 import {Link} from 'react-router-dom';
-import PaypalBtn from 'react-paypal-checkout';
+// import PaypalBtn from 'react-paypal-checkout';
 import {reqAddOrders} from 'redux/orders/actions';
 import { withRouter,} from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -60,7 +60,7 @@ class BookCar extends Component {
     let month = monthEnd- monthStart;
     if(month>1){
       error ='Số ngày mượn phải nhỏ hơn 1 tháng';
-      this.setState({numDayRental: day, err: error });
+      this.setState({ err: error });
       return  error;
     } 
     
@@ -138,7 +138,7 @@ class BookCar extends Component {
   }
 
   render() {
-    const { getFieldDecorator } = this.props.form;
+    // const { getFieldDecorator } = this.props.form;
     // const onSuccess = (payment) => {
 		// 	console.log("The payment was succeeded!", payment);
 		// }		
@@ -178,7 +178,7 @@ class BookCar extends Component {
         // alignItems:'left',
         justifyContent:'space-between'
     }
-    const {dateReturn, dateRental, city} = this.state;
+    const {dateReturn, dateRental, } = this.state;
     const {itemCar} = this.props;
     const disabledBtnFinish= (!this.props.customerInfo)?true:false;
     return (

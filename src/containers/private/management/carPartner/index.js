@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import {Row, Col, Button, Icon, Popover, Avatar, Select, notification,   } from 'antd';
+import {Row, Col, Button,    } from 'antd';
 import './index.css';
 import FunctionbarContent from './function/index';
 import PanelWrapper from 'containers/wrapper/Panel.style';

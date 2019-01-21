@@ -3,8 +3,8 @@ import {reqAddCustomer} from 'redux/customer/actions';
 import { withRouter,} from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as CONST_VARIABLE from 'utils/const/index';
-import { Form, Input,DatePicker , Select, Row, Col, Button,  } from 'antd';
-const FormItem = Form.Item;
+import { Form, Input , Row, Col, Button,  } from 'antd';
+// const FormItem = Form.Item;
 class SidebarContent extends Component{
     constructor(props){
         super(props)

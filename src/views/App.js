@@ -5,7 +5,6 @@ import HeaderContent from './layout/Header';
 import ContentSite from './layout/Content';
 import 'antd/dist/antd.css';
 import './css/app.css';
-import MessengerCustomerChat from 'react-messenger-customer-chat';
 
 const { Header, Content } = Layout;
 class App extends Component{
@@ -23,10 +22,6 @@ class App extends Component{
                         <FooterContent/>
                     </Footer> */}
                     
-                    {/* <MessengerCustomerChat
-                        pageId="118076608740675"
-                        appId="531719943986215"
-                    /> */}
                 </Layout>
             </div>
         );

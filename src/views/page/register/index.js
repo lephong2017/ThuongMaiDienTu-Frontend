@@ -1,9 +1,9 @@
-import { Form, Input,  Checkbox, Button,  } from 'antd';
+import { Form, Input,   Button,  } from 'antd';
 import React,{Component} from 'react';
 import {actRegister,actGetIAM} from 'actions/auth0/index';
 import {actRegisterRequest} from 'actions/auth0/auth0';
 
-import { withRouter,Link} from 'react-router-dom';
+import { withRouter,} from 'react-router-dom';
 import { connect } from 'react-redux';
 import {showNotification} from 'components/notification/Notification';
 const FormItem = Form.Item;

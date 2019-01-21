@@ -19,7 +19,7 @@ class NormalLoginForm extends Component {
           <Col md={24}>
             <Row className="content_order_wrapper">
                 <Col md={16}>
-                    <img src={iconSuccess} width="180" />
+                    <img alt="" src={iconSuccess} width="180" />
                     <p className="title-header-final">Đặt xe thành công</p>
                 </Col>
                 <Col md={16}>

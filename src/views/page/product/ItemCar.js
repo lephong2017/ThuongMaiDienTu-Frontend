@@ -1,6 +1,6 @@
-import { Card, Icon, Avatar, Row, Col } from 'antd';
+import { Card, Icon,  } from 'antd';
 import React,{Component} from 'react';
-import img from 'images/banner6.png';
+// import img from 'images/banner6.png';
 import {Link} from 'react-router-dom';
 import './css/product.css';
 
