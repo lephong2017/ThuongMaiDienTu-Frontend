@@ -23,10 +23,10 @@ class App extends Component{
                         <FooterContent/>
                     </Footer> */}
                     
-                    <MessengerCustomerChat
+                    {/* <MessengerCustomerChat
                         pageId="118076608740675"
                         appId="531719943986215"
-                    />
+                    /> */}
                 </Layout>
             </div>
         );

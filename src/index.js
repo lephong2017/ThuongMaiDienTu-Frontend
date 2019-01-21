@@ -33,6 +33,6 @@ class Apply extends React.Component{
     }
 }
 
-ReactDOM.render(<Apply />, document.getElementById('rootReact'));
+ReactDOM.render(<Apply />, document.getElementById('root'));
 
 serviceWorker.unregister();
