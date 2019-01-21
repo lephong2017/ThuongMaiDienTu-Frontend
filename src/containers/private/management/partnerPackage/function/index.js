@@ -5,14 +5,16 @@ import 'settings/css/global.scss';
 import { withRouter, } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {reqGetListPartnerNearHire} from 'redux/partnerPackage/actions';
-import {reqSendEmailAllPartner} from 'redux/sendmail/actions';
+import {reqSendGroupMail} from 'redux/email/actions';
+import * as CONST_VARIABLE from 'utils/const/index';
 class FunctionContent extends Component{
     state={
         fullScreen:true,
         visibled:true,
     }
     viewListPartnerHire=()=>{
-        this.props.handleGetListPartnerNearHire();
+        const accesstoken = sessionStorage.getItem(CONST_VARIABLE.ACCESS_TOKEN);
+        this.props.handleGetListPartnerNearHire(accesstoken);
     }
     onClose = () => { this.setState({ visibled: false, }) };
     showDrawer = () => {  
@@ -27,7 +29,9 @@ class FunctionContent extends Component{
     }
 
     sendMail=()=>{
-        this.props.handleSendMail(this.props.partnerHire);
+        const accesstoken = sessionStorage.getItem(CONST_VARIABLE.ACCESS_TOKEN);
+        console.log(this.props.partnerHire);
+        // this.props.handleSendMail(this.props.partnerHire, accesstoken);
     }
     render(){
        
@@ -75,11 +79,11 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = (dispatch, props) => {
     return {
-        handleGetListPartnerNearHire: ()=>{
-            dispatch(reqGetListPartnerNearHire());
+        handleGetListPartnerNearHire: (accesstoken)=>{
+            dispatch(reqGetListPartnerNearHire(accesstoken));
         },
-        handleSendMail: (listPartner)=>{
-            dispatch(reqSendEmailAllPartner(listPartner))
+        handleSendMail: (listPartner, accesstoken)=>{
+            dispatch(reqSendGroupMail(listPartner, accesstoken))
         }
 
     }

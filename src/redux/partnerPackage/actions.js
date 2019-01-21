@@ -16,9 +16,9 @@ export const actCountData = (data) => {
     }
 }
 
-export const reqGetListPartnerNearHire = () => {
+export const reqGetListPartnerNearHire = (accesstoken) => {
     return (dispatch) => {
-        return callApis(`Query/LayDanhSachGanHetHan`, 'GET', null, null).then(res => {
+        return callApis(`Query/LayDanhSachGanHetHan`, 'GET', null, accesstoken).then(res => {
             dispatch(actGetListNearHire(res.data));
         }).catch(error => console.log("Fetch Error "+ error));
     }

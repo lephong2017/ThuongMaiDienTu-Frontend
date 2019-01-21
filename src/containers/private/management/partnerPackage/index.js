@@ -18,7 +18,8 @@ import {reqLoadDataPaging, reqSearchPartnerTenantPackage, reqCountData,
      reqFindPartnerTenantPackage, reqDeletePartnerTenantPackage, reqAddPartnerTenantPackage, reqUpdatePartnerTenantPackage} from 'redux/partnerPackage/actions';
 import * as CONST_VARIABLE from 'utils/const/index';
 
-import {reqSendEmail} from 'redux/sendmail/actions';
+// import {reqSendEmail} from 'redux/sendmail/actions';
+import {reqSendGroupMail} from 'redux/email/actions';
 
 class PartnerPackageManagement extends Component{
     state={
@@ -147,7 +148,8 @@ class PartnerPackageManagement extends Component{
     }
 
     sendMail=(email)=>{
-        this.props.handleSendMail(email);
+        const accesstoken = sessionStorage.getItem(CONST_VARIABLE.ACCESS_TOKEN);
+        this.props.handleSendMail(email, accesstoken);
     }
    
     render(){
@@ -407,8 +409,9 @@ const mapDispatchToProps = (dispatch, props) => {
         handleSearchPartnerTenantPackage: (keyword, pageIndex, pageSize, accesstoken)=>{
             dispatch(reqSearchPartnerTenantPackage(keyword, pageIndex, pageSize, accesstoken))
         },
-        handleSendMail: (email)=>{
-            dispatch(reqSendEmail(email))
+
+        handleSendMail: (listPartner, accesstoken)=>{
+            dispatch(reqSendGroupMail(listPartner, accesstoken))
         }
 
     }
