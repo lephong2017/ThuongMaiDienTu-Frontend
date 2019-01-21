@@ -2,7 +2,6 @@ import callApis from 'utils/callAPI/apiCaller';
 import * as Types from './ActionTypes';
 
 export const reqCountData = (accesstoken) => {
-    console.log(accesstoken);
     return (dispatch) => {
         return callApis(`Car/CountAllPagingConditionGetByEmail`, 'GET', null, accesstoken).then(res => {
              dispatch(actCountData(res.data));
@@ -26,11 +25,9 @@ export const reqSearchCar = (keyword, pageIndex, pageSize, accesstoken) => {
 
 
 export const reqLoadDataPaging = (pageIndex,pageSize,accesstoken) => {
-    console.log(accesstoken);
 
     return (dispatch) => {
         return callApis(`Car/PagingConditionGetByEmail/pagesize/pageNow/condition?pagesize=${pageSize}&pageNow=${pageIndex}`, 'GET', null, accesstoken).then(res => {
-            console.log(res.data);    
             dispatch(actLoadDataPaging(res.data));
         }).catch(error => console.log("Fetch Error "+ error));
     }

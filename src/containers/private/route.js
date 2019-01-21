@@ -15,7 +15,7 @@ import ProcedureManagement from 'containers/private/management/procedure/index';
 import PartnerPackageManagement from 'containers/private/management/partnerPackage/index';
 import * as CONST_VARIABLE from 'utils/const/index';
 
-const adminRoutes = [
+const managerRoutes = [
   {
     path: "car",
     exact: false,
@@ -88,6 +88,76 @@ const partnerRoutes = [
   },
 ];
 
+const adminRoutes = [
+  {
+    path: "car",
+    exact: false,
+    component: ()=> <CarManagement/>
+  },
+  {
+    path: "partner",
+    exact: false,
+    component: ()=> <PartnerManagement/>
+  },
+  {
+    path: "oders",
+    exact: false,
+    component: ()=> <OrderManagement/>
+  },
+  {
+    path: "typecar",
+    exact: false,
+    component: ()=> <TypecarManagement/>
+  },
+  {
+    path: "customer",
+    exact: false,
+    component: ()=> <CustomerManagement/>
+  },
+  
+  {
+    path: "feature",
+    exact: false,
+    component: ()=> <FeatureManagement/>
+  },
+  {
+    path: "location",
+    exact: false,
+    component: ()=> <LocationManagement/>
+  },
+  {
+    path: "packages",
+    exact: false,
+    component: ()=> <PackagesManagement/>
+  },
+  {
+    path: "payment",
+    exact: false,
+    component: ()=> <PaymentManagement/>
+  },
+  {
+    path: "procedure",
+    exact: false,
+    component: ()=> <ProcedureManagement/>
+  },
+  {
+    path: "partnerpackage",
+    exact: false,
+    component: ()=> <PartnerPackageManagement/>
+  },
+  {
+    path: "ordersOfPartner",
+    exact: false,
+    component: ()=> <OrderOfPartnerManagement/>
+  },
+  {
+    path: "carOfPartner",
+    exact: false,
+    component: ()=> <CarOfPartnerManagement/>
+  },
+ 
+];
+
 class AppRouter extends Component { 
   render() {
     const role = sessionStorage.getItem(CONST_VARIABLE.ROLE_ACCOUNT);
@@ -95,8 +165,23 @@ class AppRouter extends Component {
     return (
       <div style={style}>
         {
-          (role==='ADMIN' || role==='MANAGER')?
+          (role==='ADMIN')?
           adminRoutes.map(singleRoute => {
+          const { path,component, exact, ...otherProps } = singleRoute;
+          return (
+            <Route
+              // exact={exact === false ? false : true}
+              exact={true}
+              key={path}
+              path={`${url}/${path}`}
+              component={component}
+              {...otherProps}
+            />
+          );
+        })
+        :
+        (role==='MANAGER')?
+        managerRoutes.map(singleRoute => {
           const { path,component, exact, ...otherProps } = singleRoute;
           return (
             <Route
