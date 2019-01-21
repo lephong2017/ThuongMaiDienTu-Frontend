@@ -270,7 +270,7 @@ class BookCar extends Component {
                 {
                   (this.state.err==='OK')?
                     <Col md={24}>
-                     <PaypalBtn 
+                     {/* <PaypalBtn 
                         env={env} 
                         client={client} 
                         currency={currency} 
@@ -280,7 +280,7 @@ class BookCar extends Component {
                         onError={onError} 
                         onSuccess={onSuccess} 
                         onCancel={onCancel}
-                      />
+                      /> */}
                         <Link to={{
                           pathname: `/final`,
                           info: {
@@ -293,7 +293,11 @@ class BookCar extends Component {
                             }
                           } 
                         }}>
-                          <Button disabled={disabledBtnFinish} style={{width:'100%'}} type="primary" htmlType="submit">Hoàn tất</Button>
+                          <Button disabled={disabledBtnFinish} 
+                            style={{width:'100%'}} type="primary" 
+                            onClick={this.handleSubmit}
+                            // htmlType="submit"
+                            >Hoàn tất</Button>
                         </Link>
                     </Col>:
                     <Col><span style={{color: 'red'}}>{this.state.err}</span></Col>

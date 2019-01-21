@@ -21,6 +21,8 @@ const store = createStore(
         applyMiddleware(...middleWares)
     ),
 );
+
+
 class Apply extends React.Component{
     render(){
         return(
@@ -31,6 +33,6 @@ class Apply extends React.Component{
     }
 }
 
-ReactDOM.render(<Apply />, document.getElementById('root'));
+ReactDOM.render(<Apply />, document.getElementById('rootReact'));
 
 serviceWorker.unregister();

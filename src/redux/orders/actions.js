@@ -1,4 +1,5 @@
 import callApis from 'utils/callAPI/apiCaller';
+import {callApiNotToken} from 'utils/callAPI/apiCaller';
 import * as Types from './ActionTypes';
 
 export const reqCountData = (accesstoken) => {
@@ -105,8 +106,9 @@ export const actUpdateOrders = (data) => {
 
 export const reqAddOrders = ( Orders, accesstoken) => {
     return (dispatch) => {
-        return callApis(`Orders/Create`, 'POST', Orders, accesstoken).then(res => {
-            return callApis(`Orders/Paging/pagesize/pageNow?pagesize=5&pageNow=1`, 'GET', null, accesstoken).then(res => {
+        return callApiNotToken(`Orders/Create`, 'POST', Orders, accesstoken).then(res => {
+            console.log(res);
+            return callApiNotToken(`Orders/Paging/pagesize/pageNow?pagesize=5&pageNow=1`, 'GET', null, accesstoken).then(res => {
                 dispatch(actAddOrders(res.data));
             }).catch(error => console.log("Fetch Error "+ error));
         }).catch(error => console.log("Fetch Error "+ error));
