@@ -19,7 +19,6 @@ class SidebarContent extends Component{
         const access_token = sessionStorage.getItem(CONST_VARIABLE.ACCESS_TOKEN);
         this.props.form.validateFieldsAndScroll((err, values) => {
           if (!err) {
-            console.log('Received values of form: ', values);
             this.props.handleAddCustomer(values, access_token);
             this.props.saveInfoCustomer(values);
             this.setState({disableForm: true});

@@ -10,6 +10,7 @@ import './css/sidebar.css';
 import './css/index.css';
 
 import {reqAddOrders} from 'redux/orders/actions';
+import {reqSendMail} from 'redux/email/actions';
 import { withRouter,} from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as CONST_VARIABLE from 'utils/const/index';
@@ -35,6 +36,7 @@ class ContentApp extends Component{
             locationReceive: val.locationReceive
         }
         this.props.handleAddOrders(order, access_token);
+        this.props.handleSendMail(val.nameCustomer.email, order, access_token);
     }
       render() {
          const info = this.props.location.info;
@@ -77,6 +79,9 @@ const mapStateToProps = state => {
     return {
         handleAddOrders:(Order ,accesstoken)=>{
             dispatch(reqAddOrders(Order ,accesstoken)) ;
+        },
+        handleSendMail:(email, content, accesstoken)=>{
+            dispatch(reqSendMail(email, content, accesstoken)) ;
         },
     }
   }

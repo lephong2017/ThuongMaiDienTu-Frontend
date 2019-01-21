@@ -28,7 +28,6 @@ class ContentApp extends Component{
         });
     }
     saveInfoCustomer= (val) =>{
-        console.log(val);
         this.setState({customerInfo : val});
     }
     toggle = () => {

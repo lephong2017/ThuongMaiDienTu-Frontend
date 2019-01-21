@@ -21,7 +21,7 @@ class ContentApp extends Component{
         pageIndex:1, 
         pageSize: 12,
         priceStart:0, 
-        priceEnd:1000000,
+        priceEnd:10000,
         dateRental:null,
         dateReturn:null,
         city:null,
