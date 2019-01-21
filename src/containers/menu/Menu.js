@@ -163,8 +163,9 @@ class HeaderContent extends Component {
         {
           (user)?
           <Menu.Item key={"username"}>
-            <span style={{color: 'red', textTransform: 'UPPERCASE'}}>{user.userName}</span>
-          </Menu.Item>:
+            <Button onClick={()=> sessionStorage.clear()} style={{color: 'red', textTransform: 'UPPERCASE'}}>{user.userName}</Button>
+          </Menu.Item>
+          :
           <span></span>
         }
 

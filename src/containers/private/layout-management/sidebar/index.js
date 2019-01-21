@@ -80,10 +80,11 @@ class Sider extends Component {
           {/* </MenuItemGroup> */}
         </SubMenu>
 
+        
         <SubMenu key="sub4" title={<span><Icon type="mail" /><span>Quản lý của partner</span></span>}>
-            <Menu.Item key="carOfPartner">Quản lý xe</Menu.Item>
-            <Menu.Item key="ordersOfPartner">Đơn hàng</Menu.Item>
-            <Menu.Item key="InfoService">Thông tin dịch vụ</Menu.Item>
+            <Menu.Item disabled={(role==='MANAGER')?true:false} key="carOfPartner">Quản lý xe</Menu.Item>
+            <Menu.Item disabled={(role==='MANAGER')?true:false} key="ordersOfPartner">Đơn hàng</Menu.Item>
+            <Menu.Item disabled={(role==='MANAGER')?true:false} key="InfoService">Thông tin dịch vụ</Menu.Item>
         </SubMenu>
       </Menu>
     );
