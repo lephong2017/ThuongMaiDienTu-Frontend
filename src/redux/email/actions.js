@@ -33,9 +33,8 @@ export const reqSendGroupMail = (listemail, accesstoken) => {
     // for(i=0 ; i < listemail.length ; i++){
     //     list= list+'*';
     // }
-    console.log(listemail+'*');
     return (dispatch) => {
-        return callApis(`SendMail/sendMailCanhBaoHetHan/listEmail?listEmail=${listemail}*`, 'GET', null, accesstoken).then(res => {
+        return callApis(`SendMail/sendMailCanhBaoHetHan/listEmail?listEmail=${listemail}`, 'GET', null, accesstoken).then(res => {
             console.log(res.data);
             dispatch(actSendgroupMail(res.data));
         }).catch(error => console.log("Fetch Error "+ error));
