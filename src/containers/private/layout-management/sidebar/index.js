@@ -82,9 +82,9 @@ class Sider extends Component {
 
         
         <SubMenu key="sub4" title={<span><Icon type="mail" /><span>Quản lý của partner</span></span>}>
-            <Menu.Item disabled={(role==='MANAGER')?true:false} key="carOfPartner">Quản lý xe</Menu.Item>
-            <Menu.Item disabled={(role==='MANAGER')?true:false} key="ordersOfPartner">Đơn hàng</Menu.Item>
-            <Menu.Item disabled={(role==='MANAGER')?true:false} key="InfoService">Thông tin dịch vụ</Menu.Item>
+            <Menu.Item disabled={(role==='MANAGER'|| role==='ADMIN')?true:false} key="carOfPartner">Quản lý xe</Menu.Item>
+            <Menu.Item disabled={(role==='MANAGER'|| role==='ADMIN')?true:false} key="ordersOfPartner">Đơn hàng</Menu.Item>
+            <Menu.Item disabled={(role==='MANAGER'|| role==='ADMIN')?true:false} key="InfoService">Thông tin dịch vụ</Menu.Item>
         </SubMenu>
       </Menu>
     );

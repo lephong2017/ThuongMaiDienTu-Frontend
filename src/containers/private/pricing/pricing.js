@@ -103,7 +103,7 @@ class Pricing extends Component{
                             env={env} 
                             client={client} 
                             currency={currency} 
-                            total={1000} 
+                            total={2500} 
                             locale={locale} 
                             style={style}
                             onError={onError} 
@@ -132,7 +132,7 @@ class Pricing extends Component{
                             env={env} 
                             client={client} 
                             currency={currency} 
-                            total={2000} 
+                            total={3500} 
                             locale={locale} 
                             style={style}
                             onError={onError} 
