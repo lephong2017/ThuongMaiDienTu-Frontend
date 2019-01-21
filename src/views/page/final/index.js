@@ -9,7 +9,10 @@ import 'containers/filterbar/function.css';
 import './css/sidebar.css';
 import './css/index.css';
 
-
+import {reqAddOrders} from 'redux/orders/actions';
+import { withRouter,} from 'react-router-dom';
+import { connect } from 'react-redux';
+import * as CONST_VARIABLE from 'utils/const/index';
 const { Header, Content,Footer } = Layout;
 class ContentApp extends Component{
     state={
@@ -19,6 +22,19 @@ class ContentApp extends Component{
         this.setState({
             collapsed: !this.state.collapsed,
         });
+    }
+    componentWillMount(){
+        const access_token = sessionStorage.getItem(CONST_VARIABLE.ACCESS_TOKEN);
+        const val = this.props.location.orderinfo;
+        const order = {
+            nameCustomer: val.nameCustomer.fistNameAndLastName,
+            nameCar: val.nameCar,
+            priceOrder: val.priceOrder,
+            dateOfhire: val.dateOfhire,
+            carReturnDay: val.carReturnDay,
+            locationReceive: val.locationReceive
+        }
+        this.props.handleAddOrders(order, access_token);
     }
       render() {
          const info = this.props.location.info;
@@ -51,4 +67,19 @@ class ContentApp extends Component{
         );
     }
 }
-export default ContentApp;
+const mapStateToProps = state => {
+    return {
+        itemCar: state.itemCar
+    }
+  }
+   
+  const mapDispatchToProps = (dispatch, props) => {
+    return {
+        handleAddOrders:(Order ,accesstoken)=>{
+            dispatch(reqAddOrders(Order ,accesstoken)) ;
+        },
+    }
+  }
+  
+  export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ContentApp));
+  

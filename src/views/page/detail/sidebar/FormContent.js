@@ -100,7 +100,7 @@ class BookCar extends Component {
       carReturnDay: this.state.dateReturn,
       locationReceive: this.state.locationReceive
     }
-    this.setState({orderInfo: order});
+    this.setState({orderInfo: order });
     this.props.handleAddOrders(order, access_token);
     // history.push('/final');
     // window.location.reload();
@@ -138,35 +138,35 @@ class BookCar extends Component {
   }
 
   render() {
-    // const { getFieldDecorator } = this.props.form;
-    const onSuccess = (payment) => {
-			console.log("The payment was succeeded!", payment);
-		}		
+    const { getFieldDecorator } = this.props.form;
+    // const onSuccess = (payment) => {
+		// 	console.log("The payment was succeeded!", payment);
+		// }		
 
-		const onCancel = (data) => {
-			console.log('The payment was cancelled!', data);
-		}	
+		// const onCancel = (data) => {
+		// 	console.log('The payment was cancelled!', data);
+		// }	
 
-		const onError = (err) => {
-			console.log("Error!", err);		
-		}			
+		// const onError = (err) => {
+		// 	console.log("Error!", err);		
+		// }			
 
-		let env = 'sandbox'; // you can set here to 'production' for production
-		let currency = 'USD'; // or you can set this value from your props or state  
-		let total = this.state.numDayRental* this.props.itemCar.price;  // same as above, this is the total amount (based on currency) to be 
-		let locale = 'en_US'; 
-		let style = {
-			'label':'pay', 
-			'tagline': false, 
-			'size':'medium', 
-			'shape':'pill', 
-			'color':'gold'
-		};
+		// let env = 'sandbox'; // you can set here to 'production' for production
+		// let currency = 'USD'; // or you can set this value from your props or state  
+		// let total = this.state.numDayRental* this.props.itemCar.price;  // same as above, this is the total amount (based on currency) to be 
+		// let locale = 'en_US'; 
+		// let style = {
+		// 	'label':'pay', 
+		// 	'tagline': false, 
+		// 	'size':'medium', 
+		// 	'shape':'pill', 
+		// 	'color':'gold'
+		// };
 
-		const client = {
-      sandbox:    'AY1jSZZWe9ubj79SyF4ixwYn32ExUwpeBwUBGiqjcTF3vCdQN3VPOZ7l4GF7SsBYifOWxo4x0RlceB11',
-      production: 'EPOgRKs0mDvWhvRXnGFsAcqp3ny-hYeYoSPQPxIYKvc1kGKqgCpV0xI2c7bs0qU8okWyyqbl7ajjH43z',
-		}
+		// const client = {
+    //   sandbox:    'AY1jSZZWe9ubj79SyF4ixwYn32ExUwpeBwUBGiqjcTF3vCdQN3VPOZ7l4GF7SsBYifOWxo4x0RlceB11',
+    //   production: 'EPOgRKs0mDvWhvRXnGFsAcqp3ny-hYeYoSPQPxIYKvc1kGKqgCpV0xI2c7bs0qU8okWyyqbl7ajjH43z',
+		// }
     const { formLayout } = this.state;
     const formItemLayout = formLayout === 'horizontal' ? {
         labelCol: { span: 4 },
@@ -289,14 +289,22 @@ class BookCar extends Component {
                               priceOrder: this.state.numDayRental * this.props.itemCar.price,
                               dateOfhire: this.state.dateRental,
                               carReturnDay: this.state.dateReturn,
-                              locationReceive: this.state.locationReceive
-                            }
-                          } 
+                              locationReceive: this.state.locationReceive,
+                            },
+                          } ,
+                          orderinfo: {
+                            nameCustomer: this.props.customerInfo,
+                            nameCar: this.props.itemCar.id,
+                            priceOrder: this.state.numDayRental * this.props.itemCar.price,
+                            dateOfhire: this.state.dateRental,
+                            carReturnDay: this.state.dateReturn,
+                            locationReceive: this.state.locationReceive
+                          }
                         }}>
                           <Button disabled={disabledBtnFinish} 
                             style={{width:'100%'}} type="primary" 
-                            onClick={this.handleSubmit}
-                            // htmlType="submit"
+                            // onClick={this.handleSubmit}
+                            htmlType="submit"
                             >Hoàn tất</Button>
                         </Link>
                     </Col>:
