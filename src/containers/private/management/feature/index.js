@@ -55,7 +55,7 @@ class FeatureManagement extends Component{
 
 
     onSelectChange = (selectedRowKeys) => {
-        console.log('selectedRowKeys changed: ', selectedRowKeys);
+        //console.log('selectedRowKeys changed: ', selectedRowKeys);
         this.setState({ selectedRowKeys });
     }
 
@@ -88,8 +88,8 @@ class FeatureManagement extends Component{
         this.setState({ sortedInfo: null, });
     }
     handleChangeSelectInRow =(value) => {
-        console.log("change value in rrow: ");
-        console.log(value, this.state.recordSelected);
+        //console.log("change value in rrow: ");
+        //console.log(value, this.state.recordSelected);
     }
     
     handleOnSearch= (val) =>{
@@ -322,9 +322,9 @@ class FeatureManagement extends Component{
                 onSubmitEdit={this.handleSubmitEdit}
             />,
         }
-        console.log("adasdasdas");
-        console.log(this.props.itemFeature);
-        console.log("adasdasdas");
+        // console.log("adasdasdas");
+        // console.log(this.props.itemFeature);
+        // console.log("adasdasdas");
         return (
             <Row className="content_manager_wrapper" style={{height:'100%'}}>
                 <PanelWrapper className={this.state.fullScreenMode ? "full-screen-mode" : ""}>
