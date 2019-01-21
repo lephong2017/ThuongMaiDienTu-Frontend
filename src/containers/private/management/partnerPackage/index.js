@@ -57,7 +57,7 @@ class PartnerPackageManagement extends Component{
 
 
     onSelectChange = (selectedRowKeys) => {
-        console.log('selectedRowKeys changed: ', selectedRowKeys);
+        //console.log('selectedRowKeys changed: ', selectedRowKeys);
         this.setState({ selectedRowKeys });
     }
 
@@ -90,12 +90,12 @@ class PartnerPackageManagement extends Component{
         this.setState({ sortedInfo: null, });
     }
     handleChangeSelectInRow =(value) => {
-        console.log("change value in rrow: ");
-        console.log(value, this.state.recordSelected);
+        //console.log("change value in rrow: ");
+        //console.log(value, this.state.recordSelected);
     }
     
     handleOnSearch= (val) =>{
-        console.log(this.state.pagination);
+        //console.log(this.state.pagination);
         var accesstoken = sessionStorage.getItem(CONST_VARIABLE.ACCESS_TOKEN);
         // console.log(val);
         if(val!==''){
