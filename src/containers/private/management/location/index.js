@@ -47,7 +47,8 @@ class LocationManagement extends Component{
     onCloseAdd = () => { this.setState({ visibledAdd: false, }) };
 
     showDrawerEdit=(id)=>{ 
-        this.props.handleFindLocation(id);
+        const accesstoken = sessionStorage.getItem(CONST_VARIABLE.ACCESS_TOKEN);
+        this.props.handleFindLocation(id, accesstoken);
         this.setState({visibledEdit:true, idEdit: id});
      }
     onCloseEdit = () => { this.setState({ visibledEdit: false, }) };

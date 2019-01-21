@@ -48,7 +48,8 @@ class PartnerManagement extends Component{
     onCloseAdd = () => { this.setState({ visibledAdd: false, }) };
 
     showDrawerEdit=(id)=>{ 
-        this.props.handleFindPartner(id);
+        const accesstoken = sessionStorage.getItem(CONST_VARIABLE.ACCESS_TOKEN);
+        this.props.handleFindPartner(id, accesstoken);
         this.setState({visibledEdit:true, idEdit: id});
      }
     onCloseEdit = () => { this.setState({ visibledEdit: false, }) };

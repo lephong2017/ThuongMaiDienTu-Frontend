@@ -47,7 +47,8 @@ class CustomerManagement extends Component{
     onCloseAdd = () => { this.setState({ visibledAdd: false, }) };
 
     showDrawerEdit=(id)=>{ 
-        this.props.handleFindCustomer(id);
+        const accesstoken = sessionStorage.getItem(CONST_VARIABLE.ACCESS_TOKEN);
+        this.props.handleFindCustomer(id, accesstoken);
         this.setState({visibledEdit:true, idEdit: id});
      }
     onCloseEdit = () => { this.setState({ visibledEdit: false, }) };
@@ -327,9 +328,6 @@ class CustomerManagement extends Component{
                 onSubmitEdit={this.handleSubmitEdit}
             />,
         }
-        console.log("adasdasdas");
-        console.log(this.props.itemCustomer);
-        console.log("adasdasdas");
         return (
             <Row className="content_manager_wrapper" style={{height:'100%'}}>
                 <PanelWrapper className={this.state.fullScreenMode ? "full-screen-mode" : ""}>

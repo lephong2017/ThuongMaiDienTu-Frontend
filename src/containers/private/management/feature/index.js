@@ -47,7 +47,8 @@ class FeatureManagement extends Component{
     onCloseAdd = () => { this.setState({ visibledAdd: false, }) };
 
     showDrawerEdit=(id)=>{ 
-        this.props.handleFindFeature(id);
+        const accesstoken = sessionStorage.getItem(CONST_VARIABLE.ACCESS_TOKEN);
+        this.props.handleFindFeature(id, accesstoken);
         this.setState({visibledEdit:true, idEdit: id});
      }
     onCloseEdit = () => { this.setState({ visibledEdit: false, }) };
