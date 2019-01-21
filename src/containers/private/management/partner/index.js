@@ -172,9 +172,9 @@ class PartnerManagement extends Component{
    
     render(){
         const role = sessionStorage.getItem(CONST_VARIABLE.ROLE_ACCOUNT);
-        const disableAdd = this.disableADD()?false:true;
-        const disableDelete = this.disableDelele()?false:true;
-        const disableEdit = this.disableEdit()?false:true;
+        let disableAdd = this.disableADD()?false:true;
+        let disableDelete = this.disableDelele()?false:true;
+        let disableEdit = this.disableEdit()?false:true;
         if(role === 'ADMIN') {
             disableAdd= false;
             disableDelete = false;
