@@ -171,10 +171,15 @@ class PartnerManagement extends Component{
     }
    
     render(){
+        const role = sessionStorage.getItem(CONST_VARIABLE.ROLE_ACCOUNT);
         const disableAdd = this.disableADD()?false:true;
         const disableDelete = this.disableDelele()?false:true;
         const disableEdit = this.disableEdit()?false:true;
-
+        if(role === 'ADMIN') {
+            disableAdd= false;
+            disableDelete = false;
+            disableEdit =false;
+        }
         let { sortedInfo, filteredInfo } = this.state;
         sortedInfo = sortedInfo || {};
         filteredInfo = filteredInfo || {};
